@@ -1,0 +1,20 @@
+2013-09-21 04:03:38.113 [IPEngineApp] Loading url_file u'/Users/peitalin/.ipython/profile_default/security/ipcontroller-engine.json'
+2013-09-21 04:03:38.123 [IPEngineApp] Registering with controller at tcp://127.0.0.1:59364
+2013-09-21 04:03:38.213 [IPEngineApp] Starting to monitor the heartbeat signal from the hub every 3010 ms.
+2013-09-21 04:03:38.217 [IPEngineApp] Using existing profile dir: u'/Users/peitalin/.ipython/profile_default'
+2013-09-21 04:03:38.218 [IPEngineApp] Running code in user namespace: %load_ext autoreload
+2013-09-21 04:03:38.223 [IPEngineApp] Running code in user namespace: %autoreload 2
+2013-09-21 04:03:38.224 [IPEngineApp] Running code in user namespace: from inspect import getmembers
+2013-09-21 04:03:38.241 [IPEngineApp] Running code in user namespace: pylab
+2013-09-21 04:03:38.631 [IPEngineApp] Running code in user namespace: import pandas as pd
+2013-09-21 04:03:38.971 [IPEngineApp] Running code in user namespace: from operator import *
+2013-09-21 04:03:38.996 [IPEngineApp] Running code in user namespace: from functools import *
+2013-09-21 04:03:39.023 [IPEngineApp] Running code in user namespace: from fn import *
+2013-09-21 04:03:39.081 [IPEngineApp] Running code in user namespace: from fn.op import *
+2013-09-21 04:03:39.107 [IPEngineApp] Running code in user namespace: from itertools import *
+2013-09-21 04:03:39.133 [IPEngineApp] Running code in user namespace: def words(x): return x.split(" ")
+2013-09-21 04:03:39.160 [IPEngineApp] Running code in user namespace: from __future__ import print_function, absolute_import
+2013-09-21 04:03:39.186 [IPEngineApp] Running code in user namespace: print("from: [itertools, functools, fn, operator, future] imported *")
+2013-09-21 04:03:39.216 [IPEngineApp] Running code in user namespace: print("-"*75)
+2013-09-21 04:03:39.245 [IPEngineApp] Completed registration with id 1
+2013-09-21 04:03:39.246 [IPEngineApp] entering eventloop
