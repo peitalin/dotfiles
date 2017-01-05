@@ -67,8 +67,8 @@ function dotfiles_git {
     cp $HOME/.vim/plugged/lightline.vim/autoload/lightline/colorscheme/oneNeon_lightline.vim  $HOME/Data/dotfiles
     cp $HOME/.ctags $HOME/Data/dotfiles
     cp $HOME/.Rprofile $HOME/Data/dotfiles
-    cp -R $HOME/.ipython $HOME/Data/dotfiles
-    cp -R $HOME/.matplotlib $HOME/Data/dotfiles
+    cp $HOME/.ipython/profile_default/ipython_config.py $HOME/Data/dotfiles/.ipython/profile_default/ipython_config.py
+    cp $HOME/.matplotlib/matplotlibrc $HOME/Data/dotfiles/.matplotlib/matplotlibrc
     cp $HOME/.eslintrc $HOME/Data/dotfiles
     cp -R $HOME/.kwm $HOME/Data/dotfiles
     cp $HOME/.oh-my-zsh/themes/bureau.zsh-theme $HOME/Data/dotfiles
@@ -84,9 +84,10 @@ function dotfiles_git {
     git add .ipython --ignore-removal
     git add .matplotlib --ignore-removal
     git add .eslintrc --ignore-removal
-    git add .kwm/kwmrc --ignore-removal
+    git add .kwm --ignore-removal
     git add ./oneNeon_lightline.vim
-    git add .oh-my-zsh/themes/bureau.zsh-theme
+    git add ./bureau.zsh-theme
+    git add ./Neue-Neon.tmTheme
     git commit -m "Backup dotfiles"
     git push -u origin master
 }
