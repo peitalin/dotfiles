@@ -48,11 +48,16 @@ let s:p.inactive.middle = [ [ s:base1, s:base03 ] ]
 " let s:bgblue1 = [ '#182a33', 235 ]
 " let s:bgblue2 = [ '#223344', 238 ]
 
-let s:p.tabline.tabsel = [ [ s:base1, s:base02 ] ]
-let s:p.tabline.left = [ [ s:base02, s:base023 ] ]
-let s:p.tabline.middle = [ [ s:base02, s:base03 ] ]
-let s:p.tabline.right = [ [ s:base01, s:base03 ] ]
-let s:p.normal.error = [ [ s:base03, s:red ] ]
-let s:p.normal.warning = [ [ s:base023, s:yellow ] ]
+let s:grey0 = ['#4c5768', 239]
+let s:grey1 = ['#2C323C', 237]
+let s:greyBackground = ["#282C34", 235]
+
+
+let s:p.tabline.tabsel = [ [ ["#1b1e28", 233], s:grey0 ] ]
+let s:p.tabline.left = [ [ ["#1b1e28", 233], s:grey1 ] ]
+let s:p.tabline.middle = [ [ s:base01, s:greyBackground ] ]
+let s:p.tabline.right = [ [ s:base01, s:grey1 ] ]
+let s:p.normal.error = [ [ s:base02, s:red ] ]
+let s:p.normal.warning = [ [ s:base02, s:yellow ] ]
 
 let g:lightline#colorscheme#oneNeon_lightline#palette = lightline#colorscheme#flatten(s:p)

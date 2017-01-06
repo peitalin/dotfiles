@@ -433,6 +433,7 @@ hi Special guifg=#ffb74d
 " brighter purple
 hi CtrlPMatch guifg=#ba9ef7
 
+
 " dark red: className, etc
 " hi Label cterm=italic guifg=#b55353
 " hi Constant guifg=#b55353

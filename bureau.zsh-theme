@@ -109,16 +109,25 @@ get_space () {
   echo $SPACES
 }
 
-
-_1LEFT="$_USERNAME $_PATH"
+if [[ $USER == "peitalin" ]]; then
+    _1LEFT="$_PATH"
+else
+    _1LEFT="$_USERNAME $_PATH"
+fi
+# _1LEFT="$_USERNAME $_PATH"
 # _1LEFT="$_USERNAME $_PATH"
 _1RIGHT="[%*]"
 
+# bureau_precmd () {
+#   # $1$2$3 -> 3 arguments for 'get_space'
+#   _1SPACES=`get_space $_1LEFT $_1RIGHT $(git_prompt_info)`
+#   print
+#   print -rP "$_1LEFT$_1SPACES$(git_prompt_info)$_1RIGHT"
+# }
+
 bureau_precmd () {
-  # $1$2$3 -> 3 arguments for 'get_space'
-  _1SPACES=`get_space $_1LEFT $_1RIGHT $(git_prompt_info)`
   print
-  print -rP "$_1LEFT$_1SPACES$(git_prompt_info)$_1RIGHT"
+  print -rP "$_1LEFT $(git_prompt_info)"
 }
 
 
