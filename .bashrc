@@ -32,9 +32,9 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 alias sb="sublime"
 alias sudo="sudo "
-alias rsync="rsync -poghb --backup-dir=/tmp/rsync -e /dev/null --progress --"
 alias pgrep='pgrep -f'
 alias pkill='pkill -f'
+alias whereami='echo $HOST'
 
 
 ### directory shortcuts
@@ -51,7 +51,6 @@ alias node.d="cd ~/Dropbox/Lang/nodejs"
 alias gt.d='cd $HOME/Dropbox/gtrends-beta'
 alias passwds='vim $HOME/Dropbox/usr.txt'
 alias nasdaq='cd $HOME/Data/IPO/NASDAQ'
-alias globalgames='cd $HOME/Data/IPO/GlobalGames'
 
 ####  System  ################
 alias bashrc="vim ~/.bashrc"

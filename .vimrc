@@ -438,8 +438,10 @@ hi CtrlPMatch guifg=#ba9ef7
 " hi Label cterm=italic guifg=#b55353
 " hi Constant guifg=#b55353
 " this.
-hi Identifier cterm=italic guifg=#b55353
-hi xmlAttrib cterm=italic guifg=#b55353
+" hi Identifier cterm=italic guifg=#b55353
+" hi xmlAttrib cterm=italic guifg=#b55353
+hi Identifier cterm=italic
+hi xmlAttrib cterm=italic
 
 " medium red: if else operators
 hi Type guifg=#e86868

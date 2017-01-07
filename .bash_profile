@@ -22,13 +22,6 @@ function strace {
     sudo dtruss "$@"
 }
 
-function seehtml {
-    find . -name "$@" | xargs -I % cp % "$HOME/Public";
-    cd "$HOME/Public";
-    mv -f *.txt tempfile.html;
-    open -a safari tempfile.html
-    cd -1 > /dev/null
-}
 
 function extract() {    # Handy Extract Program
     if [ -f $1 ] ; then
@@ -54,6 +47,17 @@ function extract() {    # Handy Extract Program
 
 man () {
     /usr/bin/man $@ || ($@ --help 2> /dev/null && $@ --help | $PAGER)
+}
+
+
+alias rsync='rsync -chavzP --stats'
+function rsync_from_remote {
+    echo scp peita@10.0.0.135:/run/media/F/textnix.txt ~/Downloads
+    echo "Rsync from local machine:"
+    echo "rsync -chavzP --stats peita@10.0.0.135:/run/media/F/textnix.txt ~/Downloads"
+    echo "Rsync from remote:"
+    echo "rsync -chavzP --stats /run/media/F/textnix.txt peitalin@10.0.0.28:/Users/peitalin/Downloads"
+
 }
 
 
