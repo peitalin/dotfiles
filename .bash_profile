@@ -51,14 +51,27 @@ man () {
 
 
 alias rsync='rsync -chavzP --stats'
-function rsync_from_remote {
-    echo scp peita@10.0.0.135:/run/media/F/textnix.txt ~/Downloads
-    echo "Rsync from local machine:"
-    echo "rsync -chavzP --stats peita@10.0.0.135:/run/media/F/textnix.txt ~/Downloads"
-    echo "Rsync from remote:"
-    echo "rsync -chavzP --stats /run/media/F/textnix.txt peitalin@10.0.0.28:/Users/peitalin/Downloads"
-
+function rsync_help {
+    echo "scp peita@10.0.0.135:/run/media/F/textnix.txt ~/Downloads"
+    echo "rsync is aliased to: rsync -chavzP --stats"
+    echo "\nRsync from local machine:"
+    echo "rsync -chavzP --stats 'peita@10.0.0.135:/run/media/F/text\ nix.txt' ~/Downloads"
+    echo "\nRsync from remote:"
+    echo "rsync -chavzP --stats '/run/media/F/text nix.txt' peitalin@10.0.0.28:/Users/peitalin/Downloads"
 }
+
+function rsync_to_nix {
+    echo "rsync $@ peita@10.0.0.135:/run/media/F/Torrents"
+    rsync $@ peita@10.0.0.135:/run/media/F/Torrents
+}
+
+function rsync_from_nix {
+    echo "rsync peita@10.0.0.135:/run/media/F/Torrents/$@ ~/Downloads/Torrents"
+    rsync peita@10.0.0.135:/run/media/F/Torrents/$@ ~/Downloads/Torrents
+}
+
+
+
 
 
 
@@ -89,6 +102,8 @@ function dotfiles_git {
     git add .matplotlib --ignore-removal
     git add .eslintrc --ignore-removal
     git add .kwm --ignore-removal
+    git add .rules --ignore-removal
+    git add .space --ignore-removal
     git add ./oneNeon_lightline.vim
     git add ./bureau.zsh-theme
     git add ./Neue-Neon.tmTheme

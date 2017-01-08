@@ -107,6 +107,10 @@ nmap <C-x> :SyntasticReset<CR>
 " Plug 'eagletmt/neco-ghc'
 " Plug 'eagletmt/ghcmod-vim'
 
+" " Rust"
+" Syntax highlighting
+Plug 'rust-lang/rust.vim'
+
 " Coffeescript
 Plug 'kchmck/vim-coffee-script'
 
@@ -146,13 +150,18 @@ let g:used_javascript_libs = 'react,redux,react-dom,react-redux,moment,lodash,rx
 
 " Indentation for jsx files (missing from jelera: vim-javascript-syntax)
 Plug 'gavocanov/vim-js-indent'
+" Plug 'othree/yajs.vim'
+
 
 " Syntax highlighting for .jsx (js files for react js)
-Plug 'mxw/vim-jsx'
+Plug 'peitalin/vim-jsx'
+Plug 'chemzqm/vim-jsx-improve'
 " enable JSX syntax higlighting and indenting in .js files = 0
 let g:jsx_ext_required = 0
 
-" Ternjs server: jump to var defs and documentation
+
+
+" Tern.js server: jump to var defs and documentation
 Plug 'ternjs/tern_for_vim'
 
 "" Typescript "
@@ -434,14 +443,6 @@ hi Special guifg=#ffb74d
 hi CtrlPMatch guifg=#ba9ef7
 
 
-" dark red: className, etc
-" hi Label cterm=italic guifg=#b55353
-" hi Constant guifg=#b55353
-" this.
-" hi Identifier cterm=italic guifg=#b55353
-" hi xmlAttrib cterm=italic guifg=#b55353
-hi Identifier cterm=italic
-hi xmlAttrib cterm=italic
 
 " medium red: if else operators
 hi Type guifg=#e86868
@@ -450,6 +451,19 @@ hi Preproc guifg=#e86868
 " hi Function gui=bold guifg=#dc662e
 " hi Operator guifg=#dc662e
 
+" dark red: className, etc
+" hi Label cterm=italic guifg=#b55353
+" hi Constant guifg=#b55353
+" this.
+
+
+
+"""""" vim-jsx ONLY
+" hi Identifier cterm=italic guifg=#b55353
+" hi xmlAttrib cterm=italic guifg=#b55353
+hi Identifier cterm=italic
+hi xmlAttrib cterm=italic
+
 " Blues
 " light blues
 hi xmlTagName guifg=#79BCE5
@@ -457,6 +471,16 @@ hi xmlTag guifg=#79BCE5
 " dark blues
 hi xmlEndTag guifg=#2974a1
 
+
+""" vim-improved-jsx
+" dark blues
+" hi htmlTag guifg=#2974a1
+" light blues
+hi htmlTag guifg=#56B6C2
+" hi htmlTagName guifg=#79BCE5
+" orange italic
+hi htmlArg cterm=italic
+" javaScriptBraces xxx ctermfg=145 guifg=#ABB2BF
 
 autocmd FileType python colorscheme materialtheme
 " autocmd FileType python colorscheme onedark

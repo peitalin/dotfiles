@@ -1,11 +1,12 @@
 
 
+
 ### PATHS
 export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin"
 export PATH="/usr/local/sbin:$PATH"
 export PATH="/usr/local/bin:$PATH"
-export PATH="~/Library/Python/3.4/bin:$PATH"
-export PATH="~/.local/bin:$PATH"
+export PATH="$HOME/Library/Python/3.4/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 # export PKG_CONFIG_PATH="/opt/X11/lib/pkgconfig"
 # export PATH="$HOME/.cabal/bin:$PATH"
 # export PATH="$HOME/Library/Haskell/bin:$PATH"
@@ -121,11 +122,16 @@ function yarnreact {
 }
 
 function yarnserver {
-	echo "yarn add express express-graphql graphql"
-	yarn add express express-graphql graphql
+    echo "yarn add express express-graphql graphql"
+    yarn add express express-graphql graphql
 }
 
 function yarnredux {
+    echo "yarn add redux react-redux node-uuid";
+    yarn add redux react-redux node-uuid;
+}
+
+function yarnrouter {
     echo "yarn add react-router@next redux react-redux node-uuid";
     yarn add react-router@next redux react-redux node-uuid;
 }
@@ -163,10 +169,13 @@ alias blood.d="cd ~/Downloads/Torrents/bloodpact"
 alias react.d="cd ~/Downloads/Torrents/react"
 
 # kwm window manager
-alias kwmrestart="brew services stop kwm; brew services start kwm"
+alias kwmrestart="brew services restart kwm"
 alias kwmstop="brew services stop kwm"
 alias kwmstart="brew services start kwm"
 
+
+# Rust
+source $HOME/.cargo/env
 
 
 #### Startup Message
