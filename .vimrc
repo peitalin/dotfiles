@@ -136,6 +136,9 @@ let g:vim_json_syntax_conceal = 0
 Plug 'hail2u/vim-css3-syntax'
 " Allow autoclose paired characters like [,] or (,),
 Plug 'jiangmiao/auto-pairs'
+" let g:AutoPairsFlyMode = 0
+" let g:AutoPairsShortcutFastWrap = '<C-M>'
+" DOESNT WORK
 
 
 
@@ -171,6 +174,7 @@ Plug 'leafgarland/typescript-vim'
 " GraphQL syntax highlighting
 Plug 'jparise/vim-graphql'
 
+
 call plug#end()
 
 
@@ -181,7 +185,7 @@ let g:ycm_confirm_extra_conf = 0
 let g:ycm_min_num_of_chars_for_completion = 1 " default = 2
 let g:ycm_min_num_identifier_candidate_chars = 0 " default = 0
 let g:ycm_auto_trigger = 1 " complete as you type, default = 1
-let g:ycm_key_invoke_completion = '<C-space>'
+" let g:ycm_key_invoke_completion = '<C-,>'
 
 """ Javascript YCM completion
 
@@ -409,23 +413,22 @@ colorscheme onedark
 " colorscheme srcery
 " colorscheme materialtheme
 
-" highlight Normal    guibg=#071a24 guifg=#e5d1c1
-highlight MatchParen guibg=#366672 guifg=#71AFEF
-highlight LineNr    guifg=#1b1e28
-highlight CursorLineNr guifg=#ffb74d
-" highlight VertSplit guibg=#071a24 guifg=#263238
-" highlight SignColumn guibg=#071a24
-" highlight Visual guibg=#2a3a4a
 
-" highlight NonText guibg=#071a24 guifg=#37474f
-" highlight conceal guibg=#071a24
-" highlight FoldColumn guibg=#071a24 guifg=#607d8b gui=bold
+" Normal         xxx ctermfg=145 ctermbg=235 guifg=#ABB2BF guibg=#282C34
+" highlight MatchParen guibg=#366672 guifg=#71AFEF
+highlight MatchParen guifg=#C678DD guibg=#504066
+" highlight MatchParen guibg=#282c34 guifg=#E06C75
+highlight LineNr    guifg=#1b1e28
+
+" highlight CursorLineNr guifg=#ffb74d
+highlight CursorLineNr guifg=#56B6C2
+" highlight CursorLineNr guifg=#C678DD
+
 highlight Error guifg=#f57373 guibg=#804040
 highlight vimError guifg=#f57373 guibg=#804040
 
 hi IndentGuidesOdd guibg=#2e3140 guifg=#1f1f28
 hi IndentGuidesEven guibg=#2e3140 guifg=#1f1f28
-" hi SpecialKey guibg=#071a24
 hi Comment cterm=italic
 hi String guifg=#98C379 guibg=#2f3339
 
@@ -451,11 +454,6 @@ hi Preproc guifg=#e86868
 " hi Function gui=bold guifg=#dc662e
 " hi Operator guifg=#dc662e
 
-" dark red: className, etc
-" hi Label cterm=italic guifg=#b55353
-" hi Constant guifg=#b55353
-" this.
-
 
 
 """""" vim-jsx ONLY
@@ -472,15 +470,6 @@ hi xmlTag guifg=#79BCE5
 hi xmlEndTag guifg=#2974a1
 
 
-""" vim-improved-jsx
-" dark blues
-" hi htmlTag guifg=#2974a1
-" light blues
-hi htmlTag guifg=#56B6C2
-" hi htmlTagName guifg=#79BCE5
-" orange italic
-hi htmlArg cterm=italic
-" javaScriptBraces xxx ctermfg=145 guifg=#ABB2BF
 
 autocmd FileType python colorscheme materialtheme
 " autocmd FileType python colorscheme onedark

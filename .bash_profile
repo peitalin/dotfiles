@@ -102,8 +102,6 @@ function dotfiles_git {
     git add .matplotlib --ignore-removal
     git add .eslintrc --ignore-removal
     git add .kwm --ignore-removal
-    git add .rules --ignore-removal
-    git add .space --ignore-removal
     git add ./oneNeon_lightline.vim
     git add ./bureau.zsh-theme
     git add ./Neue-Neon.tmTheme
