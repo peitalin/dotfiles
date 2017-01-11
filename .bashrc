@@ -1,4 +1,5 @@
 
+alias cim='vim'
 
 
 ### PATHS

@@ -28,9 +28,6 @@ set clipboard=unnamed             " copy and paste with *
 set mouse=a                       " Scrollable term-vim
 " set cursorcolumn
 autocmd BufWritePre * %s/\s\+$//e " trim trailing whitespace
-" autocmd FileType javascript,html setlocal shiftwidth=2 tabstop=2
-autocmd FileType css,sass.css,scss.css setlocal shiftwidth=4 tabstop=4
-au BufNewFile,BufRead *.hbs setlocal ft=d
 
 """"""""""""" END General ViM Settings """""""""""""""""
 
@@ -85,7 +82,7 @@ Plug 'davidhalter/jedi-vim'
 " Highlights the matching HTML tag when the cursor is positioned on a tag.
 Plug 'Valloric/MatchTagAlways'
 Plug 'othree/csscomplete.vim'
-" plug 'cakebaker/scss-syntax.vim'
+Plug 'cakebaker/scss-syntax.vim'
 au BufRead,BufNewFile *.scss set filetype=scss.css
 au BufRead,BufNewFile *.sass set filetype=sass.css
 
@@ -102,6 +99,7 @@ let g:syntastic_javascript_checkers = ['eslint']
 " let g:syntastic_typescript_checks = ['tslint']
 nmap <C-c> :SyntasticCheck<CR>
 nmap <C-x> :SyntasticReset<CR>
+
 
 " " Haskell
 " Plug 'eagletmt/neco-ghc'
@@ -153,16 +151,13 @@ let g:used_javascript_libs = 'react,redux,react-dom,react-redux,moment,lodash,rx
 
 " Indentation for jsx files (missing from jelera: vim-javascript-syntax)
 Plug 'gavocanov/vim-js-indent'
-" Plug 'othree/yajs.vim'
+Plug 'othree/yajs.vim'
 
 
 " Syntax highlighting for .jsx (js files for react js)
 Plug 'peitalin/vim-jsx'
-Plug 'chemzqm/vim-jsx-improve'
 " enable JSX syntax higlighting and indenting in .js files = 0
 let g:jsx_ext_required = 0
-
-
 
 " Tern.js server: jump to var defs and documentation
 Plug 'ternjs/tern_for_vim'
@@ -284,8 +279,11 @@ inoremap <C-b> <left>
 " replace tabs with 4 whitespace
 " nmap <F4> :%s/\t/    /g<CR>
 nmap <Leader>s :%s/\t/    /g<CR>
-" autocmd FileType javascript,html nmap <F4> :%s/\t/  /g<CR>
-" au BufNewFile,BufRead *.js nmap <F4> :%s/\t/  /g<CR>
+autocmd FileType javascript,html nmap <Leader>s :%s/\t/  /g<CR>
+" au BufNewFile,BufRead *.js *.html nmap <Leader>s :%s/\t/  /g<CR>
+autocmd FileType javascript,html setlocal shiftwidth=2 tabstop=2
+" autocmd FileType css,sass.css,scss.css setlocal shiftwidth=2 tabstop=2
+" au BufNewFile,BufRead *.hbs setlocal ft=d
 
 
 
@@ -296,15 +294,10 @@ map <C-t> :NERDTreeToggle<CR>
 ""  buffers
 " nmap gt :bnext<CR>
 " nmap tg :bprevious<CR>
-nmap bb :bdelete<CR>
+nmap bd :bdelete<CR>
 nmap <Leader>b :buffers<CR>
 nmap tg :tabprevious<CR>
 
-
-""""""""""" Ipython/R Shells
-" map <F5> :! tab ipython3 -i --no-banner %<CR><CR>
-" map <F7> :! tab ghci %<CR><CR>
-" map <F7> :! R_interactive_script % <CR><CR>
 
 "" Refresh file state
 map <leader>r :e! <CR>
@@ -366,8 +359,6 @@ nmap <leader>n <C-N>
 map <leader>t :TagbarToggle<CR>
 
 """"""" easymotion
-" nmap s <Plug>(easymotion-s2)
-" nmap t <Plug>(easymotion-t2)
 " Replace default search
 map  / <Plug>(easymotion-sn)
 omap / <Plug>(easymotion-tn)
@@ -397,8 +388,9 @@ let g:lightline.enable = {
 
 """"""" Vim-indent-guides
 let g:indent_guides_auto_colors = 0
-let g:indent_guides_start_level = 1
+let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1
+autocmd FileType javascript,html let g:indent_guides_guide_size = 2
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_tab_guides = 1
 " autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#243e48 ctermbg=237
@@ -427,8 +419,8 @@ highlight CursorLineNr guifg=#56B6C2
 highlight Error guifg=#f57373 guibg=#804040
 highlight vimError guifg=#f57373 guibg=#804040
 
-hi IndentGuidesOdd guibg=#2e3140 guifg=#1f1f28
-hi IndentGuidesEven guibg=#2e3140 guifg=#1f1f28
+hi IndentGuidesOdd guibg=#282C34 guifg=#1f1f28
+hi IndentGuidesEven guibg=#2e313e guifg=#1f1f28
 hi Comment cterm=italic
 hi String guifg=#98C379 guibg=#2f3339
 
@@ -442,9 +434,12 @@ hi Conditional guifg=#907161
 hi Number guifg=#ffb74d
 hi Special guifg=#ffb74d
 
-" brighter purple
+" purple
 hi CtrlPMatch guifg=#ba9ef7
 
+hi Visual guibg=#364652
+" highlight MatchParen guibg=#366672 guifg=#71AFEF
+" highlight MatchParen guifg=#C678DD guibg=#504066
 
 
 " medium red: if else operators
