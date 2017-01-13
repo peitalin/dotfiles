@@ -1,5 +1,8 @@
 
 alias cim='vim'
+alias cat='ccat'
+
+alias poke.d='cd ~/Downloads/Torrents/react/pokedex-react-master'
 
 
 ### PATHS

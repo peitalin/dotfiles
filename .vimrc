@@ -375,20 +375,68 @@ map <Leader>h <Plug>(easymotion-linebackward)
 """""""" Vim lightline  """
 
 let g:lightline = {
-\ 'colorscheme': 'oneNeon_lightline',
-\ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
-\ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" }
-\ }
+    \ 'colorscheme': 'oneNeon_lightline',
+    \ 'mode_map': { 'c': 'NORMAL' },
+    \ 'active': {
+    \   'left': [ [ 'mode', 'paste' ], [ 'filename' ] ]
+    \ },
+    \ 'component_function': {
+    \   'modified': 'LightlineModified',
+    \   'readonly': 'LightlineReadonly',
+    \   'filename': 'LightlineFilename',
+    \   'fileformat': 'LightlineFileformat',
+    \   'filetype': 'LightlineFiletype',
+    \   'fileencoding': 'LightlineFileencoding',
+    \   'mode': 'LightlineMode',
+    \ },
+    \ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
+    \ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" }
+    \ }
+
+function! LightlineModified()
+  return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+endfunction
+
+function! LightlineReadonly()
+  return &ft !~? 'help\|vimfiler\|gundo' && &readonly ? '♤ ' : ''
+endfunction
+
+function! LightlineFilename()
+  return ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
+        \ ('' != expand('%:f') ? expand('%:f') : '[New File]') .
+        \ ('' != LightlineModified() ? ' ' . LightlineModified() : '')
+endfunction
+
+" NORMAL / INSERT / VISUAL
+function! LightlineMode()
+  return winwidth(0) > 40 ? lightline#mode() : ''
+endfunction
+
+" javascript.jsx
+function! LightlineFiletype()
+  return winwidth(0) > 70 ? (&filetype !=# '' ? &filetype : 'no ft') : ''
+endfunction
+
+" utf-8
+function! LightlineFileencoding()
+  return winwidth(0) > 80 ? (&fenc !=# '' ? &fenc : &enc) : ''
+endfunction
+
+" unix
+function! LightlineFileformat()
+  return winwidth(0) > 130 ? &fileformat : ''
+endfunction
+
+
 
 let g:lightline.enable = {
-\   'statusline': 1,
 \   'tabline': 1
 \ }
 
 
 """"""" Vim-indent-guides
 let g:indent_guides_auto_colors = 0
-let g:indent_guides_start_level = 2
+let g:indent_guides_start_level = 1
 let g:indent_guides_guide_size = 1
 autocmd FileType javascript,html let g:indent_guides_guide_size = 2
 let g:indent_guides_enable_on_vim_startup = 1
@@ -419,8 +467,8 @@ highlight CursorLineNr guifg=#56B6C2
 highlight Error guifg=#f57373 guibg=#804040
 highlight vimError guifg=#f57373 guibg=#804040
 
-hi IndentGuidesOdd guibg=#282C34 guifg=#1f1f28
-hi IndentGuidesEven guibg=#2e313e guifg=#1f1f28
+hi IndentGuidesEven guibg=#282C34 guifg=#1f1f28
+hi IndentGuidesOdd guibg=#2e313e guifg=#1f1f28
 hi Comment cterm=italic
 hi String guifg=#98C379 guibg=#2f3339
 

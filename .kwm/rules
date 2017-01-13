@@ -26,7 +26,7 @@ if the screen exists.
 kwmc rule owner="iTerm2" properties={display="1"}
 
 // kwmc rule owner="Safari Technology Preview" properties={float="true"}
-kwmc rule owner="Google Chrome" properties={float="true"}
+/* kwmc rule owner="Google Chrome" properties={float="true"} */
 
 
 // kwmc rule owner="Steam" properties={float="true"}

@@ -1,6 +1,6 @@
 
 # Set default container split-ratio
-kwmc config split-ratio 0.5
+kwmc config split-ratio 0.6
 
 # New splits become the left leaf-node
 kwmc config spawn left
@@ -17,7 +17,7 @@ Override default settings for space 1 on screen 0
 
 kwmc config space 0 1 mode bsp
 kwmc config space 0 1 padding 100 100 100 100
-kwmc config space 0 1 gap 20 20
+kwmc config space 0 1 gap 10 10
 
 // kwmc config space 0 2 mode monocle
 // kwmc config space 0 2 padding 40 20 20 20
