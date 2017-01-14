@@ -75,6 +75,7 @@ Plug 'Valloric/YouCompleteMe', {
      \ }
 " let g:ycm_autoclose_preview_window_after_completion=1
 let g:ycm_add_preview_to_completeopt = 1
+let g:ycm_python_binary_path = 'python3'
 
 """ Python
 Plug 'davidhalter/jedi-vim'
@@ -180,7 +181,7 @@ let g:ycm_confirm_extra_conf = 0
 let g:ycm_min_num_of_chars_for_completion = 1 " default = 2
 let g:ycm_min_num_identifier_candidate_chars = 0 " default = 0
 let g:ycm_auto_trigger = 1 " complete as you type, default = 1
-" let g:ycm_key_invoke_completion = '<C-,>'
+let g:ycm_key_invoke_completion = '<C-m>'
 
 """ Javascript YCM completion
 
@@ -414,7 +415,7 @@ endfunction
 
 " javascript.jsx
 function! LightlineFiletype()
-  return winwidth(0) > 70 ? (&filetype !=# '' ? &filetype : 'no ft') : ''
+  return winwidth(0) > 100 ? (&filetype !=# '' ? &filetype : 'no ft') : ''
 endfunction
 
 " utf-8
@@ -424,7 +425,7 @@ endfunction
 
 " unix
 function! LightlineFileformat()
-  return winwidth(0) > 130 ? &fileformat : ''
+  return winwidth(0) > 120 ? &fileformat : ''
 endfunction
 
 
