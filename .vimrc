@@ -97,7 +97,7 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_javascript_checkers = ['eslint']
-" let g:syntastic_typescript_checks = ['tslint']
+let g:syntastic_typescript_checks = ['tslint']
 nmap <C-c> :SyntasticCheck<CR>
 nmap <C-x> :SyntasticReset<CR>
 
@@ -135,9 +135,6 @@ let g:vim_json_syntax_conceal = 0
 Plug 'hail2u/vim-css3-syntax'
 " Allow autoclose paired characters like [,] or (,),
 Plug 'jiangmiao/auto-pairs'
-" let g:AutoPairsFlyMode = 0
-" let g:AutoPairsShortcutFastWrap = '<C-M>'
-" DOESNT WORK
 
 
 
@@ -151,9 +148,10 @@ Plug 'othree/javascript-libraries-syntax.vim'
 let g:used_javascript_libs = 'react,redux,react-dom,react-redux,moment,lodash,rxjs,express,react-google-maps'
 
 " Indentation for jsx files (missing from jelera: vim-javascript-syntax)
-Plug 'gavocanov/vim-js-indent'
 Plug 'othree/yajs.vim'
 
+" JSX highlighting
+" Plug 'maxmellon/vim-jsx-pretty'
 
 " Syntax highlighting for .jsx (js files for react js)
 Plug 'peitalin/vim-jsx'
@@ -165,7 +163,6 @@ Plug 'ternjs/tern_for_vim'
 
 "" Typescript "
 Plug 'leafgarland/typescript-vim'
-" autocmd BufNewFile,BufRead *.tsx set filetype=javascript.tsx
 
 " GraphQL syntax highlighting
 Plug 'jparise/vim-graphql'
@@ -181,36 +178,39 @@ let g:ycm_confirm_extra_conf = 0
 let g:ycm_min_num_of_chars_for_completion = 1 " default = 2
 let g:ycm_min_num_identifier_candidate_chars = 0 " default = 0
 let g:ycm_auto_trigger = 1 " complete as you type, default = 1
-let g:ycm_key_invoke_completion = '<C-m>'
+" let g:ycm_key_invoke_completion = '<C-m>'
 
 """ Javascript YCM completion
 
 let g:ycm_semantic_triggers =  {
-            \   'javascript,typescript,python,haskell,elixir,go' : ['.'],
+            \   'javascript,typescript,python,haskell,go' : ['.'],
             \   'vim' : ['re![_a-zA-Z]+[_\w]*\.'],
             \   'ruby' : ['.', '::'],
             \   'erlang' : [':'],
             \ }
 
 
-" nnoremap <silent> te :YcmCompleter GetDoc<CR>
-" nnoremap <silent> tt :YcmCompleter GetType<CR>
-" nnoremap <silent> td :YcmCompleter GoToDefinition<CR>
-" nnoremap <silent> tr :YcmCompleter RefactorRename
+nnoremap <silent> te :YcmCompleter GetDoc<CR>
+nnoremap <silent> tt :YcmCompleter GetType<CR>
+nnoremap <silent> td :YcmCompleter GoToDefinition<CR>
+nnoremap <silent> tr :YcmCompleter RefactorRename
 
-nnoremap <silent> te :TernDef<CR>
-nnoremap <silent> td :TernDoc<CR>
-nnoremap <silent> tt :TernType<CR>
-nnoremap <silent> tr :TernRefs<CR>
-nnoremap <silent> tn :TernRename<CR>
+" nnoremap <silent> te :TernDef<CR>
+" nnoremap <silent> td :TernDoc<CR>
+" nnoremap <silent> tt :TernType<CR>
+" nnoremap <silent> tr :TernRefs<CR>
+" nnoremap <silent> tn :TernRename<CR>
 
 
 " Valloric/MatchTagAlways"
 " nnoremap <leader>% :MtaJumpToOtherTag<cr>
 let g:mta_filetypes = {
             \ 'html' : 1, 'xhtml' : 1, 'xml' : 1,
+            \ 'javascript' : 1,
             \ 'javascript.jsx' : 1,
-            \ 'typscript.tsx' : 1,
+            \ 'javascript.tsx' : 1,
+            \ 'typescript.tsx' : 1,
+            \ 'typescript' : 1
             \}
 
 
@@ -280,13 +280,17 @@ inoremap <C-b> <left>
 " replace tabs with 4 whitespace
 " nmap <F4> :%s/\t/    /g<CR>
 nmap <Leader>s :%s/\t/    /g<CR>
-autocmd FileType javascript,html nmap <Leader>s :%s/\t/  /g<CR>
+autocmd FileType javascript,typescript,html,css,sass.css,scss.css nmap <Leader>s :%s/\t/  /g<CR>
 " au BufNewFile,BufRead *.js *.html nmap <Leader>s :%s/\t/  /g<CR>
-autocmd FileType javascript,html setlocal shiftwidth=2 tabstop=2
-" autocmd FileType css,sass.css,scss.css setlocal shiftwidth=2 tabstop=2
+autocmd FileType javascript,typescript,html setlocal shiftwidth=2 tabstop=2
+autocmd FileType css,sass.css,scss.css setlocal shiftwidth=2 tabstop=2
 " au BufNewFile,BufRead *.hbs setlocal ft=d
 
+autocmd BufNewFile,BufRead *.tsx, set filetype=typescript.jsx
 
+
+
+nmap C :CtrlPClearCache<cr>
 
 
 """"""""""" Nerdtree Config
@@ -439,7 +443,7 @@ let g:lightline.enable = {
 let g:indent_guides_auto_colors = 0
 let g:indent_guides_start_level = 1
 let g:indent_guides_guide_size = 1
-autocmd FileType javascript,html let g:indent_guides_guide_size = 2
+autocmd FileType javascript,typescript,html let g:indent_guides_guide_size = 2
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_tab_guides = 1
 " autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#243e48 ctermbg=237

@@ -106,6 +106,17 @@ function yarnbabel {
 
 alias node7="node --harmony"
 
+
+function yarntypescript {
+    echo "yarn add --dev babel-core babel-loader babel-preset-latest babel-preset-stage-3"
+    yarn add --dev babel-core babel-loader babel-preset-latest babel-preset-stage-3
+    echo "yarn add --dev awesome-typescript-loader react react-dom babel-preset-react"
+    yarn add --dev awesome-typescript-loader react react-dom babel-preset-react
+    echo "yarn add --dev babel-plugin-transform-decorators-legacy babel-plugin-transform-async-to-generator";
+    yarn add --dev babel-plugin-transform-decorators-legacy babel-plugin-transform-async-to-generator ;
+}
+
+
 ##### ReactJS
 function yarnreact {
     echo "yarn add react react-dom";
@@ -140,9 +151,9 @@ function yarnrouter {
     yarn add react-router@next redux react-redux node-uuid;
 }
 
-function yarnreacttests {
-    echo "yarn add karma mocha";
-    yarn add karma mocha ;
+function yarntests {
+    echo "yarn add --dev babel-jest babel-preset-es2015 babel-preset-react react-test-renderer";
+    yarn add --dev jest babel-jest babel-preset-es2015 babel-preset-react react-test-renderer
 }
 
 
@@ -169,7 +180,7 @@ function test_gtrends {
 
 # JS directories
 alias listing.d="cd ~/Downloads/Torrents/listingrumors"
-alias blood.d="cd ~/Downloads/Torrents/bloodpact"
+alias blood.d="cd ~/Dropbox/bloodpact"
 alias react.d="cd ~/Downloads/Torrents/react"
 
 # kwm window manager

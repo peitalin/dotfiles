@@ -1,7 +1,5 @@
 # oh-my-zsh Bureau Theme
 
-
-
 ### NVM
 
 ZSH_THEME_NVM_PROMPT_PREFIX="%B⬡%b "
@@ -18,66 +16,66 @@ ZSH_THEME_GIT_PROMPT_STAGED="%{$fg_bold[green]%}●%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_UNSTAGED="%{$fg_bold[yellow]%}●%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg_bold[red]%}●%{$reset_color%}"
 
-# bureau_git_branch () {
-#   ref=$(command git symbolic-ref HEAD 2> /dev/null) || \
-#   ref=$(command git rev-parse --short HEAD 2> /dev/null) || return
-#   echo "${ref#refs/heads/}"
-# }
-#
-# bureau_git_status() {
-#   _STATUS=""
-#
-#   ### check status of files
-#   _INDEX=$(command git status --porcelain 2> /dev/null)
-#   if [[ -n "$_INDEX" ]]; then
-#     if $(echo "$_INDEX" | command grep -q '^[AMRD]. '); then
-#       _STATUS="$_STATUS$ZSH_THEME_GIT_PROMPT_STAGED"
-#     fi
-#     if $(echo "$_INDEX" | command grep -q '^.[MTD] '); then
-#       _STATUS="$_STATUS$ZSH_THEME_GIT_PROMPT_UNSTAGED"
-#     fi
-#     if $(echo "$_INDEX" | command grep -q -E '^\?\? '); then
-#       _STATUS="$_STATUS$ZSH_THEME_GIT_PROMPT_UNTRACKED"
-#     fi
-#     if $(echo "$_INDEX" | command grep -q '^UU '); then
-#       _STATUS="$_STATUS$ZSH_THEME_GIT_PROMPT_UNMERGED"
-#     fi
-#   else
-#     _STATUS="$_STATUS$ZSH_THEME_GIT_PROMPT_CLEAN"
-#   fi
-#
-#   ### check status of local repository
-#   _INDEX=$(command git status --porcelain -b 2> /dev/null)
-#   if $(echo "$_INDEX" | command grep -q '^## .*ahead'); then
-#     _STATUS="$_STATUS$ZSH_THEME_GIT_PROMPT_AHEAD"
-#   fi
-#   if $(echo "$_INDEX" | command grep -q '^## .*behind'); then
-#     _STATUS="$_STATUS$ZSH_THEME_GIT_PROMPT_BEHIND"
-#   fi
-#   if $(echo "$_INDEX" | command grep -q '^## .*diverged'); then
-#     _STATUS="$_STATUS$ZSH_THEME_GIT_PROMPT_DIVERGED"
-#   fi
-#
-#   if $(command git rev-parse --verify refs/stash &> /dev/null); then
-#     _STATUS="$_STATUS$ZSH_THEME_GIT_PROMPT_STASHED"
-#   fi
-#
-#   echo $_STATUS
-# }
-#
-# bureau_git_prompt () {
-#   local _branch=$(bureau_git_branch)
-#   local _status=$(bureau_git_status)
-#   local _result=""
-#   if [[ "${_branch}x" != "x" ]]; then
-#       _result="$ZSH_THEME_GIT_PROMPT_PREFIX$_branch"
-#       if [[ "${_status}x" != "x" ]]; then
-#         _result="$_result $_status"
-#       fi
-#       _result="$_result$ZSH_THEME_GIT_PROMPT_SUFFIX"
-#   fi
-#   echo $_result
-# }
+bureau_git_branch () {
+  ref=$(command git symbolic-ref HEAD 2> /dev/null) || \
+  ref=$(command git rev-parse --short HEAD 2> /dev/null) || return
+  echo "${ref#refs/heads/}"
+}
+
+bureau_git_status() {
+  _STATUS=""
+
+  # check status of files
+  _INDEX=$(command git status --porcelain 2> /dev/null)
+  if [[ -n "$_INDEX" ]]; then
+    if $(echo "$_INDEX" | command grep -q '^[AMRD]. '); then
+      _STATUS="$_STATUS$ZSH_THEME_GIT_PROMPT_STAGED"
+    fi
+    if $(echo "$_INDEX" | command grep -q '^.[MTD] '); then
+      _STATUS="$_STATUS$ZSH_THEME_GIT_PROMPT_UNSTAGED"
+    fi
+    if $(echo "$_INDEX" | command grep -q -E '^\?\? '); then
+      _STATUS="$_STATUS$ZSH_THEME_GIT_PROMPT_UNTRACKED"
+    fi
+    if $(echo "$_INDEX" | command grep -q '^UU '); then
+      _STATUS="$_STATUS$ZSH_THEME_GIT_PROMPT_UNMERGED"
+    fi
+  else
+    _STATUS="$_STATUS$ZSH_THEME_GIT_PROMPT_CLEAN"
+  fi
+
+  # check status of local repository
+  _INDEX=$(command git status --porcelain -b 2> /dev/null)
+  if $(echo "$_INDEX" | command grep -q '^## .*ahead'); then
+    _STATUS="$_STATUS$ZSH_THEME_GIT_PROMPT_AHEAD"
+  fi
+  if $(echo "$_INDEX" | command grep -q '^## .*behind'); then
+    _STATUS="$_STATUS$ZSH_THEME_GIT_PROMPT_BEHIND"
+  fi
+  if $(echo "$_INDEX" | command grep -q '^## .*diverged'); then
+    _STATUS="$_STATUS$ZSH_THEME_GIT_PROMPT_DIVERGED"
+  fi
+
+  if $(command git rev-parse --verify refs/stash &> /dev/null); then
+    _STATUS="$_STATUS$ZSH_THEME_GIT_PROMPT_STASHED"
+  fi
+
+  echo $_STATUS
+}
+
+bureau_git_prompt () {
+  local _branch=$(bureau_git_branch)
+  local _status=$(bureau_git_status)
+  local _result=""
+  if [[ "${_branch}x" != "x" ]]; then
+    _result="$ZSH_THEME_GIT_PROMPT_PREFIX$_branch"
+    if [[ "${_status}x" != "x" ]]; then
+      _result="$_result $_status"
+    fi
+    _result="$_result$ZSH_THEME_GIT_PROMPT_SUFFIX"
+  fi
+  echo $_result
+}
 
 
 _PATH="%{$fg_bold[white]%}%~%{$reset_color%}"
@@ -94,8 +92,7 @@ _LIBERTY="$_LIBERTY%{$reset_color%}"
 
 
 get_space () {
-  # $1$2$3 -> 3 arguments for 'get_space'
-  local STR=$1$2$3
+  local STR=$1$2
   local zero='%([BSUbfksu]|([FB]|){*})'
   local LENGTH=${#${(S%%)STR//$~zero/}}
   local SPACES=""
@@ -109,35 +106,18 @@ get_space () {
   echo $SPACES
 }
 
-if [[ $USER == "peitalin" ]]; then
-    _1LEFT="$_PATH"
-else
-    _1LEFT="$_USERNAME $_PATH"
-fi
-# _1LEFT="$_USERNAME $_PATH"
-# _1LEFT="$_USERNAME $_PATH"
-_1RIGHT="[%*]"
-
-# bureau_precmd () {
-#   # $1$2$3 -> 3 arguments for 'get_space'
-#   _1SPACES=`get_space $_1LEFT $_1RIGHT $(git_prompt_info)`
-#   print
-#   print -rP "$_1LEFT$_1SPACES$(git_prompt_info)$_1RIGHT"
-# }
+_1LEFT="$_USERNAME $_PATH"
+_1RIGHT="[%*] "
 
 bureau_precmd () {
+  _1SPACES=`get_space $_1LEFT $_1RIGHT`
   print
-  print -rP "$_1LEFT $(git_prompt_info)"
+  print -rP "$_1LEFT$_1SPACES$_1RIGHT"
 }
-
-
-## LOCAL RETURN CODE STATUS
-local return_code="%(?..%{$fg[cyan]%}%? ↵%{$reset_color%})"
 
 setopt prompt_subst
 PROMPT='> $_LIBERTY '
-# RPROMPT='$(nvm_prompt_info) $(bureau_git_prompt)'
-RPROMPT='%B${return_code}%b $(nvm_prompt_info)'
+RPROMPT='$(nvm_prompt_info) $(bureau_git_prompt)'
 
 autoload -U add-zsh-hook
 add-zsh-hook precmd bureau_precmd
