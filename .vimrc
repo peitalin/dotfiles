@@ -76,6 +76,7 @@ Plug 'Valloric/YouCompleteMe', {
 " let g:ycm_autoclose_preview_window_after_completion=1
 let g:ycm_add_preview_to_completeopt = 1
 let g:ycm_python_binary_path = 'python3'
+let g:ycm_key_invoke_completion = '<C-y>'
 
 """ Python
 Plug 'davidhalter/jedi-vim'
@@ -91,13 +92,17 @@ Plug 'scrooloose/syntastic'
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-let g:syntastic_mode_map = { 'mode': 'passive' }
+" let g:syntastic_mode_map = { 'mode': 'passive' }
+let g:syntastic_mode_map = { 'mode': 'active' }
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_typescript_checks = ['tslint']
+" let g:syntastic_typescript_checkers = ['tsc', 'tslint']
+let g:syntastic_typescript_checkers = ['tsuquyomi']
+let g:tsuquyomi_disable_quickfix = 1
+let g:syntastic_loc_list_height=5
 nmap <C-c> :SyntasticCheck<CR>
 nmap <C-x> :SyntasticReset<CR>
 
@@ -136,6 +141,8 @@ Plug 'hail2u/vim-css3-syntax'
 " Allow autoclose paired characters like [,] or (,),
 Plug 'jiangmiao/auto-pairs'
 
+" Autoread file changes.
+Plug 'djoshea/vim-autoread'
 
 
 """"""" Javascript
@@ -163,6 +170,17 @@ Plug 'ternjs/tern_for_vim'
 
 "" Typescript "
 Plug 'leafgarland/typescript-vim'
+Plug 'Shougo/vimproc.vim', {
+\ 'build' : {
+\     'windows' : 'tools\\update-dll-mingw',
+\     'cygwin' : 'make -f make_cygwin.mak',
+\     'mac' : 'make -f make_mac.mak',
+\     'linux' : 'make',
+\     'unix' : 'gmake',
+\    },
+\ }
+
+Plug 'Quramy/tsuquyomi'
 
 " GraphQL syntax highlighting
 Plug 'jparise/vim-graphql'

@@ -1,5 +1,4 @@
 
-alias cim='vim'
 alias cat='ccat'
 
 alias poke.d='cd ~/Downloads/Torrents/react/pokedex-react-master'
@@ -110,10 +109,16 @@ alias node7="node --harmony"
 function yarntypescript {
     echo "yarn add --dev babel-core babel-loader babel-preset-latest babel-preset-stage-3"
     yarn add --dev babel-core babel-loader babel-preset-latest babel-preset-stage-3
-    echo "yarn add --dev awesome-typescript-loader react react-dom babel-preset-react"
-    yarn add --dev awesome-typescript-loader react react-dom babel-preset-react
-    echo "yarn add --dev babel-plugin-transform-decorators-legacy babel-plugin-transform-async-to-generator";
-    yarn add --dev babel-plugin-transform-decorators-legacy babel-plugin-transform-async-to-generator ;
+    echo "yarn add --dev awesome-typescript-loader ts-loader react react-dom babel-preset-react"
+    yarn add --dev awesome-typescript-loader ts-loader react react-dom babel-preset-react
+    # echo "yarn add --dev babel-plugin-transform-decorators-legacy babel-plugin-transform-async-to-generator";
+    # yarn add --dev babel-plugin-transform-decorators-legacy babel-plugin-transform-async-to-generator ;
+    echo "yarn add --dev @types/react @types/react-dom @types/node"
+    yarn add --dev @types/react @types/react-dom @types/node
+    touch tsconfig.json tslint.json
+
+    echo yarn add immutable @types/immutable
+    yarn add immutable @types/immutable
 }
 
 
@@ -121,8 +126,10 @@ function yarntypescript {
 function yarnreact {
     echo "yarn add react react-dom";
     yarn add react react-dom;
-    echo "yarn add --dev webpack webpack-dev-server webpack-validator";
-    yarn add --dev webpack webpack-dev-server webpack-validator;
+    echo "yarn add --dev @types/react @types/react-dom"
+    yarn add --dev @types/react @types/react-dom
+    echo "yarn add --dev webpack@2.2 webpack-dev-server@2.2";
+    yarn add --dev webpack@2.2 webpack-dev-server@2.2;
     echo "yarn add --dev babel-core babel-loader babel-preset-latest babel-preset-react babel-preset-stage-3";
     yarn add --dev babel-core babel-loader babel-preset-latest babel-preset-react babel-preset-stage-3;
     echo "yarn add --dev babel-plugin-transform-decorators-legacy babel-plugin-transform-async-to-generator babel-plugin-transform-react-jsx-img-import";
@@ -130,9 +137,9 @@ function yarnreact {
     echo "yarn add --dev file-loader url-loader style-loader css-loader node-sass sass-loader html-loader resolve-url-loader";
     yarn add --dev file-loader url-loader style-loader css-loader node-sass sass-loader html-loader resolve-url-loader;
 
-    echo "INSTALLING react-hot-loader v3."
-    echo "yarn add --dev react-hot-loader@next"
-    yarn add --dev react-hot-loader@next
+    # echo "INSTALLING react-hot-loader v3."
+    # echo "yarn add --dev react-hot-loader@next"
+    # yarn add --dev react-hot-loader@next
 
 }
 
@@ -141,19 +148,31 @@ function yarnserver {
     yarn add express express-graphql graphql
 }
 
+function yarnapollo {
+    echo "yarn add graphql-tag react-apollo apollo-client"
+    yarn add graphql-tag react-apollo apollo-client
+}
+
 function yarnredux {
     echo "yarn add redux react-redux node-uuid";
     yarn add redux react-redux node-uuid;
 }
 
 function yarnrouter {
-    echo "yarn add react-router@next redux react-redux node-uuid";
-    yarn add react-router@next redux react-redux node-uuid;
+    echo "yarn add react-router@next";
+    yarn add react-router@next;
 }
 
 function yarntests {
-    echo "yarn add --dev babel-jest babel-preset-es2015 babel-preset-react react-test-renderer";
-    yarn add --dev jest babel-jest babel-preset-es2015 babel-preset-react react-test-renderer
+    echo yarn add --dev jest ts-jest babel-jest react-test-renderer react-addons-test-utils enzyme
+    yarn add --dev jest ts-jest babel-jest react-test-renderer enzyme
+    echo yarn add --dev @types/react-test-renderer @types/enzyme
+    yarn add --dev @types/jest @types/react-test-renderer @types/enzyme
+
+    echo "Making mockfile directories..."
+    mkdir -p ./src/__mocks__
+    echo "module.exports = {};" > ./src/__mocks__/fileMock.js
+    echo "module.exports = {};" > ./src/__mocks__/styleMock.js
 }
 
 
