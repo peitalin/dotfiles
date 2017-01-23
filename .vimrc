@@ -1,5 +1,6 @@
 
 
+
 """"""""""""" General ViM Settings """""""""
 scriptencoding utf-8
 syntax on
@@ -103,8 +104,8 @@ let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_typescript_checkers = ['tsuquyomi']
 let g:tsuquyomi_disable_quickfix = 1
 let g:tsuquyomi_disable_default_mappings = 1
-nmap <C-]> :TsuquyomiDefinition<CR>
-nmap <C-[> :TsuquyomiGoBack<CR>
+nnoremap <C-]> :TsuquyomiDefinition<CR>
+nnoremap <silent> tb :TsuquyomiGoBack<CR>
 nnoremap <silent> tr :TsuquyomiReferences<CR>
 
 let g:syntastic_loc_list_height=5
@@ -290,6 +291,9 @@ set completeopt=menuone,longest,preview
 
 
 """"""""""""" Custom key bindings """"""""""
+"""NEVER MAP TO: <C-[> , causes mouse scrolling bug
+" http://stackoverflow.com/questions/21738018/vim-how-do-i-map-number-keys
+
 let mapleader = "\<Space>"
 "" save file nnoremap <Leader>w :wa<CR>
 
