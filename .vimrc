@@ -104,13 +104,14 @@ let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_typescript_checkers = ['tsuquyomi']
 let g:tsuquyomi_disable_quickfix = 1
 let g:tsuquyomi_disable_default_mappings = 1
-nnoremap <C-]> :TsuquyomiDefinition<CR>
+nnoremap <silent> td :TsuquyomiDefinition<CR>
 nnoremap <silent> tb :TsuquyomiGoBack<CR>
 nnoremap <silent> tr :TsuquyomiReferences<CR>
 
 let g:syntastic_loc_list_height=5
 nmap <C-c> :SyntasticCheck<CR>
-nmap <C-x> :SyntasticReset<CR>
+" nmap <C-x> :SyntasticReset<CR>
+nmap <C-x> :lcl<CR>
 
 
 " " Haskell
@@ -214,9 +215,9 @@ let g:ycm_semantic_triggers =  {
             \ }
 
 
-nnoremap <silent> te :YcmCompleter GetDoc<CR>
+" nnoremap <silent> te :YcmCompleter GetDoc<CR>
 nnoremap <silent> tt :YcmCompleter GetType<CR>
-nnoremap <silent> td :YcmCompleter GoToDefinition<CR>
+" nnoremap <silent> td :YcmCompleter GoToDefinition<CR>
 " nnoremap <silent> tr :YcmCompleter RefactorRename
 
 " nnoremap <silent> te :TernDef<CR>
