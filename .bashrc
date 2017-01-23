@@ -116,6 +116,8 @@ function yarntypescript {
     echo "yarn add --dev @types/react @types/react-dom @types/node"
     yarn add --dev @types/react @types/react-dom @types/node
     touch tsconfig.json tslint.json
+    mkdir dist
+    touch ./dist/index.d.ts
 
     echo yarn add immutable @types/immutable
     yarn add immutable @types/immutable
@@ -151,6 +153,9 @@ function yarnserver {
 function yarnapollo {
     echo "yarn add graphql-tag react-apollo apollo-client"
     yarn add graphql-tag react-apollo apollo-client
+    echo yarn add --dev babel-preset-react-native
+    yarn add --dev babel-preset-react-native
+    # remove later when react-native dependency bug is fixed,
 }
 
 function yarnredux {

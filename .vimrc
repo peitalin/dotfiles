@@ -13,8 +13,8 @@ set scrolloff=10    " Keep 10 lines (top/bottom) for scope
 set showcmd         " show the command being typed
 set showmatch       " show matching brackets
 set backspace=indent,eol,start
-set shiftwidth=4
-set tabstop=4
+set shiftwidth=2
+set tabstop=2
 set softtabstop=0 noexpandtab
 " set expandtab                     " Tabs insert 4 space characters
 set virtualedit+=block            " Allow the cursor to go anywhere in visual block mode
@@ -92,8 +92,8 @@ Plug 'scrooloose/syntastic'
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-" let g:syntastic_mode_map = { 'mode': 'passive' }
-let g:syntastic_mode_map = { 'mode': 'active' }
+let g:syntastic_mode_map = { 'mode': 'passive' }
+" let g:syntastic_mode_map = { 'mode': 'active' }
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
@@ -102,6 +102,11 @@ let g:syntastic_javascript_checkers = ['eslint']
 " let g:syntastic_typescript_checkers = ['tsc', 'tslint']
 let g:syntastic_typescript_checkers = ['tsuquyomi']
 let g:tsuquyomi_disable_quickfix = 1
+let g:tsuquyomi_disable_default_mappings = 1
+nmap <C-]> :TsuquyomiDefinition<CR>
+nmap <C-[> :TsuquyomiGoBack<CR>
+nnoremap <silent> tr :TsuquyomiReferences<CR>
+
 let g:syntastic_loc_list_height=5
 nmap <C-c> :SyntasticCheck<CR>
 nmap <C-x> :SyntasticReset<CR>
@@ -211,7 +216,7 @@ let g:ycm_semantic_triggers =  {
 nnoremap <silent> te :YcmCompleter GetDoc<CR>
 nnoremap <silent> tt :YcmCompleter GetType<CR>
 nnoremap <silent> td :YcmCompleter GoToDefinition<CR>
-nnoremap <silent> tr :YcmCompleter RefactorRename
+" nnoremap <silent> tr :YcmCompleter RefactorRename
 
 " nnoremap <silent> te :TernDef<CR>
 " nnoremap <silent> td :TernDoc<CR>
@@ -297,17 +302,16 @@ inoremap <C-b> <left>
 
 " replace tabs with 4 whitespace
 " nmap <F4> :%s/\t/    /g<CR>
-nmap <Leader>s :%s/\t/    /g<CR>
-autocmd FileType javascript,typescript,html,css,sass.css,scss.css nmap <Leader>s :%s/\t/  /g<CR>
+nmap <Leader>s :%s/\t/  /g<CR>
+autocmd FileType python,rust,haskell nmap <Leader>s :%s/\t/    /g<CR>
 " au BufNewFile,BufRead *.js *.html nmap <Leader>s :%s/\t/  /g<CR>
-autocmd FileType javascript,typescript,html setlocal shiftwidth=2 tabstop=2
-autocmd FileType css,sass.css,scss.css setlocal shiftwidth=2 tabstop=2
+autocmd FileType python,haskell,rust,markdown setlocal shiftwidth=4 tabstop=4
 " au BufNewFile,BufRead *.hbs setlocal ft=d
-
 autocmd BufNewFile,BufRead *.tsx, set filetype=typescript.jsx
 
 
 
+" Ctrl-P refresh file cache
 nmap C :CtrlPClearCache<cr>
 
 
@@ -460,8 +464,8 @@ let g:lightline.enable = {
 """"""" Vim-indent-guides
 let g:indent_guides_auto_colors = 0
 let g:indent_guides_start_level = 1
-let g:indent_guides_guide_size = 1
-autocmd FileType javascript,typescript,html let g:indent_guides_guide_size = 2
+let g:indent_guides_guide_size = 2
+autocmd FileType python, rust let g:indent_guides_guide_size = 1
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_tab_guides = 1
 " autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#243e48 ctermbg=237
