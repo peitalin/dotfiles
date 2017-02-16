@@ -51,8 +51,9 @@ Plug 'nathanaelkane/vim-indent-guides'
 Plug 'itchyny/lightline.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 " ctrlp root directories
-let g:ctrlp_root_markers = ['package.json', 'webpack.config.js', 'README.md']
+let g:ctrlp_root_markers = ['webpack.config.js', 'README.md', 'package.json']
 let g:ctrlp_custom_ignore = '\v[\/](node_modules|jspm_packages|typings|target)|(\.(swp|ico|git|svn))$'
+let g:ctrlp_max_files = 0
 " default open in new tabs, instead of buffer
 let g:ctrlp_prompt_mappings = {
 \ 'AcceptSelection("e")': [],
@@ -107,11 +108,12 @@ let g:tsuquyomi_disable_default_mappings = 1
 nnoremap <silent> td :TsuquyomiDefinition<CR>
 nnoremap <silent> tb :TsuquyomiGoBack<CR>
 nnoremap <silent> tr :TsuquyomiReferences<CR>
+autocmd FileType typescript nmap <buffer> <Leader>t : <C-u>echo tsuquyomi#hint()<CR>
 
 let g:syntastic_loc_list_height=5
 nmap <C-c> :SyntasticCheck<CR>
 " nmap <C-x> :SyntasticReset<CR>
-nmap <C-x> :lcl<CR>
+nmap <C-x> :lcl<CR> :SyntasticReset<CR>
 
 
 " " Haskell
@@ -122,8 +124,6 @@ nmap <C-x> :lcl<CR>
 " Syntax highlighting
 Plug 'rust-lang/rust.vim'
 
-" Coffeescript
-Plug 'kchmck/vim-coffee-script'
 
 " Vim Snippets
 Plug 'SirVer/ultisnips'
@@ -155,22 +155,18 @@ Plug 'djoshea/vim-autoread'
 """"""" Javascript
 " Improve javascript syntax higlighting, needed for good folding,
 Plug 'jelera/vim-javascript-syntax'
+" Plug 'pangloss/vim-javascript'
+" Indentation for jsx files (missing from jelera: vim-javascript-syntax)
+" Plug 'othree/yajs.vim'
+
 
 " Advanced syntax highlightin for libraries and es6
-Plug 'isRuslan/vim-es6'
 Plug 'othree/javascript-libraries-syntax.vim'
-let g:used_javascript_libs = 'react,redux,react-dom,react-redux,moment,lodash,rxjs,express,react-google-maps'
+let g:used_javascript_libs = 'react,redux,react-dom,react-redux,moment,lodash,rxjs,express'
 
-" Indentation for jsx files (missing from jelera: vim-javascript-syntax)
-Plug 'othree/yajs.vim'
 
-" JSX highlighting
-" Plug 'maxmellon/vim-jsx-pretty'
-
-" Syntax highlighting for .jsx (js files for react js)
-Plug 'peitalin/vim-jsx'
-" enable JSX syntax higlighting and indenting in .js files = 0
-let g:jsx_ext_required = 0
+" Syntax highlighting for .jsx (typescript)
+Plug 'peitalin/vim-jsx-typescript'
 
 " Tern.js server: jump to var defs and documentation
 Plug 'ternjs/tern_for_vim'
@@ -192,7 +188,7 @@ Plug 'Quramy/tsuquyomi'
 " GraphQL syntax highlighting
 Plug 'jparise/vim-graphql'
 
-
+Plug 'posva/vim-vue'
 call plug#end()
 
 
@@ -312,7 +308,7 @@ autocmd FileType python,rust,haskell nmap <Leader>s :%s/\t/    /g<CR>
 " au BufNewFile,BufRead *.js *.html nmap <Leader>s :%s/\t/  /g<CR>
 autocmd FileType python,haskell,rust,markdown setlocal shiftwidth=4 tabstop=4
 " au BufNewFile,BufRead *.hbs setlocal ft=d
-autocmd BufNewFile,BufRead *.tsx, set filetype=typescript.jsx
+autocmd BufNewFile,BufRead *.tsx,*.js,*.jsx set filetype=typescript.jsx
 
 
 
@@ -388,7 +384,7 @@ nmap <leader>m '?
 nmap <leader>n <C-N>
 
 """"""" Tagbar Overview Map
-map <leader>t :TagbarToggle<CR>
+map <leader>c :TagbarToggle<CR>
 
 """"""" easymotion
 " Replace default search
@@ -459,18 +455,29 @@ function! LightlineFileformat()
   return winwidth(0) > 120 ? &fileformat : ''
 endfunction
 
-
-
 let g:lightline.enable = {
 \   'tabline': 1
 \ }
+
+function! ResizeCmdHeight()
+  if &columns < 120
+    set cmdheight=2
+  else
+    set cmdheight=1
+  endif
+endfunction
+
+augroup ResizeCmdOnVimResized
+    autocmd!
+    autocmd VimResized * call ResizeCmdHeight()
+augroup END
 
 
 """"""" Vim-indent-guides
 let g:indent_guides_auto_colors = 0
 let g:indent_guides_start_level = 1
 let g:indent_guides_guide_size = 2
-autocmd FileType python, rust let g:indent_guides_guide_size = 1
+autocmd FileType python,rust let g:indent_guides_guide_size = 1
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_tab_guides = 1
 " autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#243e48 ctermbg=237
@@ -539,12 +546,37 @@ hi xmlAttrib cterm=italic
 
 " Blues
 " light blues
-hi xmlTagName guifg=#79BCE5
-hi xmlTag guifg=#79BCE5
+hi xmlTagName guifg=#59ACE5
+hi xmlTag guifg=#59ACE5
+
 " dark blues
 hi xmlEndTag guifg=#2974a1
 
+hi htmlTag guifg=#2974a1
+hi htmlEndTag guifg=#2974a1
+hi htmlTagName guifg=#2974a1
+hi htmlArg cterm=italic
 
+
+hi Constant guifg=#56B6C2
+hi typescriptBraces guifg=#56B6C2
+hi typescriptEndColons guifg=#56B6C2
+hi typescriptRef guifg=#56B6C2
+hi typescriptPropietaryMethods guifg=#56B6C2
+hi typescriptEventListenerMethods guifg=#56B6C2
+hi typescriptFunction guifg=#56B6C2
+hi typescriptVars guifg=#56B6C2
+hi typescriptParen guifg=#56B6C2
+hi typescriptDotNotation guifg=#56B6C2
+hi typescriptBracket guifg=#56B6C2
+hi typescriptBlock guifg=#56B6C2
+hi typescriptJFunctions guifg=#56B6C2
+hi typescriptSFunctions guifg=#56B6C2
+
+" Identify the syntax highlighting group used at the cursor
+map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 autocmd FileType python colorscheme materialtheme
 " autocmd FileType python colorscheme onedark
