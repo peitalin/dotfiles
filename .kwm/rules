@@ -6,6 +6,8 @@ blacklists an application from Kwms tiling
     kwmc rule owner="Steam" properties={float="true"}
     kwmc rule owner="Photoshop" properties={float="true"}
 */
+// REACT-NATIVE Simulators
+// kwmc rule owner="qemu-system-x86_64" properties={float="true"}
 
 /*
     Add custom tiling rules for applications that

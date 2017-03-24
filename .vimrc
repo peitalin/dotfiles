@@ -52,7 +52,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 " ctrlp root directories
 let g:ctrlp_root_markers = ['webpack.config.js', 'README.md', 'package.json']
-let g:ctrlp_custom_ignore = '\v[\/](node_modules|jspm_packages|typings|target)|(\.(swp|ico|git|svn))$'
+let g:ctrlp_custom_ignore = '\v[\/](node_modules|jspm_packages|typings|target)|(\.(swp|ico|git|svn)|manifest.json)$'
 let g:ctrlp_max_files = 0
 " default open in new tabs, instead of buffer
 let g:ctrlp_prompt_mappings = {
@@ -86,9 +86,11 @@ Plug 'davidhalter/jedi-vim'
 " Highlights the matching HTML tag when the cursor is positioned on a tag.
 Plug 'Valloric/MatchTagAlways'
 Plug 'othree/csscomplete.vim'
-Plug 'cakebaker/scss-syntax.vim'
+" Plug 'cakebaker/scss-syntax.vim'
+Plug 'hail2u/vim-css3-syntax'
 au BufRead,BufNewFile *.scss set filetype=scss.css
 au BufRead,BufNewFile *.sass set filetype=sass.css
+
 
 Plug 'scrooloose/syntastic'
 set statusline+=%#warningmsg#
@@ -120,7 +122,7 @@ nmap <C-x> :lcl<CR> :SyntasticReset<CR>
 " Plug 'eagletmt/neco-ghc'
 " Plug 'eagletmt/ghcmod-vim'
 
-" " Rust"
+" " Rust
 " Syntax highlighting
 Plug 'rust-lang/rust.vim'
 
@@ -154,7 +156,7 @@ Plug 'djoshea/vim-autoread'
 
 """"""" Javascript
 " Improve javascript syntax higlighting, needed for good folding,
-Plug 'jelera/vim-javascript-syntax'
+" Plug 'jelera/vim-javascript-syntax'
 " Plug 'pangloss/vim-javascript'
 " Indentation for jsx files (missing from jelera: vim-javascript-syntax)
 " Plug 'othree/yajs.vim'
@@ -162,7 +164,7 @@ Plug 'jelera/vim-javascript-syntax'
 
 " Advanced syntax highlightin for libraries and es6
 Plug 'othree/javascript-libraries-syntax.vim'
-let g:used_javascript_libs = 'react,redux,react-dom,react-redux,moment,lodash,rxjs,express'
+let g:used_javascript_libs = 'react,redux,react-dom,react-redux,moment,lodash,express,react-apollo,graphql-tag'
 
 
 " Syntax highlighting for .jsx (typescript)
@@ -188,7 +190,6 @@ Plug 'Quramy/tsuquyomi'
 " GraphQL syntax highlighting
 Plug 'jparise/vim-graphql'
 
-Plug 'posva/vim-vue'
 call plug#end()
 
 
@@ -224,7 +225,7 @@ nnoremap <silent> tt :YcmCompleter GetType<CR>
 
 
 " Valloric/MatchTagAlways"
-" nnoremap <leader>% :MtaJumpToOtherTag<cr>
+nnoremap <leader>% :MtaJumpToOtherTag<cr>
 let g:mta_filetypes = {
             \ 'html' : 1, 'xhtml' : 1, 'xml' : 1,
             \ 'javascript' : 1,
@@ -256,6 +257,7 @@ let g:tagbar_type_markdown = {
 \ 'kinds': ['h:Heading_L1', 'i:Heading_L2', 'k:Heading_L3']
 \ }
 
+nnoremap <silent> <F11> :TagbarToggle<CR>
 
 
 """ Haskell ghc-mod completions
@@ -271,7 +273,6 @@ let g:tagbar_type_markdown = {
 " map <silent> tk :GhcModCheck<CR>
 " hi ghcmodType ctermbg=blue
 " let g:ghcmod_type_highlight = 'ghcmodType'
-
 
 
 """"""""""""""""""" VIM JEDI PYTHON """"""""""""""
@@ -308,7 +309,7 @@ autocmd FileType python,rust,haskell nmap <Leader>s :%s/\t/    /g<CR>
 " au BufNewFile,BufRead *.js *.html nmap <Leader>s :%s/\t/  /g<CR>
 autocmd FileType python,haskell,rust,markdown setlocal shiftwidth=4 tabstop=4
 " au BufNewFile,BufRead *.hbs setlocal ft=d
-autocmd BufNewFile,BufRead *.tsx,*.js,*.jsx set filetype=typescript.jsx
+autocmd BufNewFile,BufRead *.tsx,*.ts,*.js,*.jsx set filetype=typescript.jsx
 
 
 
@@ -492,57 +493,48 @@ colorscheme onedark
 " colorscheme srcery
 " colorscheme materialtheme
 
-
 " Normal         xxx ctermfg=145 ctermbg=235 guifg=#ABB2BF guibg=#282C34
-" highlight MatchParen guibg=#366672 guifg=#71AFEF
+highlight Normal guibg=#21242a
 highlight MatchParen guifg=#C678DD guibg=#504066
-" highlight MatchParen guibg=#282c34 guifg=#E06C75
-highlight LineNr    guifg=#1b1e28
-
-" highlight CursorLineNr guifg=#ffb74d
+highlight LineNr    guifg=#151822
 highlight CursorLineNr guifg=#56B6C2
-" highlight CursorLineNr guifg=#C678DD
-
 highlight Error guifg=#f57373 guibg=#804040
 highlight vimError guifg=#f57373 guibg=#804040
 
-hi IndentGuidesEven guibg=#282C34 guifg=#1f1f28
-hi IndentGuidesOdd guibg=#2e313e guifg=#1f1f28
-hi Comment cterm=italic
-hi String guifg=#98C379 guibg=#2f3339
+hi IndentGuidesEven guibg=#21242a guifg=#1f1f28
+" hi IndentGuidesEven guibg=#282C34 guifg=#1f1f28
+hi IndentGuidesOdd guibg=#262a36 guifg=#1f1f28
+hi Comment cterm=italic guifg=#4a5158
+hi String guifg=#98C379 guibg=#2a2e34
 
 """ browns
 " function params: numbers and constants
-hi Keyword guifg=#907161
+" hi Keyword guifg=#907161
 hi Statement guifg=#907161
 hi Conditional guifg=#907161
+hi Keyword guifg=#56B6C2
+hi Function guifg=#56B6C2
+" hi Statement guifg=#56B6C2
+" hi Conditional guifg=#56B6C2
 
 " Yellows
-hi Number guifg=#ffb74d
-hi Special guifg=#ffb74d
+hi Number guifg=#E5C07B
+hi Special guifg=#E5C07B
+hi Boolean guifg=#E5C07B
+" #D19A66
 
 " purple
 hi CtrlPMatch guifg=#ba9ef7
-
 hi Visual guibg=#364652
-" highlight MatchParen guibg=#366672 guifg=#71AFEF
-" highlight MatchParen guifg=#C678DD guibg=#504066
-
 
 " medium red: if else operators
-hi Type guifg=#e86868
 hi Preproc guifg=#e86868
-" orange red
-" hi Function gui=bold guifg=#dc662e
-" hi Operator guifg=#dc662e
+hi Type guifg=#e86868
 
 
 
 """""" vim-jsx ONLY
-" hi Identifier cterm=italic guifg=#b55353
-" hi xmlAttrib cterm=italic guifg=#b55353
 hi Identifier cterm=italic
-hi xmlAttrib cterm=italic
 
 " Blues
 " light blues
@@ -551,13 +543,13 @@ hi xmlTag guifg=#59ACE5
 
 " dark blues
 hi xmlEndTag guifg=#2974a1
-
 hi htmlTag guifg=#2974a1
 hi htmlEndTag guifg=#2974a1
 hi htmlTagName guifg=#2974a1
-hi htmlArg cterm=italic
+" hi htmlArg cterm=italic
+" hi xmlAttrib cterm=italic
 
-
+" cyan
 hi Constant guifg=#56B6C2
 hi typescriptBraces guifg=#56B6C2
 hi typescriptEndColons guifg=#56B6C2
@@ -572,6 +564,9 @@ hi typescriptBracket guifg=#56B6C2
 hi typescriptBlock guifg=#56B6C2
 hi typescriptJFunctions guifg=#56B6C2
 hi typescriptSFunctions guifg=#56B6C2
+" hi typescriptInterpolation guifg=#D19A66
+hi typescriptInterpolationDelimiter guifg=#56B6C2
+
 
 " Identify the syntax highlighting group used at the cursor
 map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'

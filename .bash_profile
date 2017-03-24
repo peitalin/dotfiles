@@ -67,7 +67,7 @@ function rsync_to_nix {
 
 function rsync_from_nix {
     echo "rsync peita@10.0.0.135:/run/media/F/Torrents/$@ ~/Downloads/Torrents"
-    rsync peita@10.0.0.135:/run/media/F/Torrents/$@ ~/Downloads/Torrents
+    rsync peita@10.0.0.134:/run/media/F/Torrents/$@ ~/Downloads/Torrents
 }
 
 

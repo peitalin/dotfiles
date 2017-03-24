@@ -29,6 +29,11 @@ let s:brown = [ '#6d5e56', 120 ]
 let s:lightbrown = [ '#a59389', 130 ]
 let s:p = {'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'tabline': {}}
 
+let s:grey0 = ['#4c5768', 239]
+let s:grey1 = ['#3a404a', 237]
+" let s:greyBackground = ["#282C34", 235]
+let s:greyBackground = ["#1e2127", 235]
+
 " let s:p.normal.left = [ [ s:base03, s:brown ], [ s:base03, s:lightbrown] ]
 let s:p.normal.right = [ [ s:base023, s:base1 ], [ s:base0, s:base02 ] ]
 
@@ -40,17 +45,12 @@ let s:p.replace.left = [ [ s:base023, s:red ], [ s:base3, s:base01 ] ]
 let s:p.visual.left = [ [ s:base02, s:green ], [ s:base02, s:lightgreen ] ]
 let s:p.normal.left = [ [ s:base02, s:magenta ], [ s:base02, s:lightmagenta ] ]
 
-let s:p.normal.middle = [ [ s:base2, s:base023 ] ]
+" let s:p.normal.middle = [ [ s:base2, s:base023 ] ]
+let s:p.normal.middle = [ [ s:base01, s:greyBackground ] ]
 let s:p.inactive.middle = [ [ s:base1, s:base03 ] ]
 
 
-" let s:bgblue0 = [ '#14252c', 233 ]
-" let s:bgblue1 = [ '#182a33', 235 ]
-" let s:bgblue2 = [ '#223344', 238 ]
 
-let s:grey0 = ['#4c5768', 239]
-let s:grey1 = ['#2C323C', 237]
-let s:greyBackground = ["#282C34", 235]
 
 
 let s:p.tabline.tabsel = [ [ ["#1b1e28", 233], s:grey0 ] ]

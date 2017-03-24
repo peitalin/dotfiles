@@ -1,7 +1,4 @@
 
-alias cat='ccat'
-
-alias poke.d='cd ~/Downloads/Torrents/react/pokedex-react-master'
 
 
 ### PATHS
@@ -16,6 +13,11 @@ export PATH="$HOME/.local/bin:$PATH"
 export PATH="/usr/local/Cellar:$PATH"
 export NODE_PATH="/usr/local/lib/node_modules"
 # export PYTHONPATH="/usr/local/lib/python3.5/site-packages"
+
+export ANDROID_HOME="$HOME/Library/Android/sdk"
+export PATH="$PATH:$ANDROID_HOME/tools"
+export PATH="$PATH:$ANDROID_HOME/platform-tools"
+
 
 export SHELL="/bin/zsh"
 # export TERM="xterm-256color-italic"
@@ -39,7 +41,7 @@ alias sudo="sudo "
 alias pgrep='pgrep -f'
 alias pkill='pkill -f'
 alias whereami='echo $HOST'
-
+alias cat='ccat'
 
 ### directory shortcuts
 alias drop="cd ~/Dropbox"
@@ -90,7 +92,6 @@ alias pip_update="python3 $HOME/Data/update-pip-packages/update-pip.py"
 alias matplotlibrc="vim ~/.matplotlib/matplotlibrc"
 alias pypackages="cd /usr/local/lib/python3.5/site-packages/"
 
-alias inode="node-help"
 
 ##### Haskell
 alias ghcirc="vim ~/.ghc/ghci.conf"
@@ -105,8 +106,9 @@ function yarnbabel {
     yarn add --dev babel-plugin-transform-function-bind babel-plugin-transform-exponentiation-operator
 }
 
+alias inode="node-help"
 alias node7="node --harmony"
-
+alias typescript="tsc --lib dom,es6"
 
 function yarntypescript {
     echo "yarn add --dev babel-core babel-loader babel-preset-latest "
