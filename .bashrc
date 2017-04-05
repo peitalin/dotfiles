@@ -420,6 +420,9 @@ function test_gtrends {
 alias listing.d="cd ~/Downloads/Torrents/listingrumors"
 alias blood.d="cd ~/Dropbox/bloodpact"
 alias react.d="cd ~/Downloads/Torrents/react"
+alias arrow.d="cd ~/Downloads/Torrents/react/arrow"
+alias vue.d="cd ~/Downloads/Torrents/vue"
+
 
 # kwm window manager
 alias kwmrestart="brew services restart kwm"

@@ -1,6 +1,5 @@
 
 
-
 """"""""""""" General ViM Settings """""""""
 scriptencoding utf-8
 syntax on
@@ -83,15 +82,6 @@ let g:ycm_key_invoke_completion = '<C-y>'
 """ Python
 Plug 'davidhalter/jedi-vim'
 
-" Highlights the matching HTML tag when the cursor is positioned on a tag.
-Plug 'Valloric/MatchTagAlways'
-Plug 'othree/csscomplete.vim'
-" Plug 'cakebaker/scss-syntax.vim'
-Plug 'hail2u/vim-css3-syntax'
-au BufRead,BufNewFile *.scss set filetype=scss.css
-au BufRead,BufNewFile *.sass set filetype=sass.css
-
-
 Plug 'scrooloose/syntastic'
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -124,7 +114,7 @@ nmap <C-x> :lcl<CR> :SyntasticReset<CR>
 
 " " Rust
 " Syntax highlighting
-Plug 'rust-lang/rust.vim'
+" Plug 'rust-lang/rust.vim'
 
 
 " Vim Snippets
@@ -145,8 +135,15 @@ let g:user_emmet_settings = {'javascript': {'extends': 'jsx'}}
 
 Plug 'elzr/vim-json'
 let g:vim_json_syntax_conceal = 0
+
+Plug 'othree/csscomplete.vim'
 " Add Support css3 properties
 Plug 'hail2u/vim-css3-syntax'
+Plug 'hail2u/vim-css3-syntax'
+" highlight hex colors in color
+au BufRead,BufNewFile *.scss set filetype=scss.css
+au BufRead,BufNewFile *.sass set filetype=sass.css
+
 " Allow autoclose paired characters like [,] or (,),
 Plug 'jiangmiao/auto-pairs'
 
@@ -157,21 +154,23 @@ Plug 'djoshea/vim-autoread'
 """"""" Javascript
 " Improve javascript syntax higlighting, needed for good folding,
 " Plug 'jelera/vim-javascript-syntax'
-" Plug 'pangloss/vim-javascript'
+Plug 'pangloss/vim-javascript'
 " Indentation for jsx files (missing from jelera: vim-javascript-syntax)
 " Plug 'othree/yajs.vim'
-
+" Tern.js server: jump to var defs and documentation
+" Plug 'ternjs/tern_for_vim'
 
 " Advanced syntax highlightin for libraries and es6
-Plug 'othree/javascript-libraries-syntax.vim'
-let g:used_javascript_libs = 'react,redux,react-dom,react-redux,moment,lodash,express,react-apollo,graphql-tag'
+" Plug 'othree/javascript-libraries-syntax.vim'
+" let g:used_javascript_libs = 'react,redux,react-dom,react-redux,moment,lodash,express,react-apollo,graphql-tag'
 
-
+" Highlights the matching HTML tag when the cursor is positioned on a tag.
+Plug 'Valloric/MatchTagAlways'
 " Syntax highlighting for .jsx (typescript)
 Plug 'peitalin/vim-jsx-typescript'
+" Typescript
+Plug 'Quramy/tsuquyomi'
 
-" Tern.js server: jump to var defs and documentation
-Plug 'ternjs/tern_for_vim'
 
 "" Typescript "
 Plug 'leafgarland/typescript-vim'
@@ -185,10 +184,13 @@ Plug 'Shougo/vimproc.vim', {
 \    },
 \ }
 
-Plug 'Quramy/tsuquyomi'
 
 " GraphQL syntax highlighting
 Plug 'jparise/vim-graphql'
+Plug 'amadeus/vim-mjml'
+" autocmd BufNewFile,BufRead *.mjml set filetype=html
+
+Plug 'posva/vim-vue'
 
 call plug#end()
 
@@ -309,7 +311,11 @@ autocmd FileType python,rust,haskell nmap <Leader>s :%s/\t/    /g<CR>
 " au BufNewFile,BufRead *.js *.html nmap <Leader>s :%s/\t/  /g<CR>
 autocmd FileType python,haskell,rust,markdown setlocal shiftwidth=4 tabstop=4
 " au BufNewFile,BufRead *.hbs setlocal ft=d
-autocmd BufNewFile,BufRead *.tsx,*.ts,*.js,*.jsx set filetype=typescript.jsx
+autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.jsx
+autocmd BufNewFile,BufRead *.ts,*.js set filetype=typescript
+autocmd BufNewFile,BufRead *.vue set filetype=vue.typescript
+autocmd FileType vue.typescript setlocal commentstring=//\ %s
+autocmd FileType typescript setlocal commentstring=//\ %s
 
 
 
@@ -365,6 +371,10 @@ vnoremap <TAB> >
 vnoremap <S-TAB> <
 nnoremap <TAB> V >
 nnoremap <S-TAB> V <
+
+
+"""""" disable annoying lowercase shortcut in visual-mode
+vnoremap u <Nop>
 
 
 """"""""""" EmacS bol/eol
@@ -566,6 +576,13 @@ hi typescriptJFunctions guifg=#56B6C2
 hi typescriptSFunctions guifg=#56B6C2
 " hi typescriptInterpolation guifg=#D19A66
 hi typescriptInterpolationDelimiter guifg=#56B6C2
+
+" javascript
+hi jsParens guifg=#56B6C2
+hi jsObjectBraces guifg=#C678DD
+hi jsFuncBraces guifg=#56B6C2
+hi jsObjectFuncName guifg=#D19A66
+hi jsObjectKey guifg=#56B6C2
 
 
 " Identify the syntax highlighting group used at the cursor
