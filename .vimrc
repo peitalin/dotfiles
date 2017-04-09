@@ -51,7 +51,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 " ctrlp root directories
 let g:ctrlp_root_markers = ['webpack.config.js', 'README.md', 'package.json']
-let g:ctrlp_custom_ignore = '\v[\/](node_modules|jspm_packages|typings|target)|(\.(swp|ico|git|svn)|manifest.json)$'
+let g:ctrlp_custom_ignore = '\v[\/](node_modules|jspm_packages|target)|(\.(swp|ico|git|svn)|manifest.json)$'
 let g:ctrlp_max_files = 0
 " default open in new tabs, instead of buffer
 let g:ctrlp_prompt_mappings = {
@@ -139,7 +139,7 @@ let g:vim_json_syntax_conceal = 0
 Plug 'othree/csscomplete.vim'
 " Add Support css3 properties
 Plug 'hail2u/vim-css3-syntax'
-Plug 'hail2u/vim-css3-syntax'
+Plug 'cakebaker/scss-syntax.vim'
 " highlight hex colors in color
 au BufRead,BufNewFile *.scss set filetype=scss.css
 au BufRead,BufNewFile *.sass set filetype=sass.css
@@ -187,8 +187,10 @@ Plug 'Shougo/vimproc.vim', {
 
 " GraphQL syntax highlighting
 Plug 'jparise/vim-graphql'
-Plug 'amadeus/vim-mjml'
+" Plug 'amadeus/vim-mjml'
+Plug 'othree/html5.vim'
 " autocmd BufNewFile,BufRead *.mjml set filetype=html
+
 
 Plug 'posva/vim-vue'
 
@@ -555,9 +557,11 @@ hi xmlTag guifg=#59ACE5
 hi xmlEndTag guifg=#2974a1
 hi htmlTag guifg=#2974a1
 hi htmlEndTag guifg=#2974a1
-hi htmlTagName guifg=#2974a1
+" hi htmlTagName guifg=#2974a1
+hi htmlTagName guifg=#59ACE5
 " hi htmlArg cterm=italic
 " hi xmlAttrib cterm=italic
+"
 
 " cyan
 hi Constant guifg=#56B6C2
