@@ -126,3 +126,8 @@ if [ -f ~/.bashrc ]; then
     source ~/.bashrc
 fi
 
+
+export PATH="$HOME/.cargo/bin:$PATH"
+
+# added by Miniconda3 4.3.21 installer
+export PATH="/Users/peitalin/conda/bin:$PATH"

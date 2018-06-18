@@ -106,3 +106,6 @@ if [ -f '/Users/peitalin/Downloads/google-cloud-sdk/path.zsh.inc' ]; then source
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/peitalin/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/peitalin/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+
+# added by travis gem
+[ -f /Users/peitalin/.travis/travis.sh ] && source /Users/peitalin/.travis/travis.sh

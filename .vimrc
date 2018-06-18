@@ -33,9 +33,9 @@ autocmd BufWritePre * %s/\s\+$//e " trim trailing whitespace
 
 
 
-
 """"""""""""" Plug configs """""""""""""""
 call plug#begin('~/.vim/plugged')
+" Plug 'mxw/vim-jsx'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
@@ -50,8 +50,8 @@ Plug 'nathanaelkane/vim-indent-guides'
 Plug 'itchyny/lightline.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 " ctrlp root directories
-let g:ctrlp_root_markers = ['webpack.config.js', 'README.md', 'package.json']
-let g:ctrlp_custom_ignore = '\v[\/](node_modules|jspm_packages|target)|(\.(swp|ico|git|svn)|manifest.json)$'
+let g:ctrlp_root_markers = ['index.ios.tsx', 'webpack.*config.js', 'README.md', 'package.json']
+let g:ctrlp_custom_ignore = '\v[\/](node_modules|jspm_packages|target|manifest.json)|(\.(swp|ico|git|svn|lock|svg|png|jp[e]?g))$'
 let g:ctrlp_max_files = 0
 " default open in new tabs, instead of buffer
 let g:ctrlp_prompt_mappings = {
@@ -93,6 +93,8 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_sass_checkers=["sasslint"]
+let g:syntastic_scss_checkers=["sasslint"]
 " let g:syntastic_typescript_checkers = ['tsc', 'tslint']
 let g:syntastic_typescript_checkers = ['tsuquyomi']
 let g:tsuquyomi_disable_quickfix = 1
@@ -108,14 +110,25 @@ nmap <C-c> :SyntasticCheck<CR>
 nmap <C-x> :lcl<CR> :SyntasticReset<CR>
 
 
-" " Haskell
-" Plug 'eagletmt/neco-ghc'
-" Plug 'eagletmt/ghcmod-vim'
+"" Haskell
+Plug 'eagletmt/neco-ghc'
+Plug 'eagletmt/ghcmod-vim'
 
-" " Rust
+"" Rust
 " Syntax highlighting
-" Plug 'rust-lang/rust.vim'
+Plug 'rust-lang/rust.vim'
+Plug 'racer-rust/vim-racer'
+Plug 'cespare/vim-toml'
+Plug 'maralla/vim-toml-enhance', {'depends': 'cespare/vim-toml'}
+" let g:ycm_rust_src_path = '/usr/local/rust/rustc-1.20.0/src'
+"/Users/peitalin/.cargo/bin
 
+"" Go
+" Syntax highlighting
+Plug 'fatih/vim-go'
+
+" " Solidity
+Plug 'tomlion/vim-solidity'
 
 " Vim Snippets
 Plug 'SirVer/ultisnips'
@@ -143,6 +156,8 @@ Plug 'cakebaker/scss-syntax.vim'
 " highlight hex colors in color
 au BufRead,BufNewFile *.scss set filetype=scss.css
 au BufRead,BufNewFile *.sass set filetype=sass.css
+" scss lint
+Plug 'gcorne/vim-sass-lint'
 
 " Allow autoclose paired characters like [,] or (,),
 Plug 'jiangmiao/auto-pairs'
@@ -153,16 +168,7 @@ Plug 'djoshea/vim-autoread'
 
 """"""" Javascript
 " Improve javascript syntax higlighting, needed for good folding,
-" Plug 'jelera/vim-javascript-syntax'
 Plug 'pangloss/vim-javascript'
-" Indentation for jsx files (missing from jelera: vim-javascript-syntax)
-" Plug 'othree/yajs.vim'
-" Tern.js server: jump to var defs and documentation
-" Plug 'ternjs/tern_for_vim'
-
-" Advanced syntax highlightin for libraries and es6
-" Plug 'othree/javascript-libraries-syntax.vim'
-" let g:used_javascript_libs = 'react,redux,react-dom,react-redux,moment,lodash,express,react-apollo,graphql-tag'
 
 " Highlights the matching HTML tag when the cursor is positioned on a tag.
 Plug 'Valloric/MatchTagAlways'
@@ -170,7 +176,6 @@ Plug 'Valloric/MatchTagAlways'
 Plug 'peitalin/vim-jsx-typescript'
 " Typescript
 Plug 'Quramy/tsuquyomi'
-
 
 "" Typescript "
 Plug 'leafgarland/typescript-vim'
@@ -186,13 +191,11 @@ Plug 'Shougo/vimproc.vim', {
 
 
 " GraphQL syntax highlighting
-Plug 'jparise/vim-graphql'
+" Plug 'jparise/vim-graphql'
 " Plug 'amadeus/vim-mjml'
-Plug 'othree/html5.vim'
+" Plug 'othree/html5.vim'
 " autocmd BufNewFile,BufRead *.mjml set filetype=html
-
-
-Plug 'posva/vim-vue'
+" Plug 'posva/vim-vue'
 
 call plug#end()
 
@@ -314,7 +317,7 @@ autocmd FileType python,rust,haskell nmap <Leader>s :%s/\t/    /g<CR>
 autocmd FileType python,haskell,rust,markdown setlocal shiftwidth=4 tabstop=4
 " au BufNewFile,BufRead *.hbs setlocal ft=d
 autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.jsx
-autocmd BufNewFile,BufRead *.ts,*.js set filetype=typescript
+autocmd BufNewFile,BufRead *.ts,*.js set filetype=typescript.jsx
 autocmd BufNewFile,BufRead *.vue set filetype=vue.typescript
 autocmd FileType vue.typescript setlocal commentstring=//\ %s
 autocmd FileType typescript setlocal commentstring=//\ %s
@@ -335,11 +338,9 @@ nmap bd :bdelete<CR>
 nmap <Leader>b :buffers<CR>
 nmap tg :tabprevious<CR>
 
-
 "" Refresh file state
 map <leader>r :e! <CR>
 nmap <leader>w :wa<CR>
-
 
 """"""""""" Gundo Tree Toggle
 map <C-u> :UndotreeToggle<CR>
@@ -499,11 +500,13 @@ let g:indent_guides_tab_guides = 1
 
 """"""""""""" Color Schemes """"""""""""""""
 set termguicolors
-
 colorscheme onedark
 " colorscheme japanesque
 " colorscheme srcery
 " colorscheme materialtheme
+autocmd FileType python colorscheme materialtheme
+" autocmd FileType rust colorscheme srcery
+" autocmd FileType python colorscheme onedark
 
 " Normal         xxx ctermfg=145 ctermbg=235 guifg=#ABB2BF guibg=#282C34
 highlight Normal guibg=#21242a
@@ -522,10 +525,6 @@ hi String guifg=#98C379 guibg=#2a2e34
 """ browns
 " function params: numbers and constants
 " hi Keyword guifg=#907161
-hi Statement guifg=#907161
-hi Conditional guifg=#907161
-hi Keyword guifg=#56B6C2
-hi Function guifg=#56B6C2
 " hi Statement guifg=#56B6C2
 " hi Conditional guifg=#56B6C2
 
@@ -533,20 +532,24 @@ hi Function guifg=#56B6C2
 hi Number guifg=#E5C07B
 hi Special guifg=#E5C07B
 hi Boolean guifg=#E5C07B
+hi Type guifg=#F0A15F
 " #D19A66
 
 " purple
 hi CtrlPMatch guifg=#ba9ef7
 hi Visual guibg=#364652
+hi Keyword guifg=#ba9ef7
+hi Function guifg=#5682A3
 
-" medium red: if else operators
-hi Preproc guifg=#e86868
-hi Type guifg=#e86868
+" dark grey, RUST preproc
+hi Preproc guifg=#37505C
 
 
-
+""" Pink
 """""" vim-jsx ONLY
-hi Identifier cterm=italic
+hi Identifier cterm=italic guifg=#D96Ab2
+" hi Statement guifg=#D96AB2
+hi Conditional guifg=#D96AB2
 
 " Blues
 " light blues
@@ -555,13 +558,15 @@ hi xmlTag guifg=#59ACE5
 
 " dark blues
 hi xmlEndTag guifg=#2974a1
+hi jsxCloseString guifg=#2974a1
 hi htmlTag guifg=#2974a1
 hi htmlEndTag guifg=#2974a1
 " hi htmlTagName guifg=#2974a1
 hi htmlTagName guifg=#59ACE5
 " hi htmlArg cterm=italic
 " hi xmlAttrib cterm=italic
-"
+hi jsxAttrib guifg=#1BD1C1
+" hi jsxAttrib guifg=#F8BD7F
 
 " cyan
 hi Constant guifg=#56B6C2
@@ -578,8 +583,8 @@ hi typescriptBracket guifg=#56B6C2
 hi typescriptBlock guifg=#56B6C2
 hi typescriptJFunctions guifg=#56B6C2
 hi typescriptSFunctions guifg=#56B6C2
-" hi typescriptInterpolation guifg=#D19A66
 hi typescriptInterpolationDelimiter guifg=#56B6C2
+hi typescriptIdentifier guifg=#907161 cterm=italic
 
 " javascript
 hi jsParens guifg=#56B6C2
@@ -594,7 +599,5 @@ map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans
 \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
 \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
-autocmd FileType python colorscheme materialtheme
-" autocmd FileType python colorscheme onedark
 
 
