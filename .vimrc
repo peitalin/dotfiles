@@ -99,10 +99,10 @@ let g:syntastic_scss_checkers=["sasslint"]
 let g:syntastic_typescript_checkers = ['tsuquyomi']
 let g:tsuquyomi_disable_quickfix = 1
 let g:tsuquyomi_disable_default_mappings = 1
-nnoremap <silent> td :TsuquyomiDefinition<CR>
-nnoremap <silent> tb :TsuquyomiGoBack<CR>
-nnoremap <silent> tr :TsuquyomiReferences<CR>
-autocmd FileType typescript nmap <buffer> <Leader>t : <C-u>echo tsuquyomi#hint()<CR>
+" nnoremap <silent> td :TsuquyomiDefinition<CR>
+" nnoremap <silent> tb :TsuquyomiGoBack<CR>
+" nnoremap <silent> tr :TsuquyomiReferences<CR>
+" autocmd FileType typescript nmap <buffer> <Leader>t : <C-u>echo tsuquyomi#hint()<CR>
 
 let g:syntastic_loc_list_height=5
 nmap <C-c> :SyntasticCheck<CR>
@@ -219,16 +219,10 @@ let g:ycm_semantic_triggers =  {
             \ }
 
 
-" nnoremap <silent> te :YcmCompleter GetDoc<CR>
+nnoremap <silent> te :YcmCompleter GetDoc<CR>
 nnoremap <silent> tt :YcmCompleter GetType<CR>
-" nnoremap <silent> td :YcmCompleter GoToDefinition<CR>
-" nnoremap <silent> tr :YcmCompleter RefactorRename
-
-" nnoremap <silent> te :TernDef<CR>
-" nnoremap <silent> td :TernDoc<CR>
-" nnoremap <silent> tt :TernType<CR>
-" nnoremap <silent> tr :TernRefs<CR>
-" nnoremap <silent> tn :TernRename<CR>
+nnoremap <silent> td :YcmCompleter GoToDefinition<CR>
+nnoremap <silent> tr :YcmCompleter RefactorRename
 
 
 " Valloric/MatchTagAlways"
@@ -314,7 +308,7 @@ inoremap <C-b> <left>
 nmap <Leader>s :%s/\t/  /g<CR>
 autocmd FileType python,rust,haskell nmap <Leader>s :%s/\t/    /g<CR>
 " au BufNewFile,BufRead *.js *.html nmap <Leader>s :%s/\t/  /g<CR>
-autocmd FileType python,haskell,rust,markdown setlocal shiftwidth=4 tabstop=4
+autocmd FileType python,rust,haskell,markdown setlocal shiftwidth=4 tabstop=4
 " au BufNewFile,BufRead *.hbs setlocal ft=d
 autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.jsx
 autocmd BufNewFile,BufRead *.ts,*.js set filetype=typescript.jsx
@@ -516,8 +510,8 @@ highlight CursorLineNr guifg=#56B6C2
 highlight Error guifg=#f57373 guibg=#804040
 highlight vimError guifg=#f57373 guibg=#804040
 
-hi IndentGuidesEven guibg=#21242a guifg=#1f1f28
-" hi IndentGuidesEven guibg=#282C34 guifg=#1f1f28
+" hi IndentGuidesEven guibg=#21242a guifg=#1f1f28
+hi IndentGuidesEven guibg=#282C34 guifg=#1f1f28
 hi IndentGuidesOdd guibg=#262a36 guifg=#1f1f28
 hi Comment cterm=italic guifg=#4a5158
 hi String guifg=#98C379 guibg=#2a2e34

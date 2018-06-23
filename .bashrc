@@ -15,6 +15,7 @@ export NODE_PATH="/usr/local/lib/node_modules"
 
 export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 export GOPATH="$HOME/go"
+export CARGO_HOME="$HOME/.cargo"
 
 export SHELL="/bin/zsh"
 # export TERM="xterm-256color-italic"
