@@ -61,10 +61,10 @@ let g:ctrlp_prompt_mappings = {
 
 " Colorschemes
 Plug 'joshdick/onedark.vim'
-Plug 'aereal/vim-colors-japanesque'
 Plug 'roosta/vim-srcery'
+Plug 'kristijanhusak/vim-hybrid-material'
+Plug 'rakr/vim-two-firewatch'
 Plug 'Wutzara/vim-materialtheme'
-Plug 'altercation/solarized'
 
 
 " Completion
@@ -498,7 +498,6 @@ colorscheme onedark
 " colorscheme japanesque
 " colorscheme srcery
 " colorscheme materialtheme
-autocmd FileType python colorscheme materialtheme
 " autocmd FileType rust colorscheme srcery
 " autocmd FileType python colorscheme onedark
 
@@ -550,6 +549,18 @@ hi Conditional guifg=#D96AB2
 hi xmlTagName guifg=#59ACE5
 hi xmlTag guifg=#59ACE5
 
+""" Go and Python
+" Light blue
+autocmd FileType python,go highlight Keyword guifg=#59ACE5
+autocmd FileType python,go highlight goDeclaration guifg=#59ACE5
+" Dark blue
+autocmd FileType python,go highlight Function guifg=#2974a1
+autocmd FileType python,go highlight goConditional guifg=#2974a1
+" cyan
+autocmd FileType python,go highlight goStatement guifg=#56B6C2
+autocmd FileType python,go highlight goRepeat guifg=#56B6C2
+
+
 " dark blues
 hi xmlEndTag guifg=#2974a1
 hi jsxCloseString guifg=#2974a1
@@ -592,6 +603,5 @@ hi jsObjectKey guifg=#56B6C2
 map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
 \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
 \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
-
 
 
