@@ -117,11 +117,23 @@ Plug 'eagletmt/ghcmod-vim'
 "" Rust
 " Syntax highlighting
 Plug 'rust-lang/rust.vim'
-Plug 'racer-rust/vim-racer'
+" Plug 'racer-rust/vim-racer'
+let g:racer_cmd = '~/.cargo/bin/racer'
+let g:racer_experimental_completer = 1
 Plug 'cespare/vim-toml'
 Plug 'maralla/vim-toml-enhance', {'depends': 'cespare/vim-toml'}
-" let g:ycm_rust_src_path = '/usr/local/rust/rustc-1.20.0/src'
-"/Users/peitalin/.cargo/bin
+
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+if executable('rls')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'rls',
+        \ 'cmd': {server_info->['rustup', 'run', 'nightly', 'rls']},
+        \ 'whitelist': ['rust'],
+        \ })
+endif
 
 "" Go
 " Syntax highlighting
@@ -207,6 +219,7 @@ let g:ycm_confirm_extra_conf = 0
 let g:ycm_min_num_of_chars_for_completion = 1 " default = 2
 let g:ycm_min_num_identifier_candidate_chars = 0 " default = 0
 let g:ycm_auto_trigger = 1 " complete as you type, default = 1
+let g:ycm_rust_src_path = '`rustc --print sysroot`/lib/rustlib/src/rust/src'
 " let g:ycm_key_invoke_completion = '<C-m>'
 
 """ Javascript YCM completion
