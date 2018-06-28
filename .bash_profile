@@ -88,6 +88,7 @@ function dotfiles_git {
     cp $HOME/.matplotlib/matplotlibrc $HOME/Data/dotfiles/.matplotlib/matplotlibrc
     cp $HOME/.eslintrc $HOME/Data/dotfiles
     cp -R $HOME/.kwm $HOME/Data/dotfiles
+    cp -R $HOME/.chunkwm $HOME/Data/dotfiles
     cp $HOME/.oh-my-zsh/themes/bureau.zsh-theme $HOME/Data/dotfiles
 
     cd $HOME/Data/dotfiles

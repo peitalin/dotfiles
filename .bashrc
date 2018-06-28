@@ -1,6 +1,7 @@
 
 
 
+
 ### PATHS
 
 export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin"
@@ -15,6 +16,7 @@ export NODE_PATH="/usr/local/lib/node_modules"
 
 export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 export GOPATH="$HOME/go"
+export PATH="$GOPATH/bin:$PATH"
 export CARGO_HOME="$HOME/.cargo"
 
 export SHELL="/bin/zsh"
@@ -127,10 +129,10 @@ alias ob1.d="cd ~/Downloads/Torrents/react/ob1"
 alias vi='vim'
 set editor='/usr/local/bin/vim'
 
-# kwm window manager
-alias kwmrestart="brew services restart kwm"
-alias kwmstop="brew services stop kwm"
-alias kwmstart="brew services start kwm"
+# chunkwm window manager
+alias cwmrestart="brew services restart chunkwm"
+alias cwmstop="brew services stop chunkwm"
+alias cwmstart="brew services start chunkwm"
 
 # Rust
 source $HOME/.cargo/env
