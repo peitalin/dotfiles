@@ -117,7 +117,7 @@ Plug 'eagletmt/ghcmod-vim'
 "" Rust
 " Syntax highlighting
 Plug 'rust-lang/rust.vim'
-" Plug 'racer-rust/vim-racer'
+Plug 'racer-rust/vim-racer'
 let g:racer_cmd = '~/.cargo/bin/racer'
 let g:racer_experimental_completer = 1
 Plug 'cespare/vim-toml'
@@ -553,7 +553,8 @@ hi Preproc guifg=#37505C
 
 """ Pink
 """""" vim-jsx ONLY
-hi Identifier cterm=italic guifg=#D96Ab2
+hi Identifier guifg=#D96Ab2
+" hi Identifier cterm=italic guifg=#D96Ab2
 " hi Statement guifg=#D96AB2
 hi Conditional guifg=#D96AB2
 

@@ -65,6 +65,7 @@ alias snippetsrc="vim ~/.vim/plugged/vim-snippets/UltiSnips"
 alias bashp="vim ~/.bash_profile"
 alias zshrc="vim ~/.zshrc"
 alias kwmrc="vim ~/.kwm/kwmrc"
+alias chunkwmrc="vim ~/.chunkwmrc"
 alias eslintrc="vim ~/.eslintrc"
 
 
