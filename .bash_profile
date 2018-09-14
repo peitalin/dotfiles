@@ -52,22 +52,22 @@ man () {
 
 alias rsync='rsync -chavzP --stats'
 function rsync_help {
-    echo "scp peita@10.0.0.135:/run/media/F/textnix.txt ~/Downloads"
+    echo "scp peita@10.0.0.135:/media/peitaubuntu/F/textnix.txt ~/Downloads"
     echo "rsync is aliased to: rsync -chavzP --stats"
     echo "\nRsync from local machine:"
-    echo "rsync -chavzP --stats 'peita@10.0.0.135:/run/media/F/text\ nix.txt' ~/Downloads"
+    echo "rsync -chavzP --stats 'peitaubuntu@10.0.0.20:/media/peitaubuntu/F/text\ nix.txt' ~/Downloads"
     echo "\nRsync from remote:"
-    echo "rsync -chavzP --stats '/run/media/F/text nix.txt' peitalin@10.0.0.28:/Users/peitalin/Downloads"
+    echo "rsync -chavzP --stats '/media/peitaubuntu/F/text nix.txt' peitalin@10.0.0.60:/Users/peitalin/Downloads"
 }
 
 function rsync_to_nix {
-    echo "rsync $@ peita@10.0.0.135:/run/media/F/Torrents"
-    rsync $@ peita@10.0.0.135:/run/media/F/Torrents
+    echo "rsync $@ peitaubuntu@10.0.0.20:/media/peitaubuntu/F/Torrents"
+    rsync $@ peitaubuntu@10.0.0.20:/media/peitaubuntu/F/Torrents
 }
 
 function rsync_from_nix {
-    echo "rsync peita@10.0.0.135:/run/media/F/Torrents/$@ ~/Downloads/Torrents"
-    rsync peita@10.0.0.134:/run/media/F/Torrents/$@ ~/Downloads/Torrents
+    echo "rsync peitaubuntu@10.0.0.20:/media/peitaubuntu/F/Torrents/$@ ~/Downloads/Torrents"
+    rsync peitaubuntu@10.0.0.20:/media/peitaubuntu/F/Torrents/$@ ~/Downloads/Torrents
 }
 
 
@@ -128,7 +128,4 @@ if [ -f ~/.bashrc ]; then
 fi
 
 
-export PATH="$HOME/.cargo/bin:$PATH"
 
-# added by Miniconda3 4.3.21 installer
-export PATH="/Users/peitalin/conda/bin:$PATH"

@@ -3,26 +3,28 @@
 
 
 ### PATHS
-
-export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin"
-export PATH="/usr/local/sbin:$PATH"
-export PATH="$HOME/Library/Python/3.5/bin:$PATH"
-export PATH="$HOME/.local/bin:$PATH"
-export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="/usr/local/bin:$PATH"
-# export PATH="$HOME/Library/Haskell/bin:$PATH"
-export PATH="/usr/local/Cellar:$PATH"
-export NODE_PATH="/usr/local/lib/node_modules"
+export PATH="$HOME/.cargo/bin:$PATH"   # Rust
+export PATH="/usr/local/Cellar:$PATH"  # Cellar
+export PATH="/usr/local/opt/llvm/bin:$PATH"
+export CC="/usr/local/opt/llvm/bin/clang"
 
+export NODE_PATH="/usr/local/lib/node_modules"
 export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
+export CARGO_HOME="$HOME/.cargo"
 export GOPATH="$HOME/go"
 export PATH="$GOPATH/bin:$PATH"
-export CARGO_HOME="$HOME/.cargo"
-
 export SHELL="/bin/zsh"
 # export TERM="xterm-256color-italic"
 # export TERM="xterm-256color"
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" --no-use # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+######### Environment #######
 export LANG=en_US.UTF-8
+export HISTTIMEFORMAT='%H:%M:%S  ' # time to history
+export GREP_OPTIONS='--color=auto'
 
 ####  ALIASES  ###########
 ## File nav
@@ -49,11 +51,8 @@ alias down="cd ~/Downloads"
 alias torrents="cd ~/Downloads/Torrents"
 alias gis.d="cd ~/Dropbox/GIS"
 
-alias cellar="cd /usr/local/Cellar/"
+alias cellar.d="cd /usr/local/Cellar/"
 alias music.d="cd ~/Music/Music\ Neue"
-alias py.d="cd ~/Dropbox/Lang/py"
-alias R.d="cd ~/Dropbox/Lang/R"
-alias rust.d="cd ~/Dropbox/Lang/rust"
 alias passwds='vim $HOME/Dropbox/usr.txt'
 
 
@@ -72,14 +71,9 @@ alias eslintrc="vim ~/.eslintrc"
 #### Terminal utilities
 alias tree="tree -CQN"
 alias safari='open -a safari '
-alias firefox='open -a FirefoxDeveloperEdition'
-alias chromium='open -a chromium'
 alias dxdiag="sw_vers; system_profiler SPHardwareDataType | head -n 15; echo ""; system_profiler SPDisplaysDataType"
 alias screenfetch="screenfetch-dev 2> /dev/null"
 alias ip="curl -s http://checkip.amazonaws.com"
-alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
-export HISTTIMEFORMAT='%H:%M:%S  ' # time to history
-export GREP_OPTIONS='--color=auto'
 
 ####### GIT
 alias gb="git branch"
@@ -92,10 +86,8 @@ alias pip_update="python3 $HOME/Data/update-pip-packages/update-pip.py"
 alias matplotlibrc="vim ~/.matplotlib/matplotlibrc"
 alias pypackages="cd /usr/local/lib/python3.6/site-packages/"
 
-
 ##### Haskell
 alias ghcirc="vim ~/.ghc/ghci.conf"
-
 
 ##### R configs
 function R_interactive_script {
@@ -105,26 +97,15 @@ alias iR=R_interactive_script
 alias R="R --no-save --quiet"
 alias Rprofile="vim $HOME/.Rprofile"
 
-
-export BASE_DIR="~/Dropbox/gtrends-beta"
-export GMAIL_USER='dgtesting12@gmail.com'
-function test_gtrends {
-    echo "python3 ~/Dropbox/gtrends-beta/google_trends/trends.py \ \r
-        --username $GMAIL_USER  \ \r
-        --password justfortesting! \ \r
-        --keyword "Tesla" \ \r
-        --start-date 2012-03 --end-date 2012-06\r"
-}
-
-
 # JS directories
-alias react.d="cd ~/Downloads/Torrents/react"
-alias hask.d="cd ~/Dropbox/Archive/Lang/Haskell/"
-alias go.d="cd ~/Dropbox/Archive/Lang/Go"
-alias rust.d="cd ~/Dropbox/Archive/Lang/Rust"
-alias lang.d="cd ~/Dropbox/Archive/Lang/"
+alias dev.d="cd ~/Downloads/Torrents/Dev"
+alias go.d="cd ~/Downloads/Torrents/Dev/go"
+alias rust.d="cd ~/Downloads/Torrents/Dev/rust"
+alias erlang.d="cd ~/Downloads/Torrents/Dev/erlang"
+alias js.d="cd ~/Downloads/Torrents/Dev/js"
 alias g1.d="cd ~/Dropbox/GenesysOne/"
-alias ob1.d="cd ~/Downloads/Torrents/react/ob1"
+alias react.d="cd ~/Downloads/Torrents/Dev/react"
+alias ob1.d="cd ~/Downloads/Torrents/Dev/react/native-bazaar/"
 
 # alias vim as vim
 alias vi='vim'
@@ -144,5 +125,4 @@ alias ddate="echo -e ' ' `date '+%a %d %b'`"
 ddate
 # cal
 
-# # added by travis gem
-# [ -f /Users/peitalin/.travis/travis.sh ] && source /Users/peitalin/.travis/travis.sh
+

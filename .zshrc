@@ -68,7 +68,6 @@ plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 source ~/.bash_profile
-export PATH="$HOME/.yarn/bin:$PATH"
 
 
 # User configuration
@@ -100,12 +99,3 @@ export PATH="$HOME/.yarn/bin:$PATH"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/peitalin/Downloads/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/peitalin/Downloads/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/peitalin/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/peitalin/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
-
-# added by travis gem
-[ -f /Users/peitalin/.travis/travis.sh ] && source /Users/peitalin/.travis/travis.sh

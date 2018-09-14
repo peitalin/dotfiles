@@ -35,9 +35,7 @@ autocmd BufWritePre * %s/\s\+$//e " trim trailing whitespace
 
 """"""""""""" Plug configs """""""""""""""
 call plug#begin('~/.vim/plugged')
-" Plug 'mxw/vim-jsx'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
-Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tomtom/tcomment_vim'
 Plug 'kshenoy/vim-signature'
@@ -51,7 +49,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 " ctrlp root directories
 let g:ctrlp_root_markers = ['index.ios.tsx', 'webpack.*config.js', 'README.md', 'package.json']
-let g:ctrlp_custom_ignore = '\v[\/](node_modules|jspm_packages|target|manifest.json)|(\.(swp|ico|git|svn|lock|svg|png|jp[e]?g))$'
+let g:ctrlp_custom_ignore = '\v[\/](node_modules|jspm_packages|build|target|manifest.json)|(\.(swp|ico|git|svn|lock|svg|png|jp[e]?g))$'
 let g:ctrlp_max_files = 0
 " default open in new tabs, instead of buffer
 let g:ctrlp_prompt_mappings = {
@@ -67,52 +65,39 @@ Plug 'rakr/vim-two-firewatch'
 Plug 'Wutzara/vim-materialtheme'
 
 
-" Completion
+" Completion - youcompleteme
 Plug 'Valloric/YouCompleteMe', {
      \ 'build' : {
-     \     'mac' : './install.sh --tern-completer',
+     \     'mac' : './install.py --rust-completer',
      \     'unix' : './install.sh --clang-completer --system-libclang --omnisharp-completer',
      \    }
      \ }
-" let g:ycm_autoclose_preview_window_after_completion=1
-let g:ycm_add_preview_to_completeopt = 1
-let g:ycm_python_binary_path = 'python3'
-let g:ycm_key_invoke_completion = '<C-y>'
+
+
 
 """ Python
 Plug 'davidhalter/jedi-vim'
 
-Plug 'scrooloose/syntastic'
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_mode_map = { 'mode': 'passive' }
-" let g:syntastic_mode_map = { 'mode': 'active' }
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_sass_checkers=["sasslint"]
-let g:syntastic_scss_checkers=["sasslint"]
-" let g:syntastic_typescript_checkers = ['tsc', 'tslint']
-let g:syntastic_typescript_checkers = ['tsuquyomi']
-let g:tsuquyomi_disable_quickfix = 1
-let g:tsuquyomi_disable_default_mappings = 1
-" nnoremap <silent> td :TsuquyomiDefinition<CR>
-" nnoremap <silent> tb :TsuquyomiGoBack<CR>
-" nnoremap <silent> tr :TsuquyomiReferences<CR>
-" autocmd FileType typescript nmap <buffer> <Leader>t : <C-u>echo tsuquyomi#hint()<CR>
-
-let g:syntastic_loc_list_height=5
-nmap <C-c> :SyntasticCheck<CR>
-" nmap <C-x> :SyntasticReset<CR>
-nmap <C-x> :lcl<CR> :SyntasticReset<CR>
+Plug 'w0rp/ale'
+let g:ale_sign_column_always = 1
+let g:ale_sign_error = '>>'
+let g:ale_sign_warning = '--'
+let g:ale_lint_delay = 400
+" Default: 200ms
+nmap <C-c> :ALEDetail<CR>
+nmap <C-x> :ALEHover<CR>
+nmap <C-z> :ALEHover<CR>
 
 
 "" Haskell
-Plug 'eagletmt/neco-ghc'
-Plug 'eagletmt/ghcmod-vim'
+" Plug 'eagletmt/neco-ghc'
+" Plug 'eagletmt/ghcmod-vim'
+
+"" Elixir
+" Plug 'elixir-editors/vim-elixir'
+
+"" Docker
+Plug 'ekalinin/Dockerfile.vim'
 
 "" Rust
 " Syntax highlighting
@@ -122,11 +107,6 @@ let g:racer_cmd = '~/.cargo/bin/racer'
 let g:racer_experimental_completer = 1
 Plug 'cespare/vim-toml'
 Plug 'maralla/vim-toml-enhance', {'depends': 'cespare/vim-toml'}
-
-Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/vim-lsp'
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
 if executable('rls')
     au User lsp_setup call lsp#register_server({
         \ 'name': 'rls',
@@ -150,6 +130,7 @@ Plug 'honza/vim-snippets'
 let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<c-l>"
 let g:UltiSnipsJumpBackwardTrigger="<c-h>"
+
 
 
 " Snippets/Macros for DOM tags
@@ -180,14 +161,14 @@ Plug 'djoshea/vim-autoread'
 
 """"""" Javascript
 " Improve javascript syntax higlighting, needed for good folding,
-Plug 'pangloss/vim-javascript'
+" Plug 'pangloss/vim-javascript'
 
 " Highlights the matching HTML tag when the cursor is positioned on a tag.
 Plug 'Valloric/MatchTagAlways'
 " Syntax highlighting for .jsx (typescript)
 Plug 'peitalin/vim-jsx-typescript'
 " Typescript
-Plug 'Quramy/tsuquyomi'
+" Plug 'Quramy/tsuquyomi'
 
 "" Typescript "
 Plug 'leafgarland/typescript-vim'
@@ -204,9 +185,6 @@ Plug 'Shougo/vimproc.vim', {
 
 " GraphQL syntax highlighting
 " Plug 'jparise/vim-graphql'
-" Plug 'amadeus/vim-mjml'
-" Plug 'othree/html5.vim'
-" autocmd BufNewFile,BufRead *.mjml set filetype=html
 " Plug 'posva/vim-vue'
 
 call plug#end()
@@ -214,16 +192,22 @@ call plug#end()
 
 
 """""""""""" YCM YouCompleteMe """"""""""""""""""""""""""""""""
-
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_min_num_of_chars_for_completion = 1 " default = 2
 let g:ycm_min_num_identifier_candidate_chars = 0 " default = 0
 let g:ycm_auto_trigger = 1 " complete as you type, default = 1
 let g:ycm_rust_src_path = '`rustc --print sysroot`/lib/rustlib/src/rust/src'
-" let g:ycm_key_invoke_completion = '<C-m>'
+" let g:ycm_autoclose_preview_window_after_completion=1
+let g:ycm_add_preview_to_completeopt = 1
+let g:ycm_python_binary_path = 'python3'
+let g:ycm_key_invoke_completion = '<C-y>'
+
+" Disable loading YCM
+" let g:loaded_youcompleteme = 1
+" Disable loading YCM linting
+let g:ycm_show_diagnostics_ui = 0
 
 """ Javascript YCM completion
-
 let g:ycm_semantic_triggers =  {
             \   'javascript,typescript,python,haskell,go' : ['.'],
             \   'vim' : ['re![_a-zA-Z]+[_\w]*\.'],
@@ -236,6 +220,8 @@ nnoremap <silent> te :YcmCompleter GetDoc<CR>
 nnoremap <silent> tt :YcmCompleter GetType<CR>
 nnoremap <silent> td :YcmCompleter GoToDefinition<CR>
 nnoremap <silent> tr :YcmCompleter RefactorRename
+nnoremap <silent> dt <C-o>
+
 
 
 " Valloric/MatchTagAlways"
@@ -274,20 +260,6 @@ let g:tagbar_type_markdown = {
 nnoremap <silent> <F11> :TagbarToggle<CR>
 
 
-""" Haskell ghc-mod completions
-" let g:necoghc_enable_detailed_browse = 1
-" let g:ghcmod_hlint_options = ['--ignore=Redundant $']
-"""Note : LANGUAGE PRAGMAS restricts completion to prelude functions only!
-"""Note : <C-x><C-o> for completion prompt
-
-" map <silent> tc :GhcModType<CR>
-""" Type Lookup
-" map <silent> tr :GhcModTypeClear<CR>
-" map <silent> tl :GhcModLintAsync<CR> :wincmd j<CR>
-" map <silent> tk :GhcModCheck<CR>
-" hi ghcmodType ctermbg=blue
-" let g:ghcmod_type_highlight = 'ghcmodType'
-
 
 """"""""""""""""""" VIM JEDI PYTHON """"""""""""""
 let g:jedi#completions_enabled = 0
@@ -323,11 +295,12 @@ autocmd FileType python,rust,haskell nmap <Leader>s :%s/\t/    /g<CR>
 " au BufNewFile,BufRead *.js *.html nmap <Leader>s :%s/\t/  /g<CR>
 autocmd FileType python,rust,haskell,markdown setlocal shiftwidth=4 tabstop=4
 " au BufNewFile,BufRead *.hbs setlocal ft=d
-autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.jsx
-autocmd BufNewFile,BufRead *.ts,*.js set filetype=typescript.jsx
+autocmd BufNewFile,BufRead *.ts,*.js set filetype=typescript.tsx
 autocmd BufNewFile,BufRead *.vue set filetype=vue.typescript
 autocmd FileType vue.typescript setlocal commentstring=//\ %s
 autocmd FileType typescript setlocal commentstring=//\ %s
+autocmd FileType json setlocal commentstring=//\ %s
+" autocmd FileType *.jsx,*.tsx setlocal commentstring=//\ %s
 
 
 
@@ -523,8 +496,8 @@ highlight Error guifg=#f57373 guibg=#804040
 highlight vimError guifg=#f57373 guibg=#804040
 
 " hi IndentGuidesEven guibg=#21242a guifg=#1f1f28
-hi IndentGuidesEven guibg=#282C34 guifg=#1f1f28
-hi IndentGuidesOdd guibg=#262a36 guifg=#1f1f28
+hi IndentGuidesEven guibg=#2a2e30 guifg=#1f1f28
+hi IndentGuidesOdd guibg=#262a2c guifg=#1f1f28
 hi Comment cterm=italic guifg=#4a5158
 hi String guifg=#98C379 guibg=#2a2e34
 
@@ -558,10 +531,6 @@ hi Identifier guifg=#D96Ab2
 " hi Statement guifg=#D96AB2
 hi Conditional guifg=#D96AB2
 
-" Blues
-" light blues
-hi xmlTagName guifg=#59ACE5
-hi xmlTag guifg=#59ACE5
 
 """ Go and Python
 " Light blue
@@ -575,17 +544,26 @@ autocmd FileType python,go highlight goStatement guifg=#56B6C2
 autocmd FileType python,go highlight goRepeat guifg=#56B6C2
 
 
-" dark blues
-hi xmlEndTag guifg=#2974a1
-hi jsxCloseString guifg=#2974a1
-hi htmlTag guifg=#2974a1
-hi htmlEndTag guifg=#2974a1
-" hi htmlTagName guifg=#2974a1
-hi htmlTagName guifg=#59ACE5
-" hi htmlArg cterm=italic
-" hi xmlAttrib cterm=italic
-hi jsxAttrib guifg=#1BD1C1
-" hi jsxAttrib guifg=#F8BD7F
+" " dark red
+" hi tsxTagName guifg=#E06C75
+" " orange
+" hi tsxCloseString guifg=#F99575
+" hi tsxCloseTag guifg=#F99575
+" hi tsxAttributeBraces guifg=#F99575
+" hi tsxEqual guifg=#F99575
+" " yellow
+" hi tsxAttrib guifg=#F8BD7F cterm=italic
+
+" light blue
+hi tsxTagName guifg=#59ACE5
+" dark blue
+hi tsxCloseString guifg=#2974a1
+hi tsxCloseTag guifg=#2974a1
+hi tsxAttributeBraces guifg=#2974a1
+hi tsxEqual guifg=#2974a1
+" green
+hi tsxAttrib guifg=#1BD1C1
+
 
 " cyan
 hi Constant guifg=#56B6C2
@@ -603,7 +581,13 @@ hi typescriptBlock guifg=#56B6C2
 hi typescriptJFunctions guifg=#56B6C2
 hi typescriptSFunctions guifg=#56B6C2
 hi typescriptInterpolationDelimiter guifg=#56B6C2
-hi typescriptIdentifier guifg=#907161 cterm=italic
+hi typescriptExceptions guifg=#DDA671
+" hi typescriptIdentifier guifg=#907161
+" hi typescriptStorageClass guifg=#907161
+hi typescriptIdentifier guifg=#65809D
+hi typescriptStorageClass guifg=#65809D
+" JSON
+hi jsonCommentError cterm=italic guifg=#4a5158
 
 " javascript
 hi jsParens guifg=#56B6C2
