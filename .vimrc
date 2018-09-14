@@ -220,7 +220,7 @@ nnoremap <silent> te :YcmCompleter GetDoc<CR>
 nnoremap <silent> tt :YcmCompleter GetType<CR>
 nnoremap <silent> td :YcmCompleter GoToDefinition<CR>
 nnoremap <silent> tr :YcmCompleter RefactorRename
-nnoremap <silent> dt <C-o>
+" nnoremap <silent> dt <C-o>
 
 
 
