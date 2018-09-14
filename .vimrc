@@ -81,7 +81,7 @@ Plug 'davidhalter/jedi-vim'
 Plug 'w0rp/ale'
 let g:ale_sign_column_always = 1
 let g:ale_sign_error = '>>'
-let g:ale_sign_warning = '--'
+let g:ale_sign_warning = '>'
 let g:ale_lint_delay = 400
 " Default: 200ms
 nmap <C-c> :ALEDetail<CR>
