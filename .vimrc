@@ -596,6 +596,17 @@ hi jsFuncBraces guifg=#56B6C2
 hi jsObjectFuncName guifg=#D19A66
 hi jsObjectKey guifg=#56B6C2
 
+" vim-jsx-typescript
+hi ReactState guifg=#C176A7
+hi ReactProps guifg=#D19A66
+hi Events ctermfg=204 guifg=#56B6C2
+hi ReduxKeywords ctermfg=204 guifg=#C678DD
+hi WebBrowser ctermfg=204 guifg=#56B6C2
+hi ReactLifeCycleMethods ctermfg=204 guifg=#D19A66
+
+
+
+
 
 " Identify the syntax highlighting group used at the cursor
 map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'

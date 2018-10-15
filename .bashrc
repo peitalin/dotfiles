@@ -7,7 +7,7 @@ export PATH="/usr/local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"   # Rust
 export PATH="/usr/local/Cellar:$PATH"  # Cellar
 export PATH="/usr/local/opt/llvm/bin:$PATH"
-export CC="/usr/local/opt/llvm/bin/clang"
+export CC="/usr/bin/clang"
 
 export NODE_PATH="/usr/local/lib/node_modules"
 export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
@@ -15,6 +15,9 @@ export CARGO_HOME="$HOME/.cargo"
 export GOPATH="$HOME/go"
 export PATH="$GOPATH/bin:$PATH"
 export SHELL="/bin/zsh"
+
+# export PYTHONPATH="/usr/local/lib/python3.7/site-packages"
+
 # export TERM="xterm-256color-italic"
 # export TERM="xterm-256color"
 export NVM_DIR="$HOME/.nvm"
@@ -103,7 +106,7 @@ alias go.d="cd ~/Downloads/Torrents/Dev/go"
 alias rust.d="cd ~/Downloads/Torrents/Dev/rust"
 alias erlang.d="cd ~/Downloads/Torrents/Dev/erlang"
 alias js.d="cd ~/Downloads/Torrents/Dev/js"
-alias g1.d="cd ~/Dropbox/GenesysOne/"
+alias g1.d="cd ~/Google\ Drive/GenesysOne/"
 alias react.d="cd ~/Downloads/Torrents/Dev/react"
 alias ob1.d="cd ~/Downloads/Torrents/Dev/react/native-bazaar/"
 
