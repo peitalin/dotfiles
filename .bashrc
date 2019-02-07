@@ -7,6 +7,7 @@ export PATH="/usr/local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"   # Rust
 export PATH="/usr/local/Cellar:$PATH"  # Cellar
 export PATH="/usr/local/opt/llvm/bin:$PATH"
+export PATH="/Users/peitalin/Downloads/Torrents/Dev/rust/grin/target/release:$PATH"
 export CC="/usr/bin/clang"
 
 export NODE_PATH="/usr/local/lib/node_modules"
@@ -48,6 +49,9 @@ alias pkill='pkill -f'
 alias whereami='echo $HOST'
 alias cat='ccat'
 
+###### ALIAS VIM TO NEOVIM
+alias vim='nvim'
+
 ### directory shortcuts
 alias drop="cd ~/Dropbox"
 alias down="cd ~/Downloads"
@@ -66,7 +70,6 @@ alias vimrc="vim ~/.vimrc"
 alias snippetsrc="vim ~/.vim/plugged/vim-snippets/UltiSnips"
 alias bashp="vim ~/.bash_profile"
 alias zshrc="vim ~/.zshrc"
-alias kwmrc="vim ~/.kwm/kwmrc"
 alias chunkwmrc="vim ~/.chunkwmrc"
 alias eslintrc="vim ~/.eslintrc"
 
@@ -104,7 +107,7 @@ alias Rprofile="vim $HOME/.Rprofile"
 alias dev.d="cd ~/Downloads/Torrents/Dev"
 alias go.d="cd ~/Downloads/Torrents/Dev/go"
 alias rust.d="cd ~/Downloads/Torrents/Dev/rust"
-alias erlang.d="cd ~/Downloads/Torrents/Dev/erlang"
+alias py.d="cd ~/Downloads/Torrents/Dev/py"
 alias js.d="cd ~/Downloads/Torrents/Dev/js"
 alias g1.d="cd ~/Google\ Drive/GenesysOne/"
 alias react.d="cd ~/Downloads/Torrents/Dev/react"

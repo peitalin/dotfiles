@@ -28,12 +28,16 @@ set clipboard=unnamed             " copy and paste with *
 set mouse=a                       " Scrollable term-vim
 " set cursorcolumn
 autocmd BufWritePre * %s/\s\+$//e " trim trailing whitespace
-
+set nohlsearch    " highlight removed until next search
+" set splitbelow  " Preview window opens to the bottom, not above
+set splitright  " Preview window opens to the right, not above
 """"""""""""" END General ViM Settings """""""""""""""""
 
 
 
-""""""""""""" Plug configs """""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""" Plug configs """""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'tpope/vim-surround'
@@ -56,6 +60,8 @@ let g:ctrlp_prompt_mappings = {
 \ 'AcceptSelection("e")': [],
 \ 'AcceptSelection("t")': ['<cr>', '<c-m>'],
 \ }
+" Autoread file changes.
+Plug 'djoshea/vim-autoread'
 
 " Colorschemes
 Plug 'joshdick/onedark.vim'
@@ -65,48 +71,18 @@ Plug 'rakr/vim-two-firewatch'
 Plug 'Wutzara/vim-materialtheme'
 
 
-" Completion - youcompleteme
-Plug 'Valloric/YouCompleteMe', {
-     \ 'build' : {
-     \     'mac' : './install.py --rust-completer',
-     \     'unix' : './install.sh --clang-completer --system-libclang --omnisharp-completer',
-     \    }
-     \ }
 
+"""""""""""" Autocompletion """"""""""""""""""""""""""""""""
+Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
+" :Coc-install coc-json coc-pyls coc-rls coc-tsserver
+" Remap for rename current word
+nmap <leader>rn <Plug>(coc-rename)
+" Remap keys for gotos
+nmap <silent> td <Plug>(coc-definition)
+nmap <silent> tt <Plug>(coc-type-definition)
+nmap <silent> ti <Plug>(coc-implementation)
+nmap <silent> tr <Plug>(coc-references)
 
-
-""" Python
-Plug 'davidhalter/jedi-vim'
-
-Plug 'w0rp/ale'
-let g:ale_sign_column_always = 1
-let g:ale_sign_error = '>>'
-let g:ale_sign_warning = '>'
-let g:ale_lint_delay = 400
-" Default: 200ms
-nmap <C-c> :ALEDetail<CR>
-nmap <C-x> :ALEHover<CR>
-nmap <C-z> :ALEHover<CR>
-
-
-"" Haskell
-" Plug 'eagletmt/neco-ghc'
-" Plug 'eagletmt/ghcmod-vim'
-
-"" Elixir
-" Plug 'elixir-editors/vim-elixir'
-
-"" Docker
-Plug 'ekalinin/Dockerfile.vim'
-
-"" Rust
-" Syntax highlighting
-Plug 'rust-lang/rust.vim'
-Plug 'racer-rust/vim-racer'
-let g:racer_cmd = '~/.cargo/bin/racer'
-let g:racer_experimental_completer = 1
-Plug 'cespare/vim-toml'
-Plug 'maralla/vim-toml-enhance', {'depends': 'cespare/vim-toml'}
 if executable('rls')
     au User lsp_setup call lsp#register_server({
         \ 'name': 'rls',
@@ -115,33 +91,45 @@ if executable('rls')
         \ })
 endif
 
+" Completion - youcompleteme
+Plug 'Valloric/YouCompleteMe', {
+     \ 'build' : {
+     \     'mac' : './install.py --ts-completer',
+     \     'unix' : './install.sh --clang-completer --system-libclang --omnisharp-completer',
+     \    }
+     \ }
+
+" Asynchronous linting/fixing for Vim and Language Server Protocol (LSP) integration
+Plug 'w0rp/ale'
+let g:ale_sign_column_always = 1
+let g:ale_sign_error = '>>'
+let g:ale_sign_warning = '>'
+let g:ale_lint_delay = 200
+" Default: 200ms
+nmap <C-c> :ALEDetail<CR>
+nmap <C-x> :ALEHover<CR>
+nmap <C-z> :ALEHover<CR>
+
+
+
+"""""""""""""""" Syntax highlighting
+"" Rust
+Plug 'rust-lang/rust.vim'
+Plug 'cespare/vim-toml'
+Plug 'maralla/vim-toml-enhance', {'depends': 'cespare/vim-toml'}
+
+""" Python
+Plug 'davidhalter/jedi-vim'
+"" Docker
+Plug 'ekalinin/Dockerfile.vim'
+
 "" Go
-" Syntax highlighting
 Plug 'fatih/vim-go'
 
-" " Solidity
+"" Solidity
 Plug 'tomlion/vim-solidity'
 
-" Vim Snippets
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-" let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsExpandTrigger="<c-j>"
-let g:UltiSnipsJumpForwardTrigger="<c-l>"
-let g:UltiSnipsJumpBackwardTrigger="<c-h>"
-
-
-
-" Snippets/Macros for DOM tags
-Plug 'mattn/emmet-vim'
-" C-m is synonymous with 'enter', so will cause enter key to lag
-let g:user_emmet_leader_key='<C-k>'
-let g:user_emmet_settings = {'javascript': {'extends': 'jsx'}}
-
-Plug 'elzr/vim-json'
-let g:vim_json_syntax_conceal = 0
-
+"""" CSS syntax highlight
 Plug 'othree/csscomplete.vim'
 " Add Support css3 properties
 Plug 'hail2u/vim-css3-syntax'
@@ -152,24 +140,9 @@ au BufRead,BufNewFile *.sass set filetype=sass.css
 " scss lint
 Plug 'gcorne/vim-sass-lint'
 
-" Allow autoclose paired characters like [,] or (,),
-Plug 'jiangmiao/auto-pairs'
-
-" Autoread file changes.
-Plug 'djoshea/vim-autoread'
-
-
 """"""" Javascript
-" Improve javascript syntax higlighting, needed for good folding,
-" Plug 'pangloss/vim-javascript'
-
-" Highlights the matching HTML tag when the cursor is positioned on a tag.
-Plug 'Valloric/MatchTagAlways'
 " Syntax highlighting for .jsx (typescript)
 Plug 'peitalin/vim-jsx-typescript'
-" Typescript
-" Plug 'Quramy/tsuquyomi'
-
 "" Typescript "
 Plug 'leafgarland/typescript-vim'
 Plug 'Shougo/vimproc.vim', {
@@ -182,48 +155,18 @@ Plug 'Shougo/vimproc.vim', {
 \    },
 \ }
 
-
+Plug 'elzr/vim-json'
+let g:vim_json_syntax_conceal = 0
 " GraphQL syntax highlighting
 " Plug 'jparise/vim-graphql'
 " Plug 'posva/vim-vue'
 
-call plug#end()
 
-
-
-"""""""""""" YCM YouCompleteMe """"""""""""""""""""""""""""""""
-let g:ycm_confirm_extra_conf = 0
-let g:ycm_min_num_of_chars_for_completion = 1 " default = 2
-let g:ycm_min_num_identifier_candidate_chars = 0 " default = 0
-let g:ycm_auto_trigger = 1 " complete as you type, default = 1
-let g:ycm_rust_src_path = '`rustc --print sysroot`/lib/rustlib/src/rust/src'
-" let g:ycm_autoclose_preview_window_after_completion=1
-let g:ycm_add_preview_to_completeopt = 1
-let g:ycm_python_binary_path = 'python3'
-let g:ycm_key_invoke_completion = '<C-y>'
-
-" Disable loading YCM
-" let g:loaded_youcompleteme = 1
-" Disable loading YCM linting
-let g:ycm_show_diagnostics_ui = 0
-
-""" Javascript YCM completion
-let g:ycm_semantic_triggers =  {
-            \   'javascript,typescript,python,haskell,go' : ['.'],
-            \   'vim' : ['re![_a-zA-Z]+[_\w]*\.'],
-            \   'ruby' : ['.', '::'],
-            \   'erlang' : [':'],
-            \ }
-
-
-nnoremap <silent> te :YcmCompleter GetDoc<CR>
-nnoremap <silent> tt :YcmCompleter GetType<CR>
-nnoremap <silent> td :YcmCompleter GoToDefinition<CR>
-nnoremap <silent> tr :YcmCompleter RefactorRename
-" nnoremap <silent> dt <C-o>
-
-
-
+""""""" Brackets & Parentheses highlighting
+" Allow autoclose paired characters like [,] or (,),
+Plug 'jiangmiao/auto-pairs'
+" Highlights the matching HTML tag when the cursor is positioned on a tag.
+Plug 'Valloric/MatchTagAlways'
 " Valloric/MatchTagAlways"
 nnoremap <leader>% :MtaJumpToOtherTag<cr>
 let g:mta_filetypes = {
@@ -235,12 +178,55 @@ let g:mta_filetypes = {
             \ 'typescript' : 1
             \}
 
+"""""""""""" Vim Snippets
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+" let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-l>"
+let g:UltiSnipsJumpBackwardTrigger="<c-h>"
+" Snippets/Macros for DOM tags
+Plug 'mattn/emmet-vim'
+" C-m is synonymous with 'enter', so will cause enter key to lag
+let g:user_emmet_leader_key='<C-k>'
+let g:user_emmet_settings = {'javascript': {'extends': 'jsx'}}
+
+call plug#end()
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""" PLUGS MUST BE ABOVE THIS LINE """""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
-""""""""""""""""""END JAVASCRIPT""""""""""""""""""""""""""""""""""""""""
 
 
+""""""""""""" YCM YouCompleteMe """"""""""""""""""""""""""""""""
+let g:ycm_confirm_extra_conf = 0
+let g:ycm_min_num_of_chars_for_completion = 1 " default = 2
+let g:ycm_min_num_identifier_candidate_chars = 0 " default = 0
+let g:ycm_auto_trigger = 1 " complete as you type, default = 1
+" let g:ycm_autoclose_preview_window_after_completion=1
+let g:ycm_add_preview_to_completeopt = 1
+let g:ycm_python_binary_path = 'python3'
+let g:ycm_key_invoke_completion = '<C-y>'
+" Disable loading YCM
+" let g:loaded_youcompleteme = 1
+" Disable loading YCM linting
+let g:ycm_show_diagnostics_ui = 0
+"
+" """ Javascript YCM completion
+let g:ycm_semantic_triggers =  {
+            \   'javascript,typescript,python,haskell,go' : ['.'],
+            \   'vim' : ['re![_a-zA-Z]+[_\w]*\.'],
+            \   'ruby' : ['.', '::'],
+            \ }
 
+let g:ycm_filetype_blacklist = { 'rust': 1 }
+" nnoremap <silent> te :YcmCompleter GetDoc<CR>
+" nnoremap <silent> tt :YcmCompleter GetType<CR>
+" nnoremap <silent> td :YcmCompleter GoToDefinition<CR>
+" nnoremap <silent> tr :YcmCompleter RefactorRename
+" nnoremap <silent> dt <C-o>
 
 
 """"""""""" Toggle Fold Columns
@@ -302,11 +288,8 @@ autocmd FileType typescript setlocal commentstring=//\ %s
 autocmd FileType json setlocal commentstring=//\ %s
 " autocmd FileType *.jsx,*.tsx setlocal commentstring=//\ %s
 
-
-
 " Ctrl-P refresh file cache
 nmap C :CtrlPClearCache<cr>
-
 
 """"""""""" Nerdtree Config
 map <C-t> :NERDTreeToggle<CR>
@@ -340,7 +323,6 @@ nmap <silent> <C-j> :wincmd j<CR>
 nmap <silent> <C-h> :wincmd h<CR>
 nmap <silent> <C-l> :wincmd l<CR>
 
-
 """"""""""" clipboard copy and cut
 vmap <C-x> :!pbcopy<CR>
 " yanks and copies to system clipboard
@@ -355,17 +337,14 @@ vnoremap <S-TAB> <
 nnoremap <TAB> V >
 nnoremap <S-TAB> V <
 
-
 """""" disable annoying lowercase shortcut in visual-mode
 vnoremap u <Nop>
-
 
 """"""""""" EmacS bol/eol
 noremap <C-a> ^
 noremap <C-e> $
 inoremap <C-a> <ESC> ^i
 inoremap <C-e> <ESC> $i
-
 
 """"""""" Insert mode
 imap <C-f> <Right>
@@ -605,6 +584,13 @@ hi WebBrowser ctermfg=204 guifg=#56B6C2
 hi ReactLifeCycleMethods ctermfg=204 guifg=#D19A66
 
 
+" JSX Dark Blue and Neon Green highlights
+hi xmlEndTag guifg=#2974a1
+hi tsxCloseString guifg=#2974a1
+hi htmlTag guifg=#2974a1
+hi htmlEndTag guifg=#2974a1
+hi htmlTagName guifg=#59ACE5
+hi tsxAttrib guifg=#1BD1C1
 
 
 
