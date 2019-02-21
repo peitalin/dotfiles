@@ -180,7 +180,7 @@
     "no-array-constructor": 0,      // disallow use of the Array constructor
     "no-inline-comments": 0,        // disallow comments inline after code (off by default)
     "no-lonely-if": 0,              // disallow if as the only statement in an else block (off by default)
-    "no-mixed-spaces-and-tabs": 0,  // disallow mixed spaces and tabs for indentation
+    "no-mixed-spaces-and-tabs": 1,  // disallow mixed spaces and tabs for indentation
     "no-multiple-empty-lines": 0,   // disallow multiple empty lines (off by default)
     "no-nested-ternary": 0,         // disallow nested ternary expressions (off by default)
     "no-new-object": 0,             // disallow use of the Object constructor
@@ -193,7 +193,7 @@
     "operator-assignment": 0,       // require assignment operator shorthand where possible or prohibit it entirely (off by default)
     "padded-blocks": 0,             // enforce padding within blocks (off by default)
     "quote-props": 0,               // require quotes around object literal property names (off by default)
-    "quotes": 0,                    // specify whether double or single quotes should be used
+    "quotes": [2],                  // specify whether double or single quotes should be used
     "semi": 0,                      // require or disallow use of semicolons instead of ASI
     "sort-vars": 0,                 // sort variables within the same declaration block (off by default)
     "space-after-function-name": 0, // require a space after function names (off by default)

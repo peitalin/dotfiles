@@ -7,7 +7,6 @@ export PATH="/usr/local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"   # Rust
 export PATH="/usr/local/Cellar:$PATH"  # Cellar
 export PATH="/usr/local/opt/llvm/bin:$PATH"
-export PATH="/Users/peitalin/Downloads/Torrents/Dev/rust/grin/target/release:$PATH"
 export CC="/usr/bin/clang"
 
 export NODE_PATH="/usr/local/lib/node_modules"
@@ -16,6 +15,7 @@ export CARGO_HOME="$HOME/.cargo"
 export GOPATH="$HOME/go"
 export PATH="$GOPATH/bin:$PATH"
 export SHELL="/bin/zsh"
+export RUSTC_WRAPPER=sccache
 
 # export PYTHONPATH="/usr/local/lib/python3.7/site-packages"
 
@@ -51,6 +51,7 @@ alias cat='ccat'
 
 ###### ALIAS VIM TO NEOVIM
 alias vim='nvim'
+alias cim='nvim'
 
 ### directory shortcuts
 alias drop="cd ~/Dropbox"
@@ -109,9 +110,8 @@ alias go.d="cd ~/Downloads/Torrents/Dev/go"
 alias rust.d="cd ~/Downloads/Torrents/Dev/rust"
 alias py.d="cd ~/Downloads/Torrents/Dev/py"
 alias js.d="cd ~/Downloads/Torrents/Dev/js"
-alias g1.d="cd ~/Google\ Drive/GenesysOne/"
 alias react.d="cd ~/Downloads/Torrents/Dev/react"
-alias ob1.d="cd ~/Downloads/Torrents/Dev/react/native-bazaar/"
+alias torrents.d="cd ~/Downloads/Torrents"
 
 # alias vim as vim
 alias vi='vim'

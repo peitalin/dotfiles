@@ -30,7 +30,8 @@ set mouse=a                       " Scrollable term-vim
 autocmd BufWritePre * %s/\s\+$//e " trim trailing whitespace
 set nohlsearch    " highlight removed until next search
 " set splitbelow  " Preview window opens to the bottom, not above
-set splitright  " Preview window opens to the right, not above
+set splitright    " Preview window opens to the right, not above
+set shortmess=aFc " remove prompts to continue messages in cmd line
 """"""""""""" END General ViM Settings """""""""""""""""
 
 
@@ -74,7 +75,7 @@ Plug 'Wutzara/vim-materialtheme'
 
 """""""""""" Autocompletion """"""""""""""""""""""""""""""""
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
-" :Coc-install coc-json coc-pyls coc-rls coc-tsserver
+" :Coc-install coc-json coc-rls
 " Remap for rename current word
 nmap <leader>rn <Plug>(coc-rename)
 " Remap keys for gotos
@@ -101,10 +102,12 @@ Plug 'Valloric/YouCompleteMe', {
 
 " Asynchronous linting/fixing for Vim and Language Server Protocol (LSP) integration
 Plug 'w0rp/ale'
-let g:ale_sign_column_always = 1
+" let g:ale_sign_column_always = 1
 let g:ale_sign_error = '>>'
 let g:ale_sign_warning = '>'
-let g:ale_lint_delay = 200
+let g:ale_lint_delay = 55
+let b:ale_linters = ['stylelint', 'eslint']
+let g:ale_linters = {'jsx': ['stylelint', 'eslint']}
 " Default: 200ms
 nmap <C-c> :ALEDetail<CR>
 nmap <C-x> :ALEHover<CR>
@@ -287,6 +290,7 @@ autocmd FileType vue.typescript setlocal commentstring=//\ %s
 autocmd FileType typescript setlocal commentstring=//\ %s
 autocmd FileType json setlocal commentstring=//\ %s
 " autocmd FileType *.jsx,*.tsx setlocal commentstring=//\ %s
+autocmd FileType json syntax match Comment +\/\/.\+$+
 
 " Ctrl-P refresh file cache
 nmap C :CtrlPClearCache<cr>
@@ -591,6 +595,13 @@ hi htmlTag guifg=#2974a1
 hi htmlEndTag guifg=#2974a1
 hi htmlTagName guifg=#59ACE5
 hi tsxAttrib guifg=#1BD1C1
+
+
+" rust cyan
+hi rustModPath guifg=#DF997A
+hi rustFuncCall guifg=#60A0D0
+hi rustFuncName guifg=#60A0D0
+hi rustTrait guifg=#C898C8
 
 
 
