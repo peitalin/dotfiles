@@ -13,9 +13,9 @@ set scrolloff=10    " Keep 10 lines (top/bottom) for scope
 set showcmd         " show the command being typed
 set showmatch       " show matching brackets
 set backspace=indent,eol,start
-set shiftwidth=2
-set tabstop=2
-set softtabstop=0 noexpandtab
+set shiftwidth=4
+set tabstop=4
+set softtabstop=4 noexpandtab
 " set expandtab                     " Tabs insert 4 space characters
 set virtualedit+=block            " Allow the cursor to go anywhere in visual block mode
 set relativenumber                " Relative line numbers
@@ -102,12 +102,12 @@ Plug 'Valloric/YouCompleteMe', {
 
 " Asynchronous linting/fixing for Vim and Language Server Protocol (LSP) integration
 Plug 'w0rp/ale'
-" let g:ale_sign_column_always = 1
-let g:ale_sign_error = '>>'
-let g:ale_sign_warning = '>'
-let g:ale_lint_delay = 55
-let b:ale_linters = ['stylelint', 'eslint']
-let g:ale_linters = {'jsx': ['stylelint', 'eslint']}
+let g:ale_sign_error = '>'
+let g:ale_sign_warning = '!'
+let g:ale_lint_delay = 100
+let b:ale_linters = ['tslint']
+let g:ale_linters = {'jsx': ['tslint']}
+let g:ale_sign_column_always = 1 "" annoying if it's not kept open
 " Default: 200ms
 nmap <C-c> :ALEDetail<CR>
 nmap <C-x> :ALEHover<CR>
@@ -205,9 +205,9 @@ call plug#end()
 
 """"""""""""" YCM YouCompleteMe """"""""""""""""""""""""""""""""
 let g:ycm_confirm_extra_conf = 0
-let g:ycm_min_num_of_chars_for_completion = 1 " default = 2
+let g:ycm_min_num_of_chars_for_completion = 2 " default = 2
 let g:ycm_min_num_identifier_candidate_chars = 0 " default = 0
-let g:ycm_auto_trigger = 1 " complete as you type, default = 1
+let g:ycm_auto_trigger = 0 " complete as you type, default = 1
 " let g:ycm_autoclose_preview_window_after_completion=1
 let g:ycm_add_preview_to_completeopt = 1
 let g:ycm_python_binary_path = 'python3'
@@ -216,15 +216,14 @@ let g:ycm_key_invoke_completion = '<C-y>'
 " let g:loaded_youcompleteme = 1
 " Disable loading YCM linting
 let g:ycm_show_diagnostics_ui = 0
-"
-" """ Javascript YCM completion
+""" Javascript YCM completion
 let g:ycm_semantic_triggers =  {
             \   'javascript,typescript,python,haskell,go' : ['.'],
             \   'vim' : ['re![_a-zA-Z]+[_\w]*\.'],
             \   'ruby' : ['.', '::'],
             \ }
 
-let g:ycm_filetype_blacklist = { 'rust': 1 }
+let g:ycm_filetype_blacklist = { 'rust': 1, 'typescript': 1, 'javascript': 1 }
 " nnoremap <silent> te :YcmCompleter GetDoc<CR>
 " nnoremap <silent> tt :YcmCompleter GetType<CR>
 " nnoremap <silent> td :YcmCompleter GoToDefinition<CR>
@@ -279,7 +278,7 @@ inoremap <C-b> <left>
 
 " replace tabs with 4 whitespace
 " nmap <F4> :%s/\t/    /g<CR>
-nmap <Leader>s :%s/\t/  /g<CR>
+nmap <Leader>s :%s/\t/    /g<CR>
 autocmd FileType python,rust,haskell nmap <Leader>s :%s/\t/    /g<CR>
 " au BufNewFile,BufRead *.js *.html nmap <Leader>s :%s/\t/  /g<CR>
 autocmd FileType python,rust,haskell,markdown setlocal shiftwidth=4 tabstop=4
@@ -453,7 +452,7 @@ augroup END
 """"""" Vim-indent-guides
 let g:indent_guides_auto_colors = 0
 let g:indent_guides_start_level = 1
-let g:indent_guides_guide_size = 2
+let g:indent_guides_guide_size = 1
 autocmd FileType python,rust let g:indent_guides_guide_size = 1
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_tab_guides = 1
@@ -602,6 +601,9 @@ hi rustModPath guifg=#DF997A
 hi rustFuncCall guifg=#60A0D0
 hi rustFuncName guifg=#60A0D0
 hi rustTrait guifg=#C898C8
+
+hi rustFoldBraces guifg=#C898C8
+hi rustBoxPlacementBalance guifg=#C898C8
 
 
 
