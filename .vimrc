@@ -75,6 +75,8 @@ Plug 'Wutzara/vim-materialtheme'
 
 """""""""""" Autocompletion """"""""""""""""""""""""""""""""
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
+" Disable just for .tsx
+au BufEnter *.tsx,*.ts,*.jsx,*.js :CocDisable
 " :Coc-install coc-json coc-rls
 " Remap for rename current word
 nmap <leader>rn <Plug>(coc-rename)
@@ -89,6 +91,7 @@ if executable('rls')
         \ 'name': 'rls',
         \ 'cmd': {server_info->['rustup', 'run', 'nightly', 'rls']},
         \ 'whitelist': ['rust'],
+        \ 'blacklist': ['javascript', 'jsx', 'tsx', 'typescript'],
         \ })
 endif
 
@@ -104,7 +107,7 @@ Plug 'Valloric/YouCompleteMe', {
 Plug 'w0rp/ale'
 let g:ale_sign_error = '>'
 let g:ale_sign_warning = '!'
-let g:ale_lint_delay = 100
+let g:ale_lint_delay = 200
 let b:ale_linters = ['tslint']
 let g:ale_linters = {'jsx': ['tslint']}
 let g:ale_sign_column_always = 1 "" annoying if it's not kept open
@@ -207,7 +210,7 @@ call plug#end()
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_min_num_of_chars_for_completion = 2 " default = 2
 let g:ycm_min_num_identifier_candidate_chars = 0 " default = 0
-let g:ycm_auto_trigger = 0 " complete as you type, default = 1
+let g:ycm_auto_trigger = 1 " complete as you type, default = 1
 " let g:ycm_autoclose_preview_window_after_completion=1
 let g:ycm_add_preview_to_completeopt = 1
 let g:ycm_python_binary_path = 'python3'
@@ -223,7 +226,7 @@ let g:ycm_semantic_triggers =  {
             \   'ruby' : ['.', '::'],
             \ }
 
-let g:ycm_filetype_blacklist = { 'rust': 1, 'typescript': 1, 'javascript': 1 }
+let g:ycm_filetype_blacklist = { 'rust': 1 }
 " nnoremap <silent> te :YcmCompleter GetDoc<CR>
 " nnoremap <silent> tt :YcmCompleter GetType<CR>
 " nnoremap <silent> td :YcmCompleter GoToDefinition<CR>
@@ -279,9 +282,11 @@ inoremap <C-b> <left>
 " replace tabs with 4 whitespace
 " nmap <F4> :%s/\t/    /g<CR>
 nmap <Leader>s :%s/\t/    /g<CR>
-autocmd FileType python,rust,haskell nmap <Leader>s :%s/\t/    /g<CR>
+autocmd FileType typescript.tsx,javascript.tsx,javascript,typescript nmap <Leader>s :%s/\t/  /g<CR>
 " au BufNewFile,BufRead *.js *.html nmap <Leader>s :%s/\t/  /g<CR>
 autocmd FileType python,rust,haskell,markdown setlocal shiftwidth=4 tabstop=4
+autocmd FileType typescript.tsx,javascript.tsx,javascript,typescript setlocal shiftwidth=2 tabstop=2 softtabstop=4 noexpandtab
+set softtabstop=4 noexpandtab
 " au BufNewFile,BufRead *.hbs setlocal ft=d
 autocmd BufNewFile,BufRead *.ts,*.js set filetype=typescript.tsx
 autocmd BufNewFile,BufRead *.vue set filetype=vue.typescript
@@ -454,6 +459,7 @@ let g:indent_guides_auto_colors = 0
 let g:indent_guides_start_level = 1
 let g:indent_guides_guide_size = 1
 autocmd FileType python,rust let g:indent_guides_guide_size = 1
+autocmd FileType typescript.tsx,javascript.jsx,javascript,typescript let g:indent_guides_guide_size = 2
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_tab_guides = 1
 " autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#243e48 ctermbg=237
@@ -589,7 +595,8 @@ hi ReactLifeCycleMethods ctermfg=204 guifg=#D19A66
 
 " JSX Dark Blue and Neon Green highlights
 hi xmlEndTag guifg=#2974a1
-hi tsxCloseString guifg=#2974a1
+" hi tsxCloseString guifg=#2974a1
+hi tsxCloseString guifg=#15608f
 hi htmlTag guifg=#2974a1
 hi htmlEndTag guifg=#2974a1
 hi htmlTagName guifg=#59ACE5
