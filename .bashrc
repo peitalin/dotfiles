@@ -15,15 +15,7 @@ export CARGO_HOME="$HOME/.cargo"
 export GOPATH="$HOME/go"
 export PATH="$GOPATH/bin:$PATH"
 export SHELL="/bin/zsh"
-export RUSTC_WRAPPER=sccache
-
 export PYTHONPATH="/usr/local/lib/python3.7/site-packages"
-
-# export TERM="xterm-256color-italic"
-# export TERM="xterm-256color"
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" --no-use # This loads nvm
-# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 ######### Environment #######
 export LANG=en_US.UTF-8

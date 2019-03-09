@@ -75,39 +75,28 @@ Plug 'Wutzara/vim-materialtheme'
 
 
 
-"""""""""""" Autocompletion """"""""""""""""""""""""""""""""
-" Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
-" " Disable just for .tsx
-" au BufEnter *.tsx,*.ts,*.jsx,*.js :CocDisable
-" " :Coc-install coc-json coc-rls
-" " Remap for rename current word
+" """""""""""" Autocompletion """"""""""""""""""""""""""""""""
+Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
+" Need for ALE integration
+" Disable just for .tsx
+au BufEnter *.tsx,*.ts,*.jsx,*.js :CocDisable
+" :CocInstall coc-json coc-rls
+" Remap for rename current word
 " nmap <leader>rn <Plug>(coc-rename)
 " " Remap keys for gotos
 " nmap <silent> td <Plug>(coc-definition)
 " nmap <silent> tt <Plug>(coc-type-definition)
 " nmap <silent> ti <Plug>(coc-implementation)
 " nmap <silent> tr <Plug>(coc-references)
-"
-" if executable('rls'
-"     au User lsp_setup call lsp#register_server({
-"         \ 'name': 'rls',
-"         \ 'cmd': {server_info->['rustup', 'run', 'nightly', 'rls']},
-"         \ 'whitelist': ['rust'],
-"         \ 'blacklist': ['javascript', 'jsx', 'tsx', 'typescript'],
-"         \ })
-" endif
 
-" Machine learning autocompletions
-" Plug 'zxqfl/tabnine-vim'
-
-
-" Completion - youcompleteme
-Plug 'Valloric/YouCompleteMe', {
-     \ 'build' : {
-     \     'mac' : './install.py --ts-completer --rust-completer',
-     \     'unix' : './install.sh --clang-completer --system-libclang --omnisharp-completer',
-     \    }
-     \ }
+if executable('rls')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'rls',
+        \ 'cmd': {server_info->['rustup', 'run', 'stable, 'rls']},
+        \ 'whitelist': ['rust'],
+        \ 'blacklist': ['javascript', 'jsx', 'tsx', 'typescript'],
+        \ })
+endif
 
 " Asynchronous linting/fixing for Vim and Language Server Protocol (LSP) integration
 Plug 'w0rp/ale'
@@ -121,6 +110,18 @@ let g:ale_sign_column_always = 1 "" annoying if it's not kept open
 nmap <C-c> :ALEDetail<CR>
 nmap <C-x> :ALEHover<CR>
 nmap <C-z> :ALEHover<CR>
+
+
+" Machine learning autocompletions
+" Plug 'zxqfl/tabnine-vim'
+
+" Completion - youcompleteme
+Plug 'Valloric/YouCompleteMe', {
+     \ 'build' : {
+     \     'mac' : './install.py --ts-completer --rust-completer',
+     \     'unix' : './install.sh --clang-completer --system-libclang --omnisharp-completer',
+     \    }
+     \ }
 
 
 """""""""""""""" Syntax highlighting
@@ -219,11 +220,11 @@ let g:ycm_auto_trigger = 1 " complete as you type, default = 1
 " let g:ycm_autoclose_preview_window_after_completion=1
 let g:ycm_add_preview_to_completeopt = 1
 let g:ycm_python_binary_path = 'python3'
-let g:ycm_key_invoke_completion = '<C-y>'
+let g:ycm_key_invoke_completion = '<C-n>'
 " Disable loading YCM
 " let g:loaded_youcompleteme = 1
 " Disable loading YCM linting
-let g:ycm_show_diagnostics_ui = 0
+let g:ycm_show_diagnostics_ui = 1
 """ Javascript YCM completion
 let g:ycm_semantic_triggers =  {
             \   'javascript,typescript,python,haskell,go' : ['.'],
@@ -237,14 +238,13 @@ let g:ycm_filetype_whitelist = {
             \ "javascript":1,
             \ "typescript":1,
             \ "python":1,
-            \ "rust":1,
+            \ "rust":0,
             \ }
-" let g:ycm_filetype_blacklist = { 'rust': 1 }
+let g:ycm_filetype_blacklist = { 'rust': 1 }
 nnoremap <silent> te :YcmCompleter GetDoc<CR>
 nnoremap <silent> tt :YcmCompleter GetType<CR>
 nnoremap <silent> td :YcmCompleter GoToDefinition<CR>
 nnoremap <silent> tr :YcmCompleter RefactorRename
-nnoremap <silent> dt <C-o>
 
 
 """"""""""" Toggle Fold Columns
