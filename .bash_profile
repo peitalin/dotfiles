@@ -51,14 +51,6 @@ man () {
 
 
 alias rsync='rsync -chavzP --stats'
-function rsync_help {
-    echo "scp peita@10.0.0.135:/media/peitaubuntu/F/textnix.txt ~/Downloads"
-    echo "rsync is aliased to: rsync -chavzP --stats"
-    echo "\nRsync from local machine:"
-    echo "rsync -chavzP --stats 'peitaubuntu@10.0.0.20:/media/peitaubuntu/F/text\ nix.txt' ~/Downloads"
-    echo "\nRsync from remote:"
-    echo "rsync -chavzP --stats '/media/peitaubuntu/F/text nix.txt' peitalin@10.0.0.60:/Users/peitalin/Downloads"
-}
 
 function rsync_to_nix {
     echo "rsync $@ peitaubuntu@10.0.0.20:/media/peitaubuntu/F/Torrents"
@@ -69,10 +61,6 @@ function rsync_from_nix {
     echo "rsync peitaubuntu@10.0.0.20:/media/peitaubuntu/F/Torrents/$@ ~/Downloads/Torrents"
     rsync peitaubuntu@10.0.0.20:/media/peitaubuntu/F/Torrents/$@ ~/Downloads/Torrents
 }
-
-
-
-
 
 
 function dotfiles_git {
@@ -86,7 +74,7 @@ function dotfiles_git {
     cp $HOME/.Rprofile $HOME/Data/dotfiles
     cp $HOME/.ipython/profile_default/ipython_config.py $HOME/Data/dotfiles/.ipython/profile_default/ipython_config.py
     cp $HOME/.matplotlib/matplotlibrc $HOME/Data/dotfiles/.matplotlib/matplotlibrc
-    cp -R $HOME/.chunkwm $HOME/Data/dotfiles
+    cp -R $HOME/.chunkwmrc $HOME/Data/dotfiles
     cp $HOME/.oh-my-zsh/themes/bureau.zsh-theme $HOME/Data/dotfiles
 
     cd $HOME/Data/dotfiles
@@ -99,6 +87,7 @@ function dotfiles_git {
     git add .Rprofile --ignore-removal
     git add .ipython --ignore-removal
     git add .matplotlib --ignore-removal
+    git add .chunkwmrc --ignore-removal
     git add ./oneNeon_lightline.vim
     git add ./bureau.zsh-theme
     git add ./Neue-Neon.tmTheme
@@ -106,14 +95,6 @@ function dotfiles_git {
     git push -u origin master
 }
 
-
-
-function mvps_hosts {
-    cd /etc
-    sudo wget "http://winhelp2002.mvps.org/hosts.txt"
-    sudo mv /etc/hosts /etc/hosts_backup
-    sudo mv /etc/hosts.txt /etc/hosts
-}
 
 if [ -f ~/.bashID ]; then
     source ~/.bashID
