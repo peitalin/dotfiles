@@ -1,0 +1,12 @@
+{
+    "rust-client.disableRustup": true,
+    "rust.all_features": true,
+    "rust.mode": "rls",
+    "rust.rustup": {
+        "toolchain": "stable-x86_64-apple-darwin",
+        "nightlyToolchain": "nightly-x86_64-apple-darwin"
+    },
+    "rust.rls": {
+        "useRustfmt": true
+    }
+}
