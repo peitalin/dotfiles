@@ -32,6 +32,8 @@ set nohlsearch    " highlight removed until next search
 " set splitbelow  " Preview window opens to the bottom, not above
 set splitright    " Preview window opens to the right, not above
 set shortmess=aFc " remove prompts to continue messages in cmd line
+set completeopt=menuone,longest,preview
+" set completeopt=menuone,longest
 """"""""""""" END General ViM Settings """""""""""""""""
 
 
@@ -74,31 +76,35 @@ Plug 'Wutzara/vim-materialtheme'
 
 
 """""""""""" Autocompletion """"""""""""""""""""""""""""""""
-Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
-" Disable just for .tsx
-au BufEnter *.tsx,*.ts,*.jsx,*.js :CocDisable
-" :Coc-install coc-json coc-rls
-" Remap for rename current word
-nmap <leader>rn <Plug>(coc-rename)
-" Remap keys for gotos
-nmap <silent> td <Plug>(coc-definition)
-nmap <silent> tt <Plug>(coc-type-definition)
-nmap <silent> ti <Plug>(coc-implementation)
-nmap <silent> tr <Plug>(coc-references)
+" Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
+" " Disable just for .tsx
+" au BufEnter *.tsx,*.ts,*.jsx,*.js :CocDisable
+" " :Coc-install coc-json coc-rls
+" " Remap for rename current word
+" nmap <leader>rn <Plug>(coc-rename)
+" " Remap keys for gotos
+" nmap <silent> td <Plug>(coc-definition)
+" nmap <silent> tt <Plug>(coc-type-definition)
+" nmap <silent> ti <Plug>(coc-implementation)
+" nmap <silent> tr <Plug>(coc-references)
+"
+" if executable('rls'
+"     au User lsp_setup call lsp#register_server({
+"         \ 'name': 'rls',
+"         \ 'cmd': {server_info->['rustup', 'run', 'nightly', 'rls']},
+"         \ 'whitelist': ['rust'],
+"         \ 'blacklist': ['javascript', 'jsx', 'tsx', 'typescript'],
+"         \ })
+" endif
 
-if executable('rls')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'rls',
-        \ 'cmd': {server_info->['rustup', 'run', 'nightly', 'rls']},
-        \ 'whitelist': ['rust'],
-        \ 'blacklist': ['javascript', 'jsx', 'tsx', 'typescript'],
-        \ })
-endif
+" Machine learning autocompletions
+" Plug 'zxqfl/tabnine-vim'
+
 
 " Completion - youcompleteme
 Plug 'Valloric/YouCompleteMe', {
      \ 'build' : {
-     \     'mac' : './install.py --ts-completer',
+     \     'mac' : './install.py --ts-completer --rust-completer',
      \     'unix' : './install.sh --clang-completer --system-libclang --omnisharp-completer',
      \    }
      \ }
@@ -115,7 +121,6 @@ let g:ale_sign_column_always = 1 "" annoying if it's not kept open
 nmap <C-c> :ALEDetail<CR>
 nmap <C-x> :ALEHover<CR>
 nmap <C-z> :ALEHover<CR>
-
 
 
 """""""""""""""" Syntax highlighting
@@ -208,7 +213,7 @@ call plug#end()
 
 """"""""""""" YCM YouCompleteMe """"""""""""""""""""""""""""""""
 let g:ycm_confirm_extra_conf = 0
-let g:ycm_min_num_of_chars_for_completion = 2 " default = 2
+let g:ycm_min_num_of_chars_for_completion = 1 " default = 2
 let g:ycm_min_num_identifier_candidate_chars = 0 " default = 0
 let g:ycm_auto_trigger = 1 " complete as you type, default = 1
 " let g:ycm_autoclose_preview_window_after_completion=1
@@ -223,15 +228,23 @@ let g:ycm_show_diagnostics_ui = 0
 let g:ycm_semantic_triggers =  {
             \   'javascript,typescript,python,haskell,go' : ['.'],
             \   'vim' : ['re![_a-zA-Z]+[_\w]*\.'],
-            \   'ruby' : ['.', '::'],
+            \   'ruby,rust' : ['.', '::'],
             \ }
-
-let g:ycm_filetype_blacklist = { 'rust': 1 }
-" nnoremap <silent> te :YcmCompleter GetDoc<CR>
-" nnoremap <silent> tt :YcmCompleter GetType<CR>
-" nnoremap <silent> td :YcmCompleter GoToDefinition<CR>
-" nnoremap <silent> tr :YcmCompleter RefactorRename
-" nnoremap <silent> dt <C-o>
+let g:ycm_rust_src_path = '/Users/peitalin/.rustup/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src/rust/src'
+let g:ycm_filetype_whitelist = {
+            \ "c":1,
+            \ "cpp":1,
+            \ "javascript":1,
+            \ "typescript":1,
+            \ "python":1,
+            \ "rust":1,
+            \ }
+" let g:ycm_filetype_blacklist = { 'rust': 1 }
+nnoremap <silent> te :YcmCompleter GetDoc<CR>
+nnoremap <silent> tt :YcmCompleter GetType<CR>
+nnoremap <silent> td :YcmCompleter GoToDefinition<CR>
+nnoremap <silent> tr :YcmCompleter RefactorRename
+nnoremap <silent> dt <C-o>
 
 
 """"""""""" Toggle Fold Columns
@@ -253,15 +266,13 @@ nnoremap <silent> <F11> :TagbarToggle<CR>
 
 
 """"""""""""""""""" VIM JEDI PYTHON """"""""""""""
-let g:jedi#completions_enabled = 0
+let g:jedi#completions_enabled = 1
 let g:jedi#show_call_signatures = 0
 let g:jedi#auto_vim_configuration = 1
 let g:jedi#popup_on_dot = 1
 let g:jedi#popup_select_first = 0
-" au FileType python setlocal completeopt-=preview " The reason to deactivate jedi#auto_vim_configuration
+au FileType python setlocal completeopt-=preview " The reason to deactivate jedi#auto_vim_configuration
 " popup function documentation window, preview -> popup
-set completeopt=menuone,longest,preview
-" set completeopt=menuone,longest
 
 
 
@@ -601,6 +612,9 @@ hi htmlTag guifg=#2974a1
 hi htmlEndTag guifg=#2974a1
 hi htmlTagName guifg=#59ACE5
 hi tsxAttrib guifg=#1BD1C1
+
+hi tsxTypeBraces guifg=#BDA7CC
+hi tsxTypes guifg=#8D779C
 
 
 " rust cyan

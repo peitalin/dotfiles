@@ -17,7 +17,7 @@ export PATH="$GOPATH/bin:$PATH"
 export SHELL="/bin/zsh"
 export RUSTC_WRAPPER=sccache
 
-# export PYTHONPATH="/usr/local/lib/python3.7/site-packages"
+export PYTHONPATH="/usr/local/lib/python3.7/site-packages"
 
 # export TERM="xterm-256color-italic"
 # export TERM="xterm-256color"
