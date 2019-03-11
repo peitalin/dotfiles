@@ -33,6 +33,8 @@ set nohlsearch    " highlight removed until next search
 set splitright    " Preview window opens to the right, not above
 set shortmess=aFc " remove prompts to continue messages in cmd line
 set completeopt=menuone,longest,preview
+
+hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white
 " set completeopt=menuone,longest
 """"""""""""" END General ViM Settings """""""""""""""""
 
@@ -79,15 +81,15 @@ Plug 'Wutzara/vim-materialtheme'
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
 " Need for ALE integration
 " Disable just for .tsx
-au BufEnter *.tsx,*.ts,*.jsx,*.js :CocDisable
+" au BufEnter *.tsx,*.ts,*.jsx,*.js,*.py :CocDisable
 " :CocInstall coc-json coc-rls
 " Remap for rename current word
 " nmap <leader>rn <Plug>(coc-rename)
 " " Remap keys for gotos
-" nmap <silent> td <Plug>(coc-definition)
-" nmap <silent> tt <Plug>(coc-type-definition)
-" nmap <silent> ti <Plug>(coc-implementation)
-" nmap <silent> tr <Plug>(coc-references)
+nmap <silent> td <Plug>(coc-definition)
+nmap <silent> tt <Plug>(coc-type-definition)
+nmap <silent> ti <Plug>(coc-implementation)
+nmap <silent> tr <Plug>(coc-references)
 
 if executable('rls')
     au User lsp_setup call lsp#register_server({
@@ -137,6 +139,8 @@ Plug 'ekalinin/Dockerfile.vim'
 
 "" Go
 Plug 'fatih/vim-go'
+let g:go_fmt_autosave=0
+
 
 "" Solidity
 Plug 'tomlion/vim-solidity'
@@ -224,27 +228,29 @@ let g:ycm_key_invoke_completion = '<C-n>'
 " Disable loading YCM
 " let g:loaded_youcompleteme = 1
 " Disable loading YCM linting
-let g:ycm_show_diagnostics_ui = 1
+let g:ycm_show_diagnostics_ui = 0
 """ Javascript YCM completion
 let g:ycm_semantic_triggers =  {
             \   'javascript,typescript,python,haskell,go' : ['.'],
             \   'vim' : ['re![_a-zA-Z]+[_\w]*\.'],
             \   'ruby,rust' : ['.', '::'],
             \ }
-let g:ycm_rust_src_path = '/Users/peitalin/.rustup/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src/rust/src'
+" let g:ycm_rust_src_path = '/Users/peitalin/.rustup/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src/rust/src'
 let g:ycm_filetype_whitelist = {
             \ "c":1,
             \ "cpp":1,
             \ "javascript":1,
+            \ "javascript.jsx":1,
             \ "typescript":1,
+            \ "typescript.tsx":1,
             \ "python":1,
             \ "rust":0,
             \ }
 let g:ycm_filetype_blacklist = { 'rust': 1 }
-nnoremap <silent> te :YcmCompleter GetDoc<CR>
-nnoremap <silent> tt :YcmCompleter GetType<CR>
-nnoremap <silent> td :YcmCompleter GoToDefinition<CR>
-nnoremap <silent> tr :YcmCompleter RefactorRename
+" nnoremap <silent> te :YcmCompleter GetDoc<CR>
+" nnoremap <silent> tt :YcmCompleter GetType<CR>
+" nnoremap <silent> td :YcmCompleter GoToDefinition<CR>
+" nnoremap <silent> tr :YcmCompleter RefactorRename
 
 
 """"""""""" Toggle Fold Columns
@@ -306,6 +312,7 @@ autocmd FileType typescript setlocal commentstring=//\ %s
 autocmd FileType json setlocal commentstring=//\ %s
 " autocmd FileType *.jsx,*.tsx setlocal commentstring=//\ %s
 autocmd FileType json syntax match Comment +\/\/.\+$+
+
 
 " Ctrl-P refresh file cache
 nmap C :CtrlPClearCache<cr>

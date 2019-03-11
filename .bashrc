@@ -15,7 +15,7 @@ export CARGO_HOME="$HOME/.cargo"
 export GOPATH="$HOME/go"
 export PATH="$GOPATH/bin:$PATH"
 export SHELL="/bin/zsh"
-export PYTHONPATH="/usr/local/lib/python3.7/site-packages"
+# export PYTHONPATH="/usr/local/lib/python3.7/site-packages"
 
 ######### Environment #######
 export LANG=en_US.UTF-8
