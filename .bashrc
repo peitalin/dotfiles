@@ -1,7 +1,5 @@
 
 
-
-
 ### PATHS
 export PATH="/usr/local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"   # Rust
@@ -43,6 +41,7 @@ alias cat='ccat'
 
 ###### ALIAS VIM TO NEOVIM
 alias vim='nvim'
+alias v='nvim'
 alias cim='nvim'
 
 ### directory shortcuts

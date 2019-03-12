@@ -633,6 +633,9 @@ hi rustTrait guifg=#C898C8
 hi rustFoldBraces guifg=#C898C8
 hi rustBoxPlacementBalance guifg=#C898C8
 
+hi ALEError guibg=#432322 guifg=none cterm=italic
+hi ALEWarning guibg=#523D30 guifg=none cterm=italic
+
 
 
 " Identify the syntax highlighting group used at the cursor
