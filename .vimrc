@@ -32,10 +32,8 @@ set nohlsearch    " highlight removed until next search
 " set splitbelow  " Preview window opens to the bottom, not above
 set splitright    " Preview window opens to the right, not above
 set shortmess=aFc " remove prompts to continue messages in cmd line
-set completeopt=menuone,longest,preview
-
-hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white
-" set completeopt=menuone,longest
+" set completeopt=menuone,longest,preview
+set completeopt=preview,menu
 """"""""""""" END General ViM Settings """""""""""""""""
 
 
@@ -90,6 +88,18 @@ nmap <silent> td <Plug>(coc-definition)
 nmap <silent> tt <Plug>(coc-type-definition)
 nmap <silent> ti <Plug>(coc-implementation)
 nmap <silent> tr <Plug>(coc-references)
+" Use K for show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+function! s:show_documentation()
+  if &filetype == 'vim'
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+" Highlight symbol under cursor on CursorHold
+" autocmd CursorHold * silent call CocActionAsync('highlight')
+nnoremap <silent> H :call CocActionAsync('highlight')<CR>
 
 if executable('rls')
     au User lsp_setup call lsp#register_server({
@@ -112,6 +122,10 @@ let g:ale_sign_column_always = 1 "" annoying if it's not kept open
 nmap <C-c> :ALEDetail<CR>
 nmap <C-x> :ALEHover<CR>
 nmap <C-z> :ALEHover<CR>
+
+" Coc lint
+let g:coc_status_warning_sign = '!'
+let g:coc_status_error_sign = '>'
 
 
 " Machine learning autocompletions
@@ -633,8 +647,15 @@ hi rustTrait guifg=#C898C8
 hi rustFoldBraces guifg=#C898C8
 hi rustBoxPlacementBalance guifg=#C898C8
 
-hi ALEError guibg=#432322 guifg=none cterm=italic
-hi ALEWarning guibg=#523D30 guifg=none cterm=italic
+hi ALEError      guibg=#612E2D guifg=none cterm=italic
+hi ALEWarning    guibg=#523D30 guifg=none cterm=italic
+" Coc linting colors
+hi CocErrorHighlight   guibg=#612E2D guifg=none cterm=italic
+hi CocWarningHighlight guibg=#523D30 guifg=none cterm=italic
+hi CocHighlightText    guibg=#40334A guifg=none
+
+hi CocInfoHighlight    guibg=#A5BFD5 guifg=none cterm=italic
+hi CocHintHighlight    guibg=#A5BFD5 guifg=none cterm=italic
 
 
 
