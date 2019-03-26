@@ -5,6 +5,7 @@ export PATH="/usr/local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"   # Rust
 export PATH="/usr/local/Cellar:$PATH"  # Cellar
 export PATH="/usr/local/opt/llvm/bin:$PATH"
+export PATH="$PATH:/Users/peitalin/.dat/releases/dat-13.11.5-macos-x64"
 export CC="/usr/bin/clang"
 
 export NODE_PATH="/usr/local/lib/node_modules"

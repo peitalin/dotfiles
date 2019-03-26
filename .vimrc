@@ -56,7 +56,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 " ctrlp root directories
 let g:ctrlp_root_markers = ['index.ios.tsx', 'webpack.*config.js', 'README.md', 'package.json']
-let g:ctrlp_custom_ignore = '\v[\/](node_modules|jspm_packages|build|target|manifest.json)|(\.(swp|ico|git|svn|lock|svg|png|jp[e]?g))$'
+let g:ctrlp_custom_ignore = '\v[\/](node_modules|jspm_packages|target|manifest.json)|(\.(swp|ico|git|svn|lock|svg|png|jp[e]?g))$'
 let g:ctrlp_max_files = 0
 " default open in new tabs, instead of buffer
 let g:ctrlp_prompt_mappings = {
@@ -77,7 +77,6 @@ Plug 'Wutzara/vim-materialtheme'
 
 " """""""""""" Autocompletion """"""""""""""""""""""""""""""""
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
-" Need for ALE integration
 " Disable just for .tsx
 " au BufEnter *.tsx,*.ts,*.jsx,*.js,*.py :CocDisable
 " :CocInstall coc-json coc-rls
@@ -100,6 +99,15 @@ endfunction
 " Highlight symbol under cursor on CursorHold
 " autocmd CursorHold * silent call CocActionAsync('highlight')
 nnoremap <silent> H :call CocActionAsync('highlight')<CR>
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+nmap <C-c> :CocEnable<CR>
+nmap <C-x> :CocDisable<CR>
 
 if executable('rls')
     au User lsp_setup call lsp#register_server({
@@ -111,21 +119,24 @@ if executable('rls')
 endif
 
 " Asynchronous linting/fixing for Vim and Language Server Protocol (LSP) integration
+" ONLY FOR typescript until neoclide preview window is working better
 Plug 'w0rp/ale'
 let g:ale_sign_error = '>'
 let g:ale_sign_warning = '!'
 let g:ale_lint_delay = 200
 let b:ale_linters = ['tslint']
 let g:ale_linters = {'jsx': ['tslint']}
+let g:ale_linters = {'rust': []}
+" Disable lint for rust, use Neoclide coc-rls
 let g:ale_sign_column_always = 1 "" annoying if it's not kept open
 " Default: 200ms
-nmap <C-c> :ALEDetail<CR>
-nmap <C-x> :ALEHover<CR>
-nmap <C-z> :ALEHover<CR>
+nmap <C-z> :ALEDetail<CR>
 
-" Coc lint
+" Coc lint symbols. Not working?
 let g:coc_status_warning_sign = '!'
 let g:coc_status_error_sign = '>'
+let g:warning_sign = '!'
+let g:error_sign = '>'
 
 
 " Machine learning autocompletions
@@ -240,7 +251,7 @@ let g:ycm_add_preview_to_completeopt = 1
 let g:ycm_python_binary_path = 'python3'
 let g:ycm_key_invoke_completion = '<C-n>'
 " Disable loading YCM
-" let g:loaded_youcompleteme = 1
+let g:loaded_youcompleteme = 1
 " Disable loading YCM linting
 let g:ycm_show_diagnostics_ui = 0
 """ Javascript YCM completion
@@ -327,7 +338,6 @@ autocmd FileType json setlocal commentstring=//\ %s
 " autocmd FileType *.jsx,*.tsx setlocal commentstring=//\ %s
 autocmd FileType json syntax match Comment +\/\/.\+$+
 
-
 " Ctrl-P refresh file cache
 nmap C :CtrlPClearCache<cr>
 
@@ -411,7 +421,11 @@ map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 map <Leader>h <Plug>(easymotion-linebackward)
 
-
+"""""""""" Add newline in normal mode with shift+enter
+" Quickly insert an empty new line without entering insert mode
+nnoremap L i<CR><Esc>
+nnoremap <Leader>o i<CR><Esc>
+nnoremap <Leader>O i<CR><Esc>
 
 """""""" Vim lightline  """
 
@@ -473,7 +487,7 @@ let g:lightline.enable = {
 \ }
 
 function! ResizeCmdHeight()
-  if &columns < 120
+  if &columns < 90
     set cmdheight=2
   else
     set cmdheight=1
@@ -508,16 +522,15 @@ colorscheme onedark
 " autocmd FileType python colorscheme onedark
 
 " Normal         xxx ctermfg=145 ctermbg=235 guifg=#ABB2BF guibg=#282C34
-highlight Normal guibg=#21242a
+highlight Normal guibg=#202328
 highlight MatchParen guifg=#C678DD guibg=#504066
 highlight LineNr    guifg=#151822
 highlight CursorLineNr guifg=#56B6C2
 highlight Error guifg=#f57373 guibg=#804040
 highlight vimError guifg=#f57373 guibg=#804040
 
-" hi IndentGuidesEven guibg=#21242a guifg=#1f1f28
-hi IndentGuidesEven guibg=#2a2e30 guifg=#1f1f28
-hi IndentGuidesOdd guibg=#262a2c guifg=#1f1f28
+hi IndentGuidesEven guibg=#2a2e30 guifg=#24282a
+hi IndentGuidesOdd guibg=#262a2c guifg=#24282a
 hi Comment cterm=italic guifg=#4a5158
 hi String guifg=#98C379 guibg=#2a2e34
 
@@ -543,14 +556,12 @@ hi Function guifg=#5682A3
 " dark grey, RUST preproc
 hi Preproc guifg=#37505C
 
-
 """ Pink
 """""" vim-jsx ONLY
 hi Identifier guifg=#D96Ab2
 " hi Identifier cterm=italic guifg=#D96Ab2
 " hi Statement guifg=#D96AB2
 hi Conditional guifg=#D96AB2
-
 
 """ Go and Python
 " Light blue
@@ -636,6 +647,8 @@ hi tsxAttrib guifg=#1BD1C1
 
 hi tsxTypeBraces guifg=#BDA7CC
 hi tsxTypes guifg=#8D779C
+hi tsxIfOperator guifg=#56B6C2
+hi tsxElseOperator guifg=#56B6C2
 
 
 " rust cyan
@@ -644,7 +657,7 @@ hi rustFuncCall guifg=#60A0D0
 hi rustFuncName guifg=#60A0D0
 hi rustTrait guifg=#C898C8
 
-hi rustFoldBraces guifg=#C898C8
+hi rustFoldBraces guifg=#FFEAD0
 hi rustBoxPlacementBalance guifg=#C898C8
 
 hi ALEError      guibg=#612E2D guifg=none cterm=italic
@@ -656,6 +669,9 @@ hi CocHighlightText    guibg=#40334A guifg=none
 
 hi CocInfoHighlight    guibg=#A5BFD5 guifg=none cterm=italic
 hi CocHintHighlight    guibg=#A5BFD5 guifg=none cterm=italic
+
+hi CocErrorSign   guifg=#CD584F
+hi CocWarningSign guifg=#D3785D
 
 
 

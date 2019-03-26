@@ -51,6 +51,8 @@ man () {
 
 
 alias rsync='rsync -chavzP --stats'
+# get IP address of lan devices
+alias lan_ips='arp -a'
 
 function rsync_to_nix {
     echo "rsync $@ peitaubuntu@10.0.0.20:/media/peitaubuntu/F/Torrents"
@@ -61,6 +63,7 @@ function rsync_from_nix {
     echo "rsync peitaubuntu@10.0.0.20:/media/peitaubuntu/F/Torrents/$@ ~/Downloads/Torrents"
     rsync peitaubuntu@10.0.0.20:/media/peitaubuntu/F/Torrents/$@ ~/Downloads/Torrents
 }
+
 
 
 function dotfiles_git {

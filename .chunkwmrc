@@ -132,6 +132,11 @@ chunkc core::load ffm.so
 # NOTE: sample rules for the tiling plugin
 #
 
+chunkc set global_desktop_mode bsp
+
+chunkc tiling::rule --owner \"iTerm2\" --name Copy --state bsp &
+chunkc tiling::rule --owner \"DBngin\" --name Copy --state float &
+chunkc tiling::rule --owner \"Bear\" --name Copy --state float &
 chunkc tiling::rule --owner Finder --name Copy --state float &
 chunkc tiling::rule --owner \"WhatsApp\" --state float &
 chunkc tiling::rule --owner \"Google Chrome\" --state float &
