@@ -56,7 +56,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 " ctrlp root directories
 let g:ctrlp_root_markers = ['index.ios.tsx', 'webpack.*config.js', 'README.md', 'package.json']
-let g:ctrlp_custom_ignore = '\v[\/](node_modules|jspm_packages|target|manifest.json)|(\.(swp|ico|git|svn|lock|svg|png|jp[e]?g))$'
+let g:ctrlp_custom_ignore = '\v[\/](node_modules|jspm_packages|__coverage__|target|manifest.json)|(\.(swp|ico|git|svn|lock|svg|png|jp[e]?g))$'
 let g:ctrlp_max_files = 0
 " default open in new tabs, instead of buffer
 let g:ctrlp_prompt_mappings = {
@@ -114,7 +114,7 @@ if executable('rls')
         \ 'name': 'rls',
         \ 'cmd': {server_info->['rustup', 'run', 'stable, 'rls']},
         \ 'whitelist': ['rust'],
-        \ 'blacklist': ['javascript', 'jsx', 'tsx', 'typescript'],
+        \ 'blacklist': ['javascript', 'jsx', 'tsx', 'typescript']
         \ })
 endif
 
@@ -166,10 +166,10 @@ Plug 'ekalinin/Dockerfile.vim'
 Plug 'fatih/vim-go'
 let g:go_fmt_autosave=0
 
+"" Nginx
+Plug 'chr4/nginx.vim'
 
-"" Solidity
-Plug 'tomlion/vim-solidity'
-
+Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 """" CSS syntax highlight
 Plug 'othree/csscomplete.vim'
 " Add Support css3 properties
@@ -424,8 +424,9 @@ map <Leader>h <Plug>(easymotion-linebackward)
 """""""""" Add newline in normal mode with shift+enter
 " Quickly insert an empty new line without entering insert mode
 nnoremap L i<CR><Esc>
-nnoremap <Leader>o i<CR><Esc>
-nnoremap <Leader>O i<CR><Esc>
+" nnoremap <Leader>o i<CR><Esc>
+" nnoremap <Leader>O i<CR><Esc>
+
 
 """""""" Vim lightline  """
 
@@ -630,6 +631,7 @@ hi jsObjectKey guifg=#56B6C2
 " vim-jsx-typescript
 hi ReactState guifg=#C176A7
 hi ReactProps guifg=#D19A66
+hi ApolloGraphQL guifg=#CB886B
 hi Events ctermfg=204 guifg=#56B6C2
 hi ReduxKeywords ctermfg=204 guifg=#C678DD
 hi WebBrowser ctermfg=204 guifg=#56B6C2
@@ -660,15 +662,15 @@ hi rustTrait guifg=#C898C8
 hi rustFoldBraces guifg=#FFEAD0
 hi rustBoxPlacementBalance guifg=#C898C8
 
-hi ALEError      guibg=#612E2D guifg=none cterm=italic
-hi ALEWarning    guibg=#523D30 guifg=none cterm=italic
+hi ALEError      guibg=#612E2D cterm=italic
+hi ALEWarning    guibg=#523D30 cterm=italic
 " Coc linting colors
-hi CocErrorHighlight   guibg=#612E2D guifg=none cterm=italic
-hi CocWarningHighlight guibg=#523D30 guifg=none cterm=italic
-hi CocHighlightText    guibg=#40334A guifg=none
+hi CocErrorHighlight   guibg=#612E2D cterm=italic
+hi CocWarningHighlight guibg=#523D30 cterm=italic
+hi CocHighlightText    guibg=#40334A
 
-hi CocInfoHighlight    guibg=#A5BFD5 guifg=none cterm=italic
-hi CocHintHighlight    guibg=#A5BFD5 guifg=none cterm=italic
+hi CocInfoHighlight    guibg=#A5BFD5 cterm=italic
+hi CocHintHighlight    guibg=#A5BFD5 cterm=italic
 
 hi CocErrorSign   guifg=#CD584F
 hi CocWarningSign guifg=#D3785D
