@@ -74,7 +74,7 @@ chunkc set desktop_gap_step_size         2.0
 chunkc set bsp_spawn_left                1
 chunkc set bsp_optimal_ratio             1.618
 chunkc set bsp_split_mode                optimal
-chunkc set bsp_split_ratio               0.55
+chunkc set bsp_split_ratio               0.5
 
 chunkc set monitor_focus_cycle           1
 chunkc set window_focus_cycle            monitor
@@ -106,8 +106,8 @@ chunkc set window_use_cgs_move           0
 # NOTE: the following are config variables for the chunkwm-border plugin.
 #
 
-# chunkc set focused_border_color          0xffE9875F
-chunkc set focused_border_color          0xffF99575
+chunkc set focused_border_color          0xffEE655F
+# chunkc set focused_border_color          0xffF99575
 chunkc set focused_border_width          4
 chunkc set focused_border_radius         0
 chunkc set focused_border_skip_floating  0
@@ -127,19 +127,46 @@ chunkc set ffm_standby_on_float          1
 chunkc core::load border.so
 chunkc core::load tiling.so
 chunkc core::load ffm.so
+chunkc core::load purify.so
 
-#
 # NOTE: sample rules for the tiling plugin
 #
 
 chunkc set global_desktop_mode bsp
+# chunkc set global_desktop_mode float
+# chunkc set global_desktop_mode monocle
 
-chunkc tiling::rule --owner \"iTerm2\" --name Copy --state bsp &
-chunkc tiling::rule --owner \"DBngin\" --name Copy --state float &
-chunkc tiling::rule --owner \"Bear\" --name Copy --state float &
-chunkc tiling::rule --owner Finder --name Copy --state float &
-chunkc tiling::rule --owner \"WhatsApp\" --state float &
+chunkc tiling::rule --owner iTerm2 --state tile &
+chunkc tiling::rule --owner iTerm --state tile &
+
+## Disable "tile" "bsp" mode for these applications
+chunkc tiling::rule --owner DBngin --state float &
+chunkc tiling::rule --owner Bear --state float &
+chunkc tiling::rule --owner Finder --state float &
+chunkc tiling::rule --owner WhatsApp --state float &
+chunkc tiling::rule --owner Preview --state float &
+chunkc tiling::rule --owner TablePlus --state float &
+chunkc tiling::rule --owner GraphiQL --state float &
+chunkc tiling::rule --owner qBittorrent --state float &
+chunkc tiling::rule --owner iTunes --state float &
+chunkc tiling::rule --owner OmniDiskSweeper --state float &
+chunkc tiling::rule --owner Discord --state float &
+chunkc tiling::rule --owner Slack --state float &
+chunkc tiling::rule --owner Code --state float &
+chunkc tiling::rule --owner Safari --state float &
+chunkc tiling::rule --owner Firefox --state float &
+chunkc tiling::rule --owner Sketch --state float &
+chunkc tiling::rule --owner Calendar --state float &
+chunkc tiling::rule --owner zoom.us --state float &
+chunkc tiling::rule --owner Chrome --state float &
+chunkc tiling::rule --owner WebTorrent --state float &
+# Visual Studio Code
+
 chunkc tiling::rule --owner \"Google Chrome\" --state float &
-chunkc tiling::rule --owner \"Preview\" --state float &
+chunkc tiling::rule --owner \"Quicktime Player\" --state float &
+chunkc tiling::rule --owner \"Activity Manager\" --state float &
+chunkc tiling::rule --owner \"Adobe Photoshop CC 2015.5\" --state float &
+chunkc tiling::rule --owner \"Visual Studio Code\" --state float &
 chunkc tiling::rule --owner \"App Store\" --state float &
+
 chunkc tiling::rule --owner Emacs --except "^$" --state tile &

@@ -46,6 +46,10 @@ c.InteractiveShellApp.exec_lines = [
     # 'import sys',
     # 'print(sys.version)',
     'import pandas as pd',
+    'import numpy as np',
+	'from numpy import log, exp',
+    'import requests',
+    'import json',
     'pd.options.mode.chained_assignment = None',
     # "pd.set_option('display.max_rows', 50)",
     "pd.set_option('max_columns', 100)",
@@ -53,10 +57,14 @@ c.InteractiveShellApp.exec_lines = [
     "pd.set_option('max_rows', 28)",
     "pd.options.display.float_format = '{:20,.2f}'.format",
 
+    "aprToApy = lambda apr: np.exp(apr) - 1",
+    "apyToApr = lambda apy: np.log(apy + 1)",
     # 'from fn.iters import *',
 
     'print("="*28)',
     'print("  import pandas as pd")',
+    'print("  import requests")',
+    'print("  import json")',
     'print("  pd.set_option(...)")',
     'print("="*28)'
 

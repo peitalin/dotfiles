@@ -3,7 +3,7 @@
 """"""""""""" General ViM Settings """""""""
 scriptencoding utf-8
 syntax on
-filetype plugin indent on
+filetype indent plugin on
 set hidden
 set encoding=utf-8  " Use utf-8 encoding
 set incsearch       " move while searching
@@ -56,7 +56,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 " ctrlp root directories
 let g:ctrlp_root_markers = ['index.ios.tsx', 'webpack.*config.js', 'README.md', 'package.json']
-let g:ctrlp_custom_ignore = '\v[\/](node_modules|jspm_packages|__coverage__|target|manifest.json)|(\.(swp|ico|git|svn|lock|svg|png|jp[e]?g))$'
+let g:ctrlp_custom_ignore = '\v[\/](node_modules|jspm_packages|__coverage__|target|manifest.json|build)|(\.(swp|ico|git|svn|lock|svg|png|jp[e]?g))$'
 let g:ctrlp_max_files = 0
 " default open in new tabs, instead of buffer
 let g:ctrlp_prompt_mappings = {
@@ -109,14 +109,14 @@ inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 nmap <C-c> :CocEnable<CR>
 nmap <C-x> :CocDisable<CR>
 
-if executable('rls')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'rls',
-        \ 'cmd': {server_info->['rustup', 'run', 'stable, 'rls']},
-        \ 'whitelist': ['rust'],
-        \ 'blacklist': ['javascript', 'jsx', 'tsx', 'typescript']
-        \ })
-endif
+" if executable('rls')
+"     au User lsp_setup call lsp#register_server({
+"         \ 'name': 'rls',
+"         \ 'cmd': {server_info->['rustup', 'run', 'stable, 'rls']},
+"         \ 'whitelist': ['rust'],
+"         \ 'blacklist': ['javascript', 'jsx', 'tsx', 'typescript']
+"         \ })
+" endif
 
 " Asynchronous linting/fixing for Vim and Language Server Protocol (LSP) integration
 " ONLY FOR typescript until neoclide preview window is working better
@@ -159,6 +159,8 @@ Plug 'maralla/vim-toml-enhance', {'depends': 'cespare/vim-toml'}
 
 """ Python
 Plug 'davidhalter/jedi-vim'
+Plug 'Vimjas/vim-python-pep8-indent'
+
 "" Docker
 Plug 'ekalinin/Dockerfile.vim'
 
@@ -199,7 +201,7 @@ Plug 'Shougo/vimproc.vim', {
 Plug 'elzr/vim-json'
 let g:vim_json_syntax_conceal = 0
 " GraphQL syntax highlighting
-" Plug 'jparise/vim-graphql'
+Plug 'jparise/vim-graphql'
 " Plug 'posva/vim-vue'
 
 
@@ -327,7 +329,7 @@ nmap <Leader>s :%s/\t/    /g<CR>
 autocmd FileType typescript.tsx,javascript.tsx,javascript,typescript nmap <Leader>s :%s/\t/  /g<CR>
 " au BufNewFile,BufRead *.js *.html nmap <Leader>s :%s/\t/  /g<CR>
 autocmd FileType python,rust,haskell,markdown setlocal shiftwidth=4 tabstop=4
-autocmd FileType typescript.tsx,javascript.tsx,javascript,typescript setlocal shiftwidth=2 tabstop=2 softtabstop=4 noexpandtab
+autocmd FileType yaml,typescript.tsx,javascript.tsx,javascript,typescript setlocal shiftwidth=2 tabstop=2 softtabstop=4 noexpandtab
 set softtabstop=4 noexpandtab
 " au BufNewFile,BufRead *.hbs setlocal ft=d
 autocmd BufNewFile,BufRead *.ts,*.js set filetype=typescript.tsx
@@ -506,7 +508,7 @@ let g:indent_guides_auto_colors = 0
 let g:indent_guides_start_level = 1
 let g:indent_guides_guide_size = 1
 autocmd FileType python,rust let g:indent_guides_guide_size = 1
-autocmd FileType typescript.tsx,javascript.jsx,javascript,typescript let g:indent_guides_guide_size = 2
+autocmd FileType yaml,typescript.tsx,javascript.jsx,javascript,typescript let g:indent_guides_guide_size = 2
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_tab_guides = 1
 " autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#243e48 ctermbg=237
@@ -588,11 +590,14 @@ autocmd FileType python,go highlight goRepeat guifg=#56B6C2
 
 " light blue
 hi tsxTagName guifg=#59ACE5
+hi tsxComponentName guifg=#59ACE5
 " dark blue
 hi tsxCloseString guifg=#2974a1
 hi tsxCloseTag guifg=#2974a1
 hi tsxAttributeBraces guifg=#2974a1
 hi tsxEqual guifg=#2974a1
+hi tsxCloseTagName guifg=#2974a1
+hi tsxCloseComponentName guifg=#2974a1
 " green
 hi tsxAttrib guifg=#1BD1C1
 
@@ -634,6 +639,7 @@ hi ReactProps guifg=#D19A66
 hi ApolloGraphQL guifg=#CB886B
 hi Events ctermfg=204 guifg=#56B6C2
 hi ReduxKeywords ctermfg=204 guifg=#C678DD
+hi ReduxHooksKeywords ctermfg=204 guifg=#C176A7
 hi WebBrowser ctermfg=204 guifg=#56B6C2
 hi ReactLifeCycleMethods ctermfg=204 guifg=#D19A66
 
@@ -658,6 +664,8 @@ hi rustModPath guifg=#DF997A
 hi rustFuncCall guifg=#60A0D0
 hi rustFuncName guifg=#60A0D0
 hi rustTrait guifg=#C898C8
+hi rustCommentLine guifg=#aaaaaa guifg=#444444
+
 
 hi rustFoldBraces guifg=#FFEAD0
 hi rustBoxPlacementBalance guifg=#C898C8

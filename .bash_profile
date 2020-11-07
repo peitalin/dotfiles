@@ -65,6 +65,11 @@ function rsync_from_nix {
 }
 
 
+function rsync_from_witnet {
+    echo "rsync root@$1:/root/witnet-operator-tools/docker/compose/bertux-operator-5/$2 ./Witnet/$3"
+    rsync root@$1:/root/witnet-operator-tools/docker/compose/bertux-operator-5/$2 ./Witnet/$3
+}
+
 
 function dotfiles_git {
 
@@ -111,3 +116,4 @@ fi
 
 
 export PATH="$HOME/.cargo/bin:$PATH"
+if [ -e /Users/peitalin/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/peitalin/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer

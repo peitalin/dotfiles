@@ -5,7 +5,7 @@ export PATH="/usr/local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"   # Rust
 export PATH="/usr/local/Cellar:$PATH"  # Cellar
 export PATH="/usr/local/opt/llvm/bin:$PATH"
-export PATH="$PATH:/Users/peitalin/.dat/releases/dat-13.11.5-macos-x64"
+export PATH="$HOME/data:$PATH"
 export CC="/usr/bin/clang"
 
 export NODE_PATH="/usr/local/lib/node_modules"
@@ -15,6 +15,8 @@ export GOPATH="$HOME/go"
 export PATH="$GOPATH/bin:$PATH"
 export SHELL="/bin/zsh"
 # export PYTHONPATH="/usr/local/lib/python3.7/site-packages"
+# export RUSTC_WRAPPER=sccache
+## cache build artifacts
 
 ######### Environment #######
 export LANG=en_US.UTF-8
@@ -77,6 +79,9 @@ alias ip="curl -s http://checkip.amazonaws.com"
 ####### GIT
 alias gb="git branch"
 alias gc="git checkout"
+alias gs="git status"
+alias gcm='git commit --message'
+alias gp='git pull'
 
 ###### Python configs
 alias ipy="ipython3 -i --IPSompleter.greedy=True --no-banner"
@@ -100,8 +105,10 @@ alias Rprofile="vim $HOME/.Rprofile"
 alias dev.d="cd ~/Downloads/Torrents/Dev"
 alias go.d="cd ~/Downloads/Torrents/Dev/go"
 alias rust.d="cd ~/Downloads/Torrents/Dev/rust"
+alias efc.d="cd ~/Downloads/Torrents/Dev/efc"
+alias gun.d="cd ~/Downloads/Torrents/Dev/gun"
 alias py.d="cd ~/Downloads/Torrents/Dev/py"
-alias js.d="cd ~/Downloads/Torrents/Dev/js"
+alias eth.d="cd ~/Downloads/Torrents/Dev/eth"
 alias react.d="cd ~/Downloads/Torrents/Dev/react"
 alias torrents.d="cd ~/Downloads/Torrents"
 
@@ -117,6 +124,14 @@ alias cwmstart="brew services start chunkwm"
 # Rust
 source $HOME/.cargo/env
 
+# Nodejs
+alias npx13="npx -p node@13 -- "
+alias npx14="npx -p node@14 -- "
+
+## Oasis Nodes
+export GENESIS_FILE_PATH=/Users/peitalin/Dropbox/oasis-node/genesis.json
+
+
 #### Startup Message
 # toilet -f mono9 --gay l:.
 alias ddate="echo -e ' ' `date '+%a %d %b'`"
@@ -124,3 +139,5 @@ ddate
 # cal
 
 
+
+# complete -C /usr/local/bin/terraform terraform

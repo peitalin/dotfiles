@@ -4,6 +4,10 @@
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/peitalin/.oh-my-zsh
 
+# Disable ZSH globbing
+setopt +o nomatch
+# https://unix.stackexchange.com/questions/310540/how-to-get-rid-of-no-match-found-when-running-rm
+
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
@@ -101,3 +105,7 @@ source ~/.bash_profile
 
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/local/bin/terraform terraform
+if [ -e /Users/peitalin/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/peitalin/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
