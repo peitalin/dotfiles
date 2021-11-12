@@ -76,7 +76,8 @@ Plug 'Wutzara/vim-materialtheme'
 
 
 " """""""""""" Autocompletion """"""""""""""""""""""""""""""""
-Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
+" Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
+
 " Disable just for .tsx
 " au BufEnter *.tsx,*.ts,*.jsx,*.js,*.py :CocDisable
 " :CocInstall coc-json coc-rls
@@ -222,7 +223,7 @@ let g:mta_filetypes = {
             \}
 
 """""""""""" Vim Snippets
-Plug 'SirVer/ultisnips'
+" Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 " let g:UltiSnipsExpandTrigger="<tab>"
@@ -323,16 +324,20 @@ inoremap ;; <Esc>:
 inoremap <C-f> <right>
 inoremap <C-b> <left>
 
-" replace tabs with 4 whitespace
+" replace tabs with 4 whitespacu
 " nmap <F4> :%s/\t/    /g<CR>
 nmap <Leader>s :%s/\t/    /g<CR>
 autocmd FileType typescript.tsx,javascript.tsx,javascript,typescript nmap <Leader>s :%s/\t/  /g<CR>
+
 " au BufNewFile,BufRead *.js *.html nmap <Leader>s :%s/\t/  /g<CR>
 autocmd FileType python,rust,haskell,markdown setlocal shiftwidth=4 tabstop=4
 autocmd FileType yaml,typescript.tsx,javascript.tsx,javascript,typescript setlocal shiftwidth=2 tabstop=2 softtabstop=4 noexpandtab
 set softtabstop=4 noexpandtab
 " au BufNewFile,BufRead *.hbs setlocal ft=d
-autocmd BufNewFile,BufRead *.ts,*.js set filetype=typescript.tsx
+" autocmd BufNewFile,BufRead *.ts,*.js set filetype=typescript.tsx
+" set filetypes as typescriptreact
+autocmd BufNewFile,BufRead *.zn set filetype=rust
+autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
 autocmd BufNewFile,BufRead *.vue set filetype=vue.typescript
 autocmd FileType vue.typescript setlocal commentstring=//\ %s
 autocmd FileType typescript setlocal commentstring=//\ %s

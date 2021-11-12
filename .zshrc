@@ -109,3 +109,9 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/local/bin/terraform terraform
 if [ -e /Users/peitalin/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/peitalin/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+
+# Created by `userpath` on 2021-02-09 01:42:10
+export PATH="$PATH:/Users/peitalin/.local/bin"
+
+# Created by `userpath` on 2021-02-09 01:42:11
+export PATH="$PATH:/Users/peitalin/Library/Python/3.9/bin"

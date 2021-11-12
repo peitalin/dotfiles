@@ -55,19 +55,13 @@ alias rsync='rsync -chavzP --stats'
 alias lan_ips='arp -a'
 
 function rsync_to_nix {
-    echo "rsync $@ peitaubuntu@10.0.0.20:/media/peitaubuntu/F/Torrents"
-    rsync $@ peitaubuntu@10.0.0.20:/media/peitaubuntu/F/Torrents
+    echo "rsync $@ peitaubuntu@10.0.0.20:/media/peita-Z87X-UD3H/F/Torrents"
+    rsync $@ peitaubuntu@10.0.0.20:/media/peita-Z87X-UD3H/F/Torrents
 }
 
 function rsync_from_nix {
-    echo "rsync peitaubuntu@10.0.0.20:/media/peitaubuntu/F/Torrents/$@ ~/Downloads/Torrents"
-    rsync peitaubuntu@10.0.0.20:/media/peitaubuntu/F/Torrents/$@ ~/Downloads/Torrents
-}
-
-
-function rsync_from_witnet {
-    echo "rsync root@$1:/root/witnet-operator-tools/docker/compose/bertux-operator-5/$2 ./Witnet/$3"
-    rsync root@$1:/root/witnet-operator-tools/docker/compose/bertux-operator-5/$2 ./Witnet/$3
+    echo "rsync peitaubuntu@10.0.0.20:/media/peita-Z87X-UD3H/F/Torrents/$@ ~/Downloads/Torrents"
+    rsync peitaubuntu@10.0.0.20:/media/peita-Z87X-UD3H/F/Torrents/$@ ~/Downloads/Torrents
 }
 
 

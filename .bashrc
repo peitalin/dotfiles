@@ -6,6 +6,7 @@ export PATH="$HOME/.cargo/bin:$PATH"   # Rust
 export PATH="/usr/local/Cellar:$PATH"  # Cellar
 export PATH="/usr/local/opt/llvm/bin:$PATH"
 export PATH="$HOME/data:$PATH"
+export PATH="$HOME/Downloads/zinc-0.2.3-macos/:$PATH"
 export CC="/usr/bin/clang"
 
 export NODE_PATH="/usr/local/lib/node_modules"
@@ -128,9 +129,6 @@ source $HOME/.cargo/env
 alias npx13="npx -p node@13 -- "
 alias npx14="npx -p node@14 -- "
 
-## Oasis Nodes
-export GENESIS_FILE_PATH=/Users/peitalin/Dropbox/oasis-node/genesis.json
-
 
 #### Startup Message
 # toilet -f mono9 --gay l:.
@@ -140,4 +138,3 @@ ddate
 
 
 
-# complete -C /usr/local/bin/terraform terraform
